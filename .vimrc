@@ -8,9 +8,9 @@
 "                                 
 
 
-if has('vim_starting')
-	set nocompatible
-endif
+" if has('vim_starting')
+" 	set nocompatible
+" endif
 
 
 call plug#begin(expand('~/.vim/plugged'))
@@ -22,8 +22,8 @@ call plug#begin(expand('~/.vim/plugged'))
   Plug 'tpope/vim-commentary'
   Plug 'reireias/vim-cheatsheet'
   Plug 'thinca/vim-splash'
-  Plug 'thinca/vim-quickrun'
   Plug 'Shougo/vimproc.vim'
+  Plug 'yuratomo/w3m.vim'
   Plug 'w0rp/ale'
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
@@ -111,61 +111,44 @@ let g:airline_theme = "distinguished"
 
 
 
-" vim-quickrun config ----------------------------
+"" ALE config -------------------------------------
+"" エラー行に表示するマーク
+"let g:ale_sign_error = '⨉'
+"let g:ale_sign_warning = '⚠'
+"" エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+"let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"" エラー表示の列を常時表示
+"let g:ale_sign_column_always = 1
 
-" vimprocで非同期実行
-" 成功時にバッファ、失敗時にQuickFixで表示
-" 結果表示のサイズ調整など
-let g:quickrun_config = {
-  \ '_' : {
-     \ 'runner' : 'vimproc',
-     \ 'runner/vimproc/updatetime' : 40,
-     \ 'outputter' : 'error',
-     \ 'outputter/error/success' : 'buffer',
-     \ 'outputter/error/error'   : 'quickfix',
-     \ 'outputter/buffer/split' : ':botright 8sp',
-   \ }
-\}
+"" ファイルを開いたときにlint実行
+"let g:ale_lint_on_enter = 1
+"" ファイルを保存したときにlint実行
+"let g:ale_lint_on_save = 1
+"" 編集中のlintはしない
+"let g:ale_lint_on_text_changed = 'never'
 
-" 実行時に前回の表示内容をクローズ&保存してから実行
-let g:quickrun_no_default_key_mappings = 1
-" vim-quickrun end --------------------------------
+"" lint結果をロケーションリストとQuickFixには表示しない
+"" 出てると結構うざいしQuickFixを書き換えられるのは困る
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 0
+"let g:ale_open_list = 0
+"let g:ale_keep_list_window_open = 0
 
-" ALE config -------------------------------------
-" エラー行に表示するマーク
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
-" エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" エラー表示の列を常時表示
+"" 有効にするlinter
+"let g:ale_linters = {
+"\   'python': ['flake8'],
+"\}
+
+"" ALE用プレフィックス
+"nmap [ale] <Nop>
+"map <C-k> [ale]
+"" エラー行にジャンプ
+"nmap <silent> [ale]<C-P> <Plug>(ale_previous)
+
+"左側のシンボルカラムを常時表示
 let g:ale_sign_column_always = 1
 
-" ファイルを開いたときにlint実行
-let g:ale_lint_on_enter = 1
-" ファイルを保存したときにlint実行
-let g:ale_lint_on_save = 1
-" 編集中のlintはしない
-let g:ale_lint_on_text_changed = 'never'
-
-" lint結果をロケーションリストとQuickFixには表示しない
-" 出てると結構うざいしQuickFixを書き換えられるのは困る
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-
-" 有効にするlinter
-let g:ale_linters = {
-\   'python': ['flake8'],
-\}
-
-" ALE用プレフィックス
-nmap [ale] <Nop>
-map <C-k> [ale]
-" エラー行にジャンプ
-nmap <silent> [ale]<C-P> <Plug>(ale_previous)
-
-"------------------------------------------------
+""------------------------------------------------
 
 
 
