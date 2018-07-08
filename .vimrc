@@ -18,7 +18,7 @@ call plug#begin(expand('~/.vim/plugged'))
   Plug 'jistr/vim-nerdtree-tabs'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'davidhalter/jedi-vim'
+"  Plug 'davidhalter/jedi-vim'
   Plug 'tpope/vim-commentary'
   Plug 'reireias/vim-cheatsheet'
   Plug 'thinca/vim-splash'
@@ -320,3 +320,6 @@ hi clear SpellBad
 hi SpellBad cterm=underline
 
 set laststatus=2
+
+" バックスペース有効化
+set backspace=indent,eol,start
