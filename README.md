@@ -1,4 +1,4 @@
-##yo
+## yo
 
 
 vimはvimplug入れてからゴニョゴニョ
