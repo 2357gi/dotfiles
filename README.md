@@ -1,4 +1,5 @@
 ## yo
 
-
-vimはvimplug入れてからゴニョゴニョ
+### todo
+#### Vimrc整理
+vimrcの動きをmacとlinuxでわける
