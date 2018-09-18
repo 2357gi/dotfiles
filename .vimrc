@@ -8,11 +8,8 @@
 "                                 
 
 
-" if has('vim_starting')
-" 	set nocompatible
-" endif
 
-
+" vimplug's plugins ===========================
 call plug#begin(expand('~/.vim/plugged'))
   Plug 'scrooloose/nerdtree'
   Plug 'jistr/vim-nerdtree-tabs'
@@ -28,34 +25,26 @@ call plug#begin(expand('~/.vim/plugged'))
 if v:version >= 703
   Plug 'Shougo/vimshell.vim'
 endif
-
-
- 
-
-"*********Vim-plugs plugin END ******************
 call plug#end()
+" vimplug's plugins ===========================
 
 
-
-"------------------------------Plugin config*****
-set t_Co=256
-"------------------------------------------------
+" vimplug's configs ===========================
+set t_Co=256 "for vim somecolor
 
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 let g:cheatseet#cheat_file = '~/.cheatsheet.md'
 
-
-" NerdTree config *******************************
+" ---NERDTree conf ============================
 "キーバインド
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
- 
-" NerdTree config end ***************************
+ " ---NERDTree conf ============================
 
 
-" Airline config --------------------------------
+" Airline config ===============================
 let g:airline_theme = 'papercolor'
 let g:airline_powerline_fonts = 1
 let g:airline_mode_map = {
@@ -77,37 +66,8 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.maxlinenr = '㏑'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_theme = "distinguished"
+" Airline config ===============================
 
-
-
-
-
-"------------------------------------------------------------------
-"" " Powerline系フォントを利用する
-""let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
-
-""let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline#extensions#whitespace#mixed_indent_algo = 1
-"let g:airline_theme = 'tomorrow'
-""let g:airline_skip_empty_sections = 1
-
-"if !exists('g:airline_symbols')
-"    	let g:airline_symbols = {}
-"endif
-
-""右側に使用されるセパレータ
-"let g:airline_symbols.crypt = '🔒'		"暗号化されたファイル
-"let g:airline_symbols.linenr = '¶'			"行
-"let g:airline_symbols.maxlinenr = '㏑'		"最大行
-"let g:airline_symbols.branch = '⭠'		"gitブランチ
-"let g:airline_symbols.paste = 'ρ'			"ペーストモード
-"let g:airline_symbols.spell = 'Ꞩ'			"スペルチェック
-"let g:airline_symbols.notexists = '∄'		"gitで管理されていない場合
-
-
-""airline config END------------------------------ 
 
 
 
@@ -202,6 +162,8 @@ set scrolloff=4
 
 "jjで挿入モードを抜ける
 inoremap jj <Esc>
+inoremap ッｊ <Esc>
+inoremap っｊ<Esc>
 
 " ---------------検索系
 
@@ -323,3 +285,5 @@ set laststatus=2
 
 " バックスペース有効化
 set backspace=indent,eol,start
+
+
