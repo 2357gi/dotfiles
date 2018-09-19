@@ -31,7 +31,8 @@ endfor
 let s .= '%#TabLineFill#%T%=%#TabLine#'
 return s
 endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+" タブライン表示　エラー出てるのでコメントアウト
+" let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 
 " The prefix key.

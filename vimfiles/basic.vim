@@ -45,6 +45,10 @@ set whichwrap=b,s,h,l,<,>,[,],~
 " 括弧入力時の対応する括弧を表示
 set showmatch matchtime=1
 
+" タブ幅を4に設定
+set tabstop=4
+set shiftwidth=4
+
 " syntax on
 syntax on
 
