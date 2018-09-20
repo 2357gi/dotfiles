@@ -5,12 +5,16 @@
 " for vim somecolor
 set t_Co=256
 
+
 set list           " 不可視文字を表示
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表示記号指定
 
 " ステータスライン周り
 set laststatus=2
+set showcmd				" コマンドをステータスラインに表示
 
+set matchtime=3				" 対応括弧のハイライト表示を3秒にする
+set wrap				" 文字を折り返す
 
 " Set tabline.
 function! s:my_tabline()  "{{{

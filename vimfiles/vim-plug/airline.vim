@@ -1,7 +1,6 @@
 call plug#begin(expand('~/.vim/plugged'))
 	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline'
-endif
+	Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " Airline config ===============================

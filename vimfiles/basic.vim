@@ -62,6 +62,13 @@ set nowritebackup
 set noswapfile
 set autoread
 set hidden
+" ------------------------------------------------------------------------------
+" buffer
+" ------------------------------------------------------------------------------
+nnoremap < :bp<CR>|
+
+set switchbuf=useopen			" 新しく開く代わりに既存バッファを開く
+
 
 set showcmd
 set number
@@ -78,6 +85,8 @@ set iminsert=2
 set clipboard&
 set clipboard=unnamed,unnamedplus
 
-" OSのクリップボードをレジスタ指定無しでYank, Putできるようにする。
-
-
+" ------------------------------------------------------------------------------
+" window
+" ------------------------------------------------------------------------------
+set splitbelow				" ウィンドウ分割を(上でなく)下側に変更
+set splitright				" ウィンドウ分割を(左でなく)右側に変更

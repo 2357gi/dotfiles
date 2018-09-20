@@ -1,109 +1,87 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-# export ZSH=/home/gi/.oh-my-zsh
+# ------------------------------------------------------------------------------
+# common
+# ------------------------------------------------------------------------------
+export LANG=ja_JP.UTF-8		# 日本語設定
+autoload -U is-at-least		# zsh バージョン切り分けモジュール
+export EDITOR=vim			# エディタを vim に設定
+export PAGER=lv				# ページャを lv に設定
+export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 
-export PATH=~/vim/src/:$PATH
-export PATH=$PATH:/usr/local/bin/
-export PATH="/home/gi/anaconda3/bin:$PATH"
+# ------------------------------------------------------------------------------
+# 補完
+# ------------------------------------------------------------------------------
+autoload -U compinit; compinit -u	# 強力な補完機能
+setopt auto_cd				# ディレクトリ名のみでcd
+setopt correct				# コマンドの間違いを修正する
+setopt list_packed			# 候補を詰めて表示する
+setopt nolistbeep			# 補完時のビープ音を無効にする
+setopt list_types			# 保管候補の表示で ls -F
+setopt auto_param_keys			# カッコの対応などを自動的に補完する
+setopt auto_param_slash			# ディレクトリの末尾に / 付加
+setopt auto_remove_slash		# スペースで / を削除
+setopt complete_aliases			# 補完する前にオリジナルコマンドに展開
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}	# カラー表示
+setopt noautoremoveslash		# パスの最後の / を自動削除しない
+setopt auto_pushd			# cd でディレクトリスタックに自動保存
+setopt pushd_ignore_dups		# 重複してディレクトリスタック保存しない
+setopt magic_equal_subst		# 引数の = 以降も補完する
+setopt auto_menu			# 補完キー連打で自動で補完
+setopt auto_list			# 複数の補完を一行で表示する
+setopt complete_in_word			# カーソル位置で補完
+setopt glob_complete			# glob を展開しない
+setopt numeric_glob_sort		# 辞書順ではなく数字順に並べる
+setopt mark_dirs			# ディレクトリにマッチした場合 / を追加
+autoload -U bashcompinit; bashcompinit -u	# bash 補完サポート
+# ------------------------------------------------------------------------------
+# 履歴
+# ------------------------------------------------------------------------------
+HISTFILE=~/.zsh_history			# 履歴ファイルの保存場所
+HISTSIZE=100000000			# 履歴ファイルの最大サイズ
+SAVEHIST=100000000			# 履歴ファイルの最大サイズ
+setopt auto_pushd			# 移動したディレクトリを自動でpush
+setopt hist_expand			# 保管時にヒストリを自動的に展開する
+setopt hist_ignore_dups			# 直前と同じ履歴を保存しない
+setopt hist_ignore_all_dups		# 重複した履歴を保存しない
+setopt append_history			# 複数の履歴を追加で保存
+setopt inc_append_history		# 履歴をインクリメンタルに追加
+setopt hist_save_no_dups		# 古いコマンドと同じものは無視
+setopt hist_no_store			# historyコマンドは履歴に登録しない
+setopt hist_reduce_blanks		# 空白を詰めて保存
+setopt hist_expire_dups_first		# 履歴削除時に重複行を優先して削除
+setopt share_history			# 履歴をプロセスで共有する
+setopt hist_verify			# 履歴選択後、実行前に編集可能にする
+# ------------------------------------------------------------------------------
+# 履歴の検索
+# ------------------------------------------------------------------------------
+autoload history-search-end		# コマンド履歴の検索(カーソルを行末へ)
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end  history-search-end
+bindkey "^P" history-beginning-search-backward-end	# Ctrl+P で前方検索する
+bindkey "^N" history-beginning-search-forward-end 	# Ctrl+N で後方検索する
+if is-at-least 4.3.10
+then
+  bindkey '^R' history-incremental-pattern-search-backward
+  bindkey '^S' history-incremental-pattern-search-forward
+fi
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="avit"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
-
-# source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 #----- pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
    eval "$(pyenv init -)"
 fi
+export PATH=~/vim/src/:$PATH
+export PATH=$PATH:/usr/local/bin/
+export PATH="/home/gi/anaconda3/bin:$PATH"
 
+if [ -f ~/dotfiles/.bash_aliases ]; then
+    . ~/dotfiles/.bash_aliases
+fi
+
+plugins=(
+  git
+)
 
 
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
@@ -121,50 +99,57 @@ function tmux_automatically_attach_session()
             ! is_exists 'tmux' && return 1
 
         if is_tmux_runnning; then
-                    echo "${fg_bold[red]} _____ __  __ _   ___  __ ${reset_color}"
-                                echo "${fg_bold[red]}|_   _|  \/  | | | \ \/ / ${reset_color}"
-                                            echo "${fg_bold[red]}  | | | |\/| | | | |\  /  ${reset_color}"
-                                                        echo "${fg_bold[red]}  | | | |  | | |_| |/  \  ${reset_color}"
-                                                                    echo "${fg_bold[red]}  |_| |_|  |_|\___//_/\_\ ${reset_color}"
-                                                                            elif is_screen_running; then
-                                                                                        echo "This is on screen."
-                                                                                                fi
-                                                                                                    else
-                                                                                                            if shell_has_started_interactively && ! is_ssh_running; then
-                                                                                                                        if ! is_exists 'tmux'; then
-                                                                                                                                        echo 'Error: tmux command not found' 2>&1
-                                                                                                                                                        return 1
-                                                                                                                                                                    fi
+            echo "${fg_bold[green]} _____ __  __ _   ___  __ ${reset_color}"
+            echo "${fg_bold[green]}|_   _|  \/  | | | \ \/ / ${reset_color}"
+            echo "${fg_bold[green]}  | | | |\/| | | | |\  /  ${reset_color}"
+            echo "${fg_bold[green]}  | | | |  | | |_| |/  \  ${reset_color}"
+            echo "${fg_bold[green]}  |_| |_|  |_|\___//_/\_\ ${reset_color}"
+        elif is_screen_running; then
+            echo "This is on screen."
+    fi
+    else
+    if shell_has_started_interactively && ! is_ssh_running; then
+         if ! is_exists 'tmux'; then
+             echo 'Error: tmux command not found' 2>&1
+             return 1
+         fi
 
-            if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
-                            # detached session exists
-                                            tmux list-sessions
-                                                            echo -n "Tmux: attach? (y/N/num) "
-                                                                            read
-                                                                                            if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then
-                                                                                                                tmux attach-session
-                                                                                                                                    if [ $? -eq 0 ]; then
-                                                                                                                                                            echo "$(tmux -V) attached session"
-                                                                                                                                                                                    return 0
-                                                                                                                                                                                                        fi
-                                                                                                                                                                                                                        elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
-                                                                                                                                                                                                                                            tmux attach -t "$REPLY"
-                                                                                                                                                                                                                                                                if [ $? -eq 0 ]; then
-                                                                                                                                                                                                                                                                                        echo "$(tmux -V) attached session"
-                                                                                                                                                                                                                                                                                                                return 0
-                                                                                                                                                                                                                                                                                                                                    fi
-                                                                                                                                                                                                                                                                                                                                                    fi
-                                                                                                                                                                                                                                                                                                                                                                fi
+         if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+             # detached session exists
+             tmux list-sessions
+             echo -n "Tmux: attach? (y/N/num) "
+             read
+             if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then
+                 tmux attach-session
+                  if [ $? -eq 0 ]; then
+                  echo "$(tmux -V) attached session"
+                  return 0
+             fi
+         elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
+              tmux attach -t "$REPLY"
+         if [ $? -eq 0 ]; then
+              echo "$(tmux -V) attached session"
+              return 0
+         fi
+     fi
+ fi
 
-            if is_osx && is_exists 'reattach-to-user-namespace'; then
-                            # on OS X force tmux's default command
-                                            # to spawn a shell in the user's namespace
-                                                            tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
-                                                                            tmux -f <(echo "$tmux_config") new-session && echo "$(tmux -V) created new session supported OS X"
-                                                                                        else
-                                                                                                        tmux new-session && echo "tmux created new session"
-                                                                                                                    fi
+        if is_osx && is_exists 'reattach-to-user-namespace'; then
+                        # on OS X force tmux's default command
+                                        # to spawn a shell in the user's namespace
+                                                        tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
+                                                                        tmux -f <(echo "$tmux_config") new-session && echo "$(tmux -V) created new session supported OS X"
+                                                                                    else
+                                                                                                    tmux new-session && echo "tmux created new session"
+                                                                                                                fi
+                                                                                                                        fi
                                                                                                                             fi
-                                                                                                                                fi
-                                                                                                                                }
-                                                                                                     tmux_automatically_attach_session
+                                                                                                                            }
+                                                                                                 tmux_automatically_attach_session
+
+
+
+# ------------------------------------------------------------------------------
+# 全ての設定が終わってから実行
+# ------------------------------------------------------------------------------
+typeset -U path cdpath fpath manpath	# パスの重複をなくす
