@@ -1,7 +1,6 @@
 "
 " ui.vim
 "
-set termguicolors
 
 colorscheme molokai
 " 
