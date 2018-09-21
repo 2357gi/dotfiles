@@ -1,10 +1,15 @@
 "
 " ui.vim
 "
+set termguicolors
 
-" for vim somecolor
-set t_Co=256
+colorscheme molokai
+" 
+" set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+highlight Normal ctermbg=none
 
 set list           " 不可視文字を表示
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表示記号指定
