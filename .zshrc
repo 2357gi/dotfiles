@@ -24,6 +24,7 @@ setopt complete_aliases			# 補完する前にオリジナルコマンドに展�
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}	# カラー表示
 setopt noautoremoveslash		# パスの最後の / を自動削除しない
 setopt auto_pushd			# cd でディレクトリスタックに自動保存
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'	# 補完で小文字でも大文字にマッチ
 setopt pushd_ignore_dups		# 重複してディレクトリスタック保存しない
 setopt magic_equal_subst		# 引数の = 以降も補完する
 setopt auto_menu			# 補完キー連打で自動で補完
@@ -59,6 +60,7 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end  history-search-end
 bindkey "^P" history-beginning-search-backward-end	# Ctrl+P で前方検索する
 bindkey "^N" history-beginning-search-forward-end 	# Ctrl+N で後方検索する
+
 if is-at-least 4.3.10
 then
   bindkey '^R' history-incremental-pattern-search-backward
