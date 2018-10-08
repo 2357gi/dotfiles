@@ -1,0 +1,6 @@
+pane	0	1	:vim	1	:*	1	:/home/gi/ダウンロード/seminar-day2-acmpc	0	vim	:vim /home/gi/ダウンロード/seminar-day2-acmpc/
+pane	0	1	:vim	1	:*	2	:/home/gi/Sandbox/zemi	1	vim	:vim note_2.md
+pane	0	2	:inlogger	0	:-	1	:/home/gi	1	zsh	:
+window	0	1	1	:*	38c1,170x44,0,0{85x44,0,0,0,84x44,86,0,4}
+window	0	2	0	:-	bc3f,170x44,0,0,2
+state	0	

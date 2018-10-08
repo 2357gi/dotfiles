@@ -1,0 +1,5 @@
+pane	0	1	:zsh	1	:*	1	:/home/gi/Sandbox/signate	1	zsh	:
+pane	0	1	:zsh	1	:*	2	:/home/gi/Sandbox/signate	0	zsh	:
+pane	0	1	:zsh	1	:*	3	:/home/gi/Sandbox/signate	0	python	:/home/gi/anaconda3/bin/python /home/gi/anaconda3/bin/jupyter-notebook
+window	0	1	1	:*	46dd,170x44,0,0{101x44,0,0,0,68x44,102,0[68x28,102,0,1,68x15,102,29,2]}
+state	0	

@@ -1,0 +1,6 @@
+pane	0	1	:zsh	1	:*	1	:/home/gi	1	zsh	:
+pane	1	1	:sudo	1	:*	1	:/home/gi/dotfiles	1	sudo	:sudo shutdown -h now
+pane	1	1	:sudo	1	:*	2	:/home/gi/dotfiles	0	zsh	:
+window	0	1	1	:*	b25d,80x24,0,0,0
+window	1	1	1	:*	38c4,170x44,0,0{85x44,0,0,1,84x44,86,0,2}
+state		

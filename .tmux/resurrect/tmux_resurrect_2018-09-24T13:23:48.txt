@@ -1,0 +1,7 @@
+pane	0	1	:zsh	1	:*	1	:/home/gi	1	zsh	:
+pane	1	1	:sudo	0	:-	1	:/home/gi/develop/fujihalab_system	1	zsh	:
+pane	1	2	:zsh	1	:*	1	:/home/gi	1	zsh	:
+window	0	1	1	:*	bc3e,170x44,0,0,1
+window	1	1	0	:-	b061,84x42,0,0,4
+window	1	2	1	:*	b062,84x42,0,0,5
+state	1	0

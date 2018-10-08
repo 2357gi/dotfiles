@@ -1,0 +1,6 @@
+pane	0	1	:vim	0	:-	1	:/home/gi/ダウンロード/seminar-day2-acmpc	1	vim	:vim /home/gi/ダウンロード/seminar-day2-acmpc/
+pane	0	1	:vim	0	:-	2	:/home/gi/Sandbox/zemi	0	vim	:vim note_2.md
+pane	0	2	:inlogger	1	:*	1	:/home/gi/develop/fujihalab_system/fujihalab_system	1	git	:git push origin master
+window	0	1	0	:-	38c1,170x44,0,0{85x44,0,0,0,84x44,86,0,4}
+window	0	2	1	:*	bc3f,170x44,0,0,2
+state	0	
