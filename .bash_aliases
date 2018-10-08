@@ -1,6 +1,6 @@
 
 
-alias ls='ls -GF --color=auto'
+alias ls='ls -GF'
 
 alias rm='rm -i'
 alias ..='cd ..'
@@ -8,7 +8,7 @@ alias ..='cd ..'
 alias mv='mv -i'
 alias cp='cp -i'
 
-alias ll='ls -alF'
+alias ll='ls -alG'
 
 alias up='cd ..; ls -lF'
 
