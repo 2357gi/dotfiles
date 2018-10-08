@@ -12,6 +12,9 @@ alias ll='ls -alF'
 
 alias up='cd ..; ls -lF'
 
+alias fjvenv='. ~/develop/fujihalab_system/fjvenv/bin/activate'
+alias zmvenv='. ~/Sandbox/zemi/zmvenv/bin/activate'
+
 alias vi='vim'
 alias g='git'
 alias p='pwd'
