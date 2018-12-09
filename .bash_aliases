@@ -16,7 +16,16 @@ alias fjvenv='. ~/develop/fujihalab_system/fjvenv/bin/activate'
 alias zmvenv='. ~/Sandbox/zemi/zmvenv/bin/activate'
 
 alias vi='vim'
+
 alias g='git'
+alias ga='git add'
+alias gs='git status'
+alias gcm='git commit -m'
+
+alias cdg='cd ~/github.com/ && cd '
+
+alias jn='jupyter notebook'
+
 alias p='pwd'
 
 alias df='df -h'
