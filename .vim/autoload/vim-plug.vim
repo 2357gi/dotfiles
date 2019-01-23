@@ -5,6 +5,7 @@ call plug#begin(expand('~/.vim/plugged'))
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'w0rp/ale'
 	Plug 'scrooloose/syntastic'
+	Plug 'ekalinin/Dockerfile.vim'
 	" Plug 'davidhalter/jedi-vim'
 	" Plug 'tpope/vim-commentary'
 	" Plug 'reireias/vim-cheatsheet'

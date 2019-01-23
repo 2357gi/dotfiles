@@ -1,4 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/gi/dotfiles/vimfiles'
-let g:netrw_dirhist_2='/home/gi/dotfiles/vimfiles/vim-plug'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/2357gi/github.com/odpt_app'
+let g:netrw_dirhist_2='/Users/2357gi/github.com/dotfiles/.vim'
+let g:netrw_dirhist_3='/Users/2357gi/github.com/dotfiles/.vim/autoload'
+let g:netrw_dirhist_4='/'
+let g:netrw_dirhist_5='/Users/2357gi/Sandbox/RLtrain'
+let g:netrw_dirhist_6='/Users/2357gi/github.com/in_anyone_lab'
+let g:netrw_dirhist_7='/Users/2357gi/.vim'
+let g:netrw_dirhist_8='/Users/2357gi/.vim/autoload'
