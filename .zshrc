@@ -73,9 +73,19 @@ if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
    eval "$(pyenv init -)"
 fi
+
+
+
+#----- rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 export PATH=~/vim/src/:$PATH
 export PATH=$PATH:/usr/local/bin/
 export PATH="/home/gi/anaconda3/bin:$PATH"
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 if [ -f ~/github.com/dotfiles/.bash_aliases ]; then
     . ~/github.com/dotfiles/.bash_aliases
