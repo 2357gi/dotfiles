@@ -30,6 +30,8 @@ alias p='pwd'
 
 alias df='df -h'
 
+alias noti='terminal-notifier -message "コマンド完了"'
+
 dic() {
   w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
 }
