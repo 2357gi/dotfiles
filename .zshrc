@@ -67,34 +67,59 @@ then
   bindkey '^S' history-incremental-pattern-search-forward
 fi
 
-#----- pyenv
+# ------------------------------------------------------------------------------
+# function settings
+# ------------------------------------------------------------------------------
+function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
+function is_osx() { [[ $OSTYPE == darwin* ]]; }
+function is_screen_running() { [ ! -z "$STY" ]; }
+function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
+function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
+function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
+function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
+# ------------------------------------------------------------------------------
+# env系
+# ------------------------------------------------------------------------------
+
+# pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
    export PATH=${PYENV_ROOT}/bin:$PATH
    eval "$(pyenv init -)"
 fi
 
-
-
-#----- rbenv
+# rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# ------------------------------------------------------------------------------
+# export
+# ------------------------------------------------------------------------------
 export PATH=~/vim/src/:$PATH
 export PATH=$PATH:/usr/local/bin/
 export PATH="/home/gi/anaconda3/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-if [ -f ~/github.com/dotfiles/.bash_aliases ]; then
-    . ~/github.com/dotfiles/.bash_aliases
+if [ -f ~/dotfiles/.bash_aliases ]; then
+    . ~/dotfiles/.bash_aliases
 fi
 
 plugins=(
   git
 )
+# ------------------------------------------------------------------------------
+# Peco
+# ------------------------------------------------------------------------------
+function peco-history-selection() {
+	    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+		    CURSOR=$#BUFFER
+			    zle reset-prompt
+			}
 
+			zle -N peco-history-selection
+			bindkey '^R' peco-history-selection
 
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
@@ -126,8 +151,7 @@ function tmux_automatically_attach_session()
 				return 1
 			fi
 
-			if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
-				# detached session exists
+			if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then # detached session exists
 				tmux list-sessions
 				echo -n "Tmux: attach? (y/N/num) "
 				read
