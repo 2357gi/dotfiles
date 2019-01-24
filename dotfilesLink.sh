@@ -2,6 +2,9 @@
 # from @2357gi
 
 ln -sf ~/github.com/dotfiles ~/dotfiles
+
+
+In -sf ~/github.com/dotfiles/.czrc ~/.czrc
 ln -sf ~/github.com/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/github.com/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/github.com/dotfiles/.tmux.conf ~/.tmux.conf
