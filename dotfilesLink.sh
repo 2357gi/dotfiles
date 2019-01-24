@@ -1,6 +1,7 @@
 #!/bin/sh
 # from @2357gi
 
+ln -sf ~/github.com/dotfiles ~/dotfiles
 ln -sf ~/github.com/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/github.com/dotfiles/.zshrc ~/.zshrc
 ln -sf ~/github.com/dotfiles/.tmux.conf ~/.tmux.conf
