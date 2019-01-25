@@ -7,7 +7,10 @@
 "     (_\_/ |_|_| |_| |_|_|  \___|
 "                                 
 " its vim basic config.
-" # buffer is active.
+
+
+" Terminal接続を高速化
+set ttyfast
 
 " スペルチェック
 set spell
@@ -53,14 +56,17 @@ set shiftwidth=4
 syntax on
 
 " 行末の1文字先までカーソルを移動できるように
-set virtualedit=onemore
+set virtualedit=block
 
 set fenc=utf-8
 
 set nobackup
-set nowritebackup
-set noswapfile
+
+
+" 外部で変更されたら読み直す
 set autoread
+
+" 保存されていないFileがあっても構わず別のFileを開く
 set hidden
 " ------------------------------------------------------------------------------
 " buffer
