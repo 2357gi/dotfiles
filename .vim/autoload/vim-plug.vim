@@ -6,6 +6,8 @@ call plug#begin(expand('~/.vim/plugged'))
 	Plug 'w0rp/ale'
 	Plug 'scrooloose/syntastic'
 	Plug 'ekalinin/Dockerfile.vim'
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'
 	" Plug 'davidhalter/jedi-vim'
 	" Plug 'tpope/vim-commentary'
 	" Plug 'reireias/vim-cheatsheet'
