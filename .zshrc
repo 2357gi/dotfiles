@@ -110,17 +110,31 @@ plugins=(
   git
 )
 # ------------------------------------------------------------------------------
+# スピンインジゲーター
+# ------------------------------------------------------------------------------
+chars="/-\|"
+
+while :; do
+	for (( i=0; i<${#chars}; i++ )); do
+		sleep 1
+		echo -en "${chars:$i:1}" "\r"
+	done
+done
+
+# ------------------------------------------------------------------------------
 # Peco
 # ------------------------------------------------------------------------------
 function peco-history-selection() {
-	    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-		    CURSOR=$#BUFFER
-			    zle reset-prompt
-			}
+	BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+	CURSOR=$#BUFFER
+	zle reset-prompt
+}
 
-			zle -N peco-history-selection
-			bindkey '^R' peco-history-selection
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
+# -----------------------------------------------------------------------
+# zsh-tmux
 # -----------------------------------------------------------------------
 function tmux_automatically_attach_session()
 {
