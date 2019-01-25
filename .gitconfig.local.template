@@ -1,0 +1,34 @@
+[user]
+	name = 2357gi
+	email = 2357.gi@gmail.com
+	username = 2357gi
+
+[core]
+	editor = vim
+	excludesfile = /Users/2357gi/.gitignore_global
+
+
+[alias]
+	alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
+
+	aa     = !git add .  && git add -u && git status
+	cam    = commit --amend
+	wip    = commit -m 'wip'
+	co     = checkout
+	f      = "!git ls-files | grep -i"
+	fp     = "!git ls-files | peco"
+	d      = diff
+	dc     = diff --cached
+	d1     = diff HEAD~
+	d2     = diff HEAD~2
+	d3     = diff HEAD~3
+	drag   = pull --rebase
+	refresh= !git fetch origin && git remote prune origin
+	b      = branch -a
+	s      = status --short --branch
+	st     = status
+	info   = remote show origin
+	l      = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset')))
+	graph  = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+	review = diff origin/master
+
