@@ -15,8 +15,7 @@
 	cam    = commit --amend
 	wip    = commit -m 'wip'
 	co     = checkout
-	f      = "!git ls-files | grep -i"
-	fp     = "!git ls-files | peco"
+	f      = "!git ls-files | fzf"
 	d      = diff
 	dc     = diff --cached
 	d1     = diff HEAD~
