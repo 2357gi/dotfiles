@@ -119,7 +119,7 @@ plugins=(
 # enhancd
 # ------------------------------------------------------------------------------
 if [ -f ~/enhancd/enhancd.sh ]; then
-	source ~/enhancd/enhancd.sh
+	source ~/enhancd/init.sh
 fi
 # ------------------------------------------------------------------------------
 # prompt
