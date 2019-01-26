@@ -20,6 +20,9 @@ set showcmd				" コマンドをステータスラインに表示
 set matchtime=3				" 対応括弧のハイライト表示を3秒にする
 set wrap				" 文字を折り返す
 
+" ALEの左側のLintからむを常時標示
+let g:ale_sign_column_always = 1
+
 " Set tabline.
 function! s:my_tabline()  "{{{
 let s = ''
