@@ -1,3 +1,4 @@
+#!bin/sh
 # its one line installer
 
 set -eu
@@ -17,14 +18,16 @@ cd $THIS_DIR
 
 echo "start setup..."
 for f in .??*; do
-	[ "$f" = ".git" ] && continue
-	[ "$f" = ".gitconfig.local.template" ] && continue
+	[[ "$f" = ".git" ]] && continue
+	[[ "$f" = ".gitconfig.local.template" ]] && continue
+	[[ "$f" = ".gitignore" ]] && continue
 
 	ln -snfv ~/dotfiles/"$f" ~/
 done
 
-[ -e ~/.gitconfig.local ] || cp ~/dotfiles/.gitconfig.local.template ~/.gitconfig
-
+if [[ -e ~/.gitconfig.local ]];then
+   cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig
+fi
 
 cat << END
 
