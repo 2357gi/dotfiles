@@ -21,6 +21,7 @@ for f in .??*; do
 	[[ "$f" = ".git" ]] && continue
 	[[ "$f" = ".gitconfig.local.template" ]] && continue
 	[[ "$f" = ".gitignore" ]] && continue
+	[[ "$f" = ".commit_template" ]] $$ continue
 
 	ln -snfv ~/dotfiles/"$f" ~/
 done
@@ -28,6 +29,8 @@ done
 if [[ -e ~/.gitconfig.local ]];then
    cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig
 fi
+
+git config commit.template .commit_template
 
 cat << END
 
