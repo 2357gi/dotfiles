@@ -8,6 +8,9 @@ export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 
+# zshが勝手に改行したときの記号を消す
+export PROMPT_EOL_MARK=''
+
 # ------------------------------------------------------------------------------
 # 補完
 # ------------------------------------------------------------------------------
@@ -77,6 +80,8 @@ function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
 function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
+
+
 # ------------------------------------------------------------------------------
 # env系
 # ------------------------------------------------------------------------------
@@ -89,13 +94,18 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 # rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+	export PATH=${RBENV_ROOT}/bin:$PATH
+	eval "$(rbenv init -)"
+fi
 
 # goenv
-eval "$(goenv init -)"
+export GOENV_ROOT="${HOME}/.goenv"
+if [ -d "${GOENV_ROOT}" ]; then
+	export PATH=${GOENV_ROOT}/bin:$PATH
+	eval "$(goenv init -)"
+fi
 
 
 # ------------------------------------------------------------------------------
@@ -106,6 +116,7 @@ export PATH=$PATH:/usr/local/bin/
 export PATH="/home/gi/anaconda3/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export GOPATH=$HOME/go
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
