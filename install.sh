@@ -27,7 +27,8 @@ for f in .??*; do
 done
 
 if [[ -e ~/.gitconfig.local ]];then
-   cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig
+   cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
+   # cp -f ~/dotfiles/.git
 fi
 
 git config commit.template .commit_template
