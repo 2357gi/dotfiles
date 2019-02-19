@@ -18,6 +18,7 @@ cd $THIS_DIR
 
 echo "start setup..."
 for f in .??*; do
+	[[ "$f" = ".tmux" ]] && continue
 	[[ "$f" = ".git" ]] && continue
 	[[ "$f" = ".gitconfig.local.template" ]] && continue
 	[[ "$f" = ".gitignore" ]] && continue
@@ -31,7 +32,8 @@ if [[ -e ~/.gitconfig.local ]];then
    # cp -f ~/dotfiles/.git
 fi
 
-git config commit.template .commit_template
+eval git config commit.template .commit_template
+eval git config --global core.excludesfile ~/.gitignore_global
 
 cat << END
 
