@@ -21,7 +21,7 @@ for f in .??*; do
 	[[ "$f" = ".git" ]] && continue
 	[[ "$f" = ".gitconfig.local.template" ]] && continue
 	[[ "$f" = ".gitignore" ]] && continue
-	[[ "$f" = ".commit_template" ]] $$ continue
+	[[ "$f" = ".commit_template" ]] && continue
 
 	ln -snfv ~/dotfiles/"$f" ~/
 done
