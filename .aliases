@@ -21,7 +21,10 @@ alias vif='vim $(fzf)'
 alias g='git'
 alias ga='git add'
 alias gs='git status --short --branch'
+alias gc='git commit'
 alias gcm='git commit -m'
+
+alias .z='source ~/.zshrc'
 
 
 cl (){
