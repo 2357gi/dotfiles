@@ -23,7 +23,12 @@ alias ga='git add'
 alias gs='git status --short --branch'
 alias gcm='git commit -m'
 
-alias cdg='cd ~/github.com/ && cd '
+
+cl (){
+	\cd "$@" && ls
+}
+
+alias cd="cl"
 
 alias jn='jupyter notebook'
 
