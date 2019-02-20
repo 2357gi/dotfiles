@@ -1,4 +1,0 @@
-pane	0	2	:vim	1	:*	1	:/home/gi/ダウンロード/seminar-day2-acmpc	0	vim	:vim /home/gi/ダウンロード/seminar-day2-acmpc/
-pane	0	2	:vim	1	:*	2	:/home/gi/ダウンロード/seminar-day2-acmpc	1	zsh	:
-window	0	2	1	:*	b8d2,170x44,0,0{85x44,0,0,4,84x44,86,0,7}
-state	0	

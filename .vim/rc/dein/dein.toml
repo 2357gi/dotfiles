@@ -42,8 +42,10 @@ hook_add = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-depends = 'fzf'
 hook_add = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
+
+[[plugins]]
+repo = 'junegunn/fzf'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'

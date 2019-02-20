@@ -1,3 +1,5 @@
 .vim/.netrwhist
 .vim/dein/*
 !/.vim/dein/.keep
+.tmux/resurrect/*
+!.vim/resurrect/.keep

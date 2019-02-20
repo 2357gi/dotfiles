@@ -29,7 +29,6 @@ done
 
 if [[ -e ~/.gitconfig.local ]];then
    cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
-   # cp -f ~/dotfiles/.git
 fi
 
 eval git config commit.template .commit_template
