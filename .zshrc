@@ -119,8 +119,8 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/go
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
 plugins=(

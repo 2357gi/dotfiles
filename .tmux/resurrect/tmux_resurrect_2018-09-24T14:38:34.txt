@@ -1,4 +1,0 @@
-pane	0	1	:zsh	1	:*	1	:/home/gi/develop/fujihalab_system/fujihalab_system	0	vim	:vim nfc-fujihalab-h29-v2.py
-pane	0	1	:zsh	1	:*	2	:/home/gi/develop/fujihalab_system/fujihalab_system	1	zsh	:
-window	0	1	1	:*	b8c8,170x44,0,0{85x44,0,0,2,84x44,86,0,3}
-state	0	

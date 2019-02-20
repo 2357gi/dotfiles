@@ -1,8 +1,0 @@
-pane	0	1	:vim	0	:-	1	:/home/gi/develop/fujihalab_system/fujihalab_system	1	vim	:vim nfc-fujihalab-h29-v2.py
-pane	0	1	:vim	0	:-	2	:/home/gi/develop/fujihalab_system/fujihalab_system	0	zsh	:
-pane	0	2	:vim	1	:*	1	:/home/gi/develop/fujihalab_system/fujihalab_system	1	vim	:vim nfc-fujihalab-h29-v2.py
-pane	1	1	:zsh	1	:*	1	:/home/gi	1	zsh	:bash /home/gi/.pyenv/libexec/pyenv-rehash
-window	0	1	0	:-	b8c8,170x44,0,0{85x44,0,0,2,84x44,86,0,3}
-window	0	2	1	:*	bc42,170x44,0,0,5
-window	1	1	1	:*	bc44,170x44,0,0,7
-state	1	

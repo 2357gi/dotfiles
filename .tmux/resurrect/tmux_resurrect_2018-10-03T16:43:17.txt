@@ -1,9 +1,0 @@
-pane	0	1	:sudo	1	:*	1	:/home/gi/ダウンロード/Asus-E200HA-Linux-Post-Install-Script	1	sudo	:/home/gi/anaconda3/bin/python /home/gi/anaconda3/bin/jupyter-notebook
-/home/gi/anaconda3/bin/python /home/gi/anaconda3/bin/jupyter-notebook
-sudo ./e200ha_with_sound.sh
-sudo ./e200ha_with_sound.sh
-pane	0	1	:sudo	1	:*	2	:/home/gi	0	zsh	:
-pane	1	1	:zsh	1	:*	1	:/home/gi/Downloads	1	zsh	:
-window	0	1	1	:*	96bc,170x42,0,0{85x42,0,0,1,84x42,86,0,3}
-window	1	1	1	:*	ae5f,80x23,0,0,2
-state	0	
