@@ -59,7 +59,15 @@ set fenc=utf-8
 
 set nobackup
 
+
+" カーソルラインをハイライト！
+set cursorline
+hi clear CursorLine
+
+" F3で相対行表示切り替え
 set number
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+
 
 " ------------------------------------------------------------------------------
 " buffer

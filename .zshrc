@@ -8,8 +8,9 @@ export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 
+
 # zshが勝手に改行したときの記号を消す
-export PROMPT_EOL_MARK=''
+# export PROMPT_EOL_MARK=''
 
 # ------------------------------------------------------------------------------
 # 補完
@@ -130,6 +131,15 @@ plugins=(
 # fzf
 # ------------------------------------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$HOME/.fzf/shell/key-bindings.zsh"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # fbr - checkout git branch
 fbr() {
