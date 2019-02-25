@@ -15,6 +15,7 @@ runtime! rc/dein/dein.vim
 let mapleader = "\<Space>"
 
 
+
 " Terminal接続を高速化
 set ttyfast
 
@@ -72,6 +73,7 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 nmap <leader>o :FZF<CR>
+nmap q: :q
 
 " ------------------------------------------------------------------------------
 " buffer

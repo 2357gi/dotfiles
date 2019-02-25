@@ -10,19 +10,19 @@ repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
 repo = 'w0rp/ale'
-hook_add = 'source ~/.vim/rc/plugins/ale.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/ale.rc.vim'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
-hook_add = 'source ~/.vim/rc/plugins/indentline.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/indentline.rc.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-hook_add = 'source ~/.vim/rc/plugins/nerdtree.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/nerdtree.rc.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
-hook_add = 'source ~/.vim/rc/plugins/vim-airline.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/vim-airline.rc.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -38,16 +38,16 @@ repo = 'vim-scripts/vim-auto-save'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
-hook_add = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-hook_add = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'
-hook_add = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
 
