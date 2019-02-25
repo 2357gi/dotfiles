@@ -42,12 +42,14 @@ repo = 'ryanoasis/vim-devicons'
 hook_source = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
-repo = 'junegunn/fzf'
-hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
+repo = 'junegunn/fzf.vim'
+build = './install --all'
+hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
-hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
+repo = 'junegunn/fzf'
+depends = 'fzf'
+hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'

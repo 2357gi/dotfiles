@@ -1,4 +1,2 @@
-" nmap <leader>b :Baffer<CR>
+let mapleader = "\<Space>"
 nmap <leader>o :FZF<CR>
-
-
