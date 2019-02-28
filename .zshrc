@@ -7,7 +7,6 @@ autoload -Uz add-zsh-hook	# zsh のhook関数を呼ぶ
 export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
-autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
 
 # zshが勝手に改行したときの記号を消す
 # export PROMPT_EOL_MARK=''
