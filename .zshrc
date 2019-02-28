@@ -3,10 +3,10 @@
 # ------------------------------------------------------------------------------
 export LANG=ja_JP.UTF-8		# 日本語設定
 autoload -U is-at-least		# zsh バージョン切り分けモジュール
-autoload -Uz add-zsh-hook	# zsh のhook関数を呼ぶ
 export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
+autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
 
 # zshが勝手に改行したときの記号を消す
 # export PROMPT_EOL_MARK=''
@@ -71,7 +71,7 @@ then
 fi
 
 # ------------------------------------------------------------------------------
-# function settings
+# function
 # ------------------------------------------------------------------------------
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
@@ -208,11 +208,17 @@ add-zsh-hook precmd precmd_prompt
 
 PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
 %B%F{green}❯%f%b "
+
 # ------------------------------------------------------------------------------
-# precmd
+# Precomd
 # ------------------------------------------------------------------------------
+precmd () {
+}
+
 chpwd() {
-	if [[ $(pwd) != $HOME ]]; then; ls; fi
+	if [[ $(pwd) != $HOME ]] ; then
+		ls
+	fi
 }
 # -----------------------------------------------------------------------
 # zsh-tmux
