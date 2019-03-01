@@ -37,8 +37,7 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-.keep
-
+!.keep
 .idea/
 
 # Temporary Files

@@ -53,3 +53,18 @@ on_ft = ['markdown', 'mkd']
 repo  = 'hashivim/vim-terraform'
 on_ft = ['tf']
 hook_add = 'source ~/.vim/rc/plugins/vim-terraform.rc.vim'
+
+# Docker
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+on_ft = ['Dockerfile']
+
+# scala
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_ft = ['scala', 'play']
+
+# scala
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_ft = ['python', 'scala', 'go', 'ruby', 'javascript']

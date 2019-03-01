@@ -73,6 +73,8 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 nmap <leader>o :FZF<CR>
+nmap <leader>e :NERDTreeToggle<CR>
+nmap <leader>f :Buffers<CR>
 nmap q: :q
 
 " ------------------------------------------------------------------------------

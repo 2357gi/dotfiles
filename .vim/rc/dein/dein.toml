@@ -18,7 +18,7 @@ hook_source = 'source ~/.vim/rc/plugins/indentline.rc.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-hook_source = 'source ~/.vim/rc/plugins/nerdtree.rc.vim'
+hook_add = 'source ~/.vim/rc/plugins/nerdtree.rc.vim'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
@@ -46,6 +46,7 @@ hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
+hook_add = 'set rtp+=~/.fzf'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'
