@@ -35,6 +35,7 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'vim-scripts/vim-auto-save'
+hook_source = 'source ~/.vim/rc/plugins/vim-auto-save.rc.vim'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -42,11 +43,14 @@ hook_source = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
+build = './install --all'
 hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
 hook_add = 'set rtp+=~/.fzf'
+depends = 'fzf'
+hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'
