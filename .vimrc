@@ -15,6 +15,9 @@ runtime! rc/dein/dein.vim
 let mapleader = "\<Space>"
 
 
+" mouseを有効か
+set mouse=a
+set ttymouse=xterm2
 
 " Terminal接続を高速化
 set ttyfast
