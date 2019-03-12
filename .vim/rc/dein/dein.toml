@@ -55,3 +55,6 @@ hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
 repo = 'mileszs/ack.vim'
 hook_source = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
 
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
