@@ -1,15 +1,33 @@
 #!bin/sh
-# its one line installer
 
 set -eu
 
 cat << END
-
 **************************************************
 DOTFILES SETUP START!
 **************************************************
-
 END
+
+cd ~
+
+
+echo '********* generate a new SSH key?[Y/n]'
+read ANSWER
+case $ANSWER in
+	"" | "Y" | "y" )
+		ssh-keygen -t rsa -b 4096 ;;
+	* ) echo 'skip' ;;
+esac
+
+
+echo '********* installll homebrew?[Y/n]'
+read ANSWER
+case $ANSWER in
+	"" | "Y" | "y" )
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" ;;
+	* ) echo "skip" ;;
+esac
+
 
 # 実行場所のディレクトリを取得
 THIS_DIR=$(cd $(dirname $0); pwd)
