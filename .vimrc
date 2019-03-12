@@ -75,10 +75,8 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " ----------------------------------------------------
 " key mapping
 " ----------------------------------------------------
-nmap <leader>o :FZF<CR>
-nmap <leader>e :NERDTreeToggle<CR>
-nmap <leader>f :Buffers<CR>
-nmap q: :q
+
+" プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
 
 " ------------------------------------------------------------------------------
 " buffer
