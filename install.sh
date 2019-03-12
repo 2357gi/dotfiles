@@ -29,6 +29,7 @@ case $ANSWER in
 esac
 
 
+
 # 実行場所のディレクトリを取得
 THIS_DIR=$(cd $(dirname $0); pwd)
 
