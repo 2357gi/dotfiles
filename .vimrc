@@ -15,6 +15,9 @@ runtime! rc/dein/dein.vim
 let mapleader = "\<Space>"
 
 
+" mouseを有効か
+set mouse=a
+set ttymouse=xterm2
 
 " Terminal接続を高速化
 set ttyfast
@@ -73,6 +76,8 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 nmap <leader>o :FZF<CR>
+nmap <leader>e :NERDTreeToggle<CR>
+nmap <leader>f :Buffers<CR>
 nmap q: :q
 
 " ------------------------------------------------------------------------------
