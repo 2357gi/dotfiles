@@ -50,7 +50,7 @@ if [[ -e ~/.gitconfig.local ]];then
    cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
 fi
 
-eval git config commit.template .commit_template
+eval git config --global commit.template .commit_template
 eval git config --global core.excludesfile ~/.gitignore_global
 
 cat << END
