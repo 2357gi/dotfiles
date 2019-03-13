@@ -75,15 +75,14 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " ----------------------------------------------------
 " key mapping
 " ----------------------------------------------------
-
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
+nmap <leader>r :source ~/.vimrc<CR>
 
 " ------------------------------------------------------------------------------
 " buffer
 " ------------------------------------------------------------------------------
-nnoremap < :bp<CR>|
-
-set switchbuf=useopen			" 新しく開く代わりに既存バッファを開く
+" 新しく開く代わりに既存バッファを開く
+set switchbuf=useopen
 
 
 " 保存されていないFileがあっても構わず別のFileを開く
@@ -143,6 +142,7 @@ set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表
 " ステータスライン周り
 set laststatus=2
 set showcmd				" コマンドをステータスラインに表示
+set noshowmode
 
 set wrap				" 文字を折り返す
 
