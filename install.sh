@@ -8,7 +8,16 @@ DOTFILES SETUP START!
 **************************************************
 END
 
-cd ~
+cd $HOME
+
+echo '********* clone 2357gi/dotfiles?'
+read ANSWER
+case $ANSWER in
+	"" | "Y" | "y" )
+		git clone https://github.com/2357gi/dotfiles.git $HOME/dotfiles
+		DOTFILES_PATH=$HOME/dotfiles ;;
+	* ) echo "skip" ;;
+esac
 
 
 echo '********* generate a new SSH key?[Y/n]'
@@ -20,7 +29,7 @@ case $ANSWER in
 esac
 
 
-echo '********* installll homebrew?[Y/n]'
+echo '********* install homebrew?[Y/n]'
 read ANSWER
 case $ANSWER in
 	"" | "Y" | "y" )
@@ -29,11 +38,7 @@ case $ANSWER in
 esac
 
 
-
-# 実行場所のディレクトリを取得
-THIS_DIR=$(cd $(dirname $0); pwd)
-
-cd $THIS_DIR
+cd DOTFILES_PATH
 
 echo "start setup..."
 for f in .??*; do
