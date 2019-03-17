@@ -121,6 +121,7 @@ export PATH="/home/gi/anaconda3/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/go
+export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 
 if [ -f ~/.aliases ]; then
     . ~/.aliases
