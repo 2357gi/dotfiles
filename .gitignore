@@ -3,3 +3,5 @@
 !/.vim/dein/.keep
 .tmux/resurrect/*
 !.vim/resurrect/.keep
+
+\[quickrun\ output\]
