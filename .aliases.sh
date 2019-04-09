@@ -27,11 +27,7 @@ alias gcm='git commit -m'
 alias .z='source ~/.zshrc'
 
 alias k='kubectl'
-
-
-cl (){
-	\cd "$@" && ls
-}
+alias fig='docker-compose'
 
 alias cd="cl"
 

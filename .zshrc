@@ -123,9 +123,11 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/go
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/.aliases.sh ]; then
+    . ~/.aliases.sh
 fi
+
+source ~/dotfiles/function.zsh
 
 plugins=(
   git
@@ -226,6 +228,13 @@ chpwd() {
 	fi
 }
 # -----------------------------------------------------------------------
+# docker fzf 
+# -----------------------------------------------------------------------
+
+if [ ~/docker-fzf-completion ] ; then
+	source ~/docker-fzf-completion/docker-fzf.zsh
+fi
+# -----------------------------------------------------------------------
 # zsh-tmux
 # -----------------------------------------------------------------------
 function tmux_automatically_attach_session()
@@ -287,3 +296,11 @@ tmux_automatically_attach_session
 # 全ての設定が終わってから実行
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

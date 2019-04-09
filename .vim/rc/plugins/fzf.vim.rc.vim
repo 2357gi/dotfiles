@@ -10,5 +10,7 @@ command! -bang -nargs=* Rg
 
 nmap <Space>o :FZF<CR>
 nmap <Space>f :Buffers<CR>
+nmap <Space>h :History<CR>
+nmap <Space>g :Rg<CR>
 
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)

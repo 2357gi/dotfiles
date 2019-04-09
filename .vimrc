@@ -12,7 +12,7 @@
 runtime! rc/dein/dein.vim
 
 " leaderをspaceに
-let mapleader = "\<Space>"
+" let mapleader = "\<Space>"
 
 
 " mouseを有効か
@@ -76,7 +76,7 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
-nmap <leader>r :source ~/.vimrc<CR>
+nmap <Space>r :source ~/.vimrc<CR>
 
 " ------------------------------------------------------------------------------
 " buffer

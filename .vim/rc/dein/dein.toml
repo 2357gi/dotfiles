@@ -32,6 +32,7 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+hook_source = 'source ~/.vim/rc/plugins/vim-fugitive.vim.rc.vim'
 
 [[plugins]]
 repo = 'vim-scripts/vim-auto-save'
@@ -50,7 +51,6 @@ hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 repo = 'junegunn/fzf'
 hook_add = 'set rtp+=~/.fzf'
 depends = 'fzf'
-hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
 
 [[plugins]]
 repo = 'mileszs/ack.vim'
