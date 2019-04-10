@@ -28,6 +28,8 @@ alias .z='source ~/.zshrc'
 
 alias k='kubectl'
 
+alias :q='exit'
+
 
 cl (){
 	\cd "$@" && ls
