@@ -78,6 +78,20 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
 nmap <leader>r :source ~/.vimrc<CR>
 
+" 保存
+nmap <Space>w :w<CR>
+nmap <Space>qqq :q!<CR>
+
+" emacsっぽい動き
+nmap <C-e> $
+nmap <C-a> 0
+nmap <C-f> W
+nmap <C-b> B
+imap <C-e> <C-o>$
+imap <C-a> <C-o>0
+imap <C-f> <C-o>W
+imap <C-b> <C-o>B
+
 " ------------------------------------------------------------------------------
 " buffer
 " ------------------------------------------------------------------------------
