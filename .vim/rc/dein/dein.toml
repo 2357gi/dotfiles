@@ -59,3 +59,7 @@ hook_source = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
+hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'
