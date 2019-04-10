@@ -32,6 +32,7 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+hook_source = 'source ~/.vim/rc/plugins/vim-fugitive.rc.vim'
 
 [[plugins]]
 repo = 'vim-scripts/vim-auto-save'
