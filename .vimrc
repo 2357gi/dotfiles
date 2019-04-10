@@ -93,7 +93,7 @@ imap <C-f> <C-o>W
 imap <C-b> <C-o>B
 
 " terminal召喚
-nmap <Space>ter :vetical teminal ++cols=100
+nmap <Space>t :vertical terminal ++cols=100<CR>↲
 
 " ------------------------------------------------------------------------------
 " buffer
@@ -101,13 +101,13 @@ nmap <Space>ter :vetical teminal ++cols=100
 " 新しく開く代わりに既存バッファを開く
 set switchbuf=useopen
 
+set noswapfile
 
 " 保存されていないFileがあっても構わず別のFileを開く
 set hidden
 " 外部で変更されたら読み直す
 set autoread
-nnoremap <silent> <C-j> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+
 " ------------------------------------------------------------------------------
 
 " Windowsでもパスの区切り文字を/にする
