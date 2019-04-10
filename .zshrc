@@ -123,8 +123,8 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export GOPATH=$HOME/go
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
+if [ -f ~/.aliases.sh ]; then
+    . ~/.aliases.sh
 fi
 
 plugins=(
