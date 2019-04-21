@@ -46,5 +46,5 @@ alias -g H='| head'
 alias -g T='| tail'
 
 dic() {
-  w3m "http://ejje.weblio.jp/content/$1" | grep -E "^ *(主な意|用例):"
+  w3m "http://ejje.weblio.jp/content/$1" | grep -E "主な意|用例"
 }
