@@ -70,6 +70,11 @@ then
   bindkey '^S' history-incremental-pattern-search-forward
 fi
 
+ZSH_HISTORY_KEYBIND_GET="^B"
+ZSH_HISTORY_FILTER_OPTIONS="--filter-branch --filter-dir"
+ZSH_HISTORY_KEYBIND_ARROW_UP="^p"
+ZSH_HISTORY_KEYBIND_ARROW_DOWN="^n"
+
 # ------------------------------------------------------------------------------
 # function
 # ------------------------------------------------------------------------------
@@ -83,7 +88,7 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
 
 # ------------------------------------------------------------------------------
-# env系
+# PATH周り
 # ------------------------------------------------------------------------------
 
 # pyenv
@@ -107,22 +112,20 @@ if [ -d "${GOENV_ROOT}" ]; then
 	eval "$(goenv init -)"
 fi
 
-
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
 PATH=$JAVA_HOME/bin:$PATH
 
-# ------------------------------------------------------------------------------
-# export
-# ------------------------------------------------------------------------------
 export PATH=~/vim/src/:$PATH
 export PATH=$PATH:/usr/local/bin/
 export PATH="/home/gi/anaconda3/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export GOPATH=$HOME/go
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
+
+# export aliases
 if [ -f ~/.aliases.sh ]; then
     . ~/.aliases.sh
 fi
@@ -158,6 +161,7 @@ bindkey '^Z' fancy-ctrl-z
 # ------------
 source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
 # fbr - checkout git branch
 fbr() {
@@ -192,6 +196,7 @@ FZF-EOF"
 # ------------------------------------------------------------------------------
 if [ -f ~/enhancd/init.sh ]; then
 	source ~/enhancd/init.sh
+	export ENHANCD_FILTER=fzy:fzf:peco:percol:gof:picj:icepick:sentaku:selecta
 fi
 # ------------------------------------------------------------------------------
 # prompt
@@ -215,6 +220,10 @@ PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
 %B%F{green}❯%f%b "
 
 # ------------------------------------------------------------------------------
+# history
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
 # Precomd
 # ------------------------------------------------------------------------------
 precmd () {
@@ -225,62 +234,6 @@ chpwd() {
 		ls
 	fi
 }
-# -----------------------------------------------------------------------
-# zsh-tmux
-# -----------------------------------------------------------------------
-function tmux_automatically_attach_session()
-{
-	if is_screen_or_tmux_running; then
-		! is_exists 'tmux' && return 1
-
-		if is_tmux_runnning; then
-			echo "${fg_bold[green]} _____ __  __ _   ___  __ ${reset_color}"
-			echo "${fg_bold[green]}|_   _|  \/  | | | \ \/ / ${reset_color}"
-			echo "${fg_bold[green]}  | | | |\/| | | | |\  /  ${reset_color}"
-			echo "${fg_bold[green]}  | | | |  | | |_| |/  \  ${reset_color}"
-			echo "${fg_bold[green]}  |_| |_|  |_|\___//_/\_\ ${reset_color}"
-		elif is_screen_running; then
-			echo "This is on screen."
-		fi
-	else
-		if shell_has_started_interactively && ! is_ssh_running; then
-			if ! is_exists 'tmux'; then
-				echo 'Error: tmux command not found' 2>&1
-				return 1
-			fi
-
-			if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then # detached session exists
-				tmux list-sessions
-				echo -n "Tmux: attach? (y/N/num) "
-				read
-				if [[ "$REPLY" =~ ^[Yy]$ ]] || [[ "$REPLY" == '' ]]; then
-					tmux attach-session
-					if [ $? -eq 0 ]; then
-						echo "$(tmux -V) attached session"
-						return 0
-					fi
-				elif [[ "$REPLY" =~ ^[0-9]+$ ]]; then
-					tmux attach -t "$REPLY"
-					if [ $? -eq 0 ]; then
-						echo "$(tmux -V) attached session"
-						return 0
-					fi
-				fi
-			fi
-
-			if is_osx && is_exists 'reattach-to-user-namespace'; then
-				# on OS X force tmux's default command
-				# to spawn a shell in the user's namespace
-				tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
-				tmux -f <(echo "$tmux_config") new-session && echo "$(tmux -V) created new session supported OS X"
-			else
-				tmux new-session && echo "tmux created new session"
-			fi
-		fi
-	fi
-}
-tmux_automatically_attach_session
-
 
 
 # ------------------------------------------------------------------------------
