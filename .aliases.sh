@@ -15,6 +15,7 @@ alias vi='vim'
 alias vif='vim $(fzf)'
 
 alias g='git'
+compdef g=git
 alias gs='git status --short --branch'
 alias ga='git add'
 alias gc='git commit'
@@ -24,8 +25,11 @@ alias gco='git checkout'
 alias .z='source ~/.zshrc'
 
 alias d='docker'
+compdef d=docker
 alias fig='docker-compose'
+compdef fig=docker-compose
 alias k='kubectl'
+compdef k=kubectl
 
 alias :q='exit'
 

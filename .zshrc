@@ -125,7 +125,7 @@ export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
 # k8s用の保管
-echo "source <(kubectl completion zsh)"
+source <(kubectl completion zsh)
 
 # export aliases
 if [ -f ~/.aliases.sh ]; then
