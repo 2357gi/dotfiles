@@ -37,6 +37,10 @@ setopt glob_complete			# glob を展開しない
 setopt numeric_glob_sort		# 辞書順ではなく数字順に並べる
 setopt mark_dirs			# ディレクトリにマッチした場合 / を追加
 autoload -U bashcompinit; bashcompinit -u	# bash 補完サポート
+# docker用の保管
+fpath=(~/.zsh/completion $fpath)
+# k8s用の保管
+source <(kubectl completion zsh)
 # ------------------------------------------------------------------------------
 # 履歴
 # ------------------------------------------------------------------------------
