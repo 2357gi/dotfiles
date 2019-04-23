@@ -10,6 +10,7 @@ alias cp='cp -i'
 
 alias ll='ls -alG'
 
+alias v='vim'
 alias vi='vim'
 alias vif='vim $(fzf)'
 
@@ -22,13 +23,13 @@ alias gco='git checkout'
 
 alias .z='source ~/.zshrc'
 
+alias d='docker'
+alias fig='docker-compose'
 alias k='kubectl'
 
 alias :q='exit'
 
 alias c='pbcopy'
-
-alias cd="cl"
 
 alias jn='jupyter notebook'
 
@@ -46,5 +47,5 @@ alias -g H='| head'
 alias -g T='| tail'
 
 dic() {
-  w3m "http://ejje.weblio.jp/content/$1" | grep -E "主な意|用例"
+  w3m "http://ejje.weblio.jp/content/$1" | grep -E "主な|用例"
 }

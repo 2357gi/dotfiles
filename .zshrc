@@ -124,6 +124,8 @@ export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
+# k8s用の保管
+echo "source <(kubectl completion zsh)"
 
 # export aliases
 if [ -f ~/.aliases.sh ]; then
@@ -240,3 +242,9 @@ chpwd() {
 # 全ての設定が終わってから実行
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'; fi
