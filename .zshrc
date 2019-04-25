@@ -7,10 +7,11 @@ export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
-export GITHUB_DIR=~/.ghq/github.com
+export ghq_root=$(ghq root)
+export GITHUB_DIR=$ghq_root/github.com
 
 # zshが勝手に改行したときの記号を消す
-# export PROMPT_EOL_MARK=''
+# export PROMPT_EOL_MARK=''$ghq_root
 
 # ------------------------------------------------------------------------------
 # 補完
@@ -245,7 +246,3 @@ chpwd() {
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
 
 
-
-if (which zprof > /dev/null 2>&1) ;then
-	zprof
-fi
