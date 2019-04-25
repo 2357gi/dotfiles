@@ -7,6 +7,7 @@ export EDITOR=vim			# エディタを vim に設定
 export PAGER=lv				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
+export GITHUB_DIR=~/.ghq/github.com
 
 # zshが勝手に改行したときの記号を消す
 # export PROMPT_EOL_MARK=''
@@ -37,10 +38,12 @@ setopt glob_complete			# glob を展開しない
 setopt numeric_glob_sort		# 辞書順ではなく数字順に並べる
 setopt mark_dirs			# ディレクトリにマッチした場合 / を追加
 autoload -U bashcompinit; bashcompinit -u	# bash 補完サポート
-# docker用の保管
-fpath=(~/.zsh/completion $fpath)
+
+# dockerの保管をfzfでできるように
+source $GITHUB_DIR/kwhrtsk/docker-fzf-completion/docker-fzf.zsh
 # k8s用の保管
 source <(kubectl completion zsh)
+
 # ------------------------------------------------------------------------------
 # 履歴
 # ------------------------------------------------------------------------------
@@ -97,24 +100,15 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-   export PATH=${PYENV_ROOT}/bin:$PATH
-   eval "$(pyenv init -)"
-fi
+[ -d "${PYENV_ROOT}" ] && export PATH=${PYENV_ROOT}/bin:$PATH && eval "$(pyenv init -)"
 
 # rbenv
 export RBENV_ROOT="${HOME}/.rbenv"
-if [ -d "${RBENV_ROOT}" ]; then
-	export PATH=${RBENV_ROOT}/bin:$PATH
-	eval "$(rbenv init -)"
-fi
+[ -d "${RBENV_ROOT}" ] && export PATH=${RBENV_ROOT}/bin:$PATH && eval "$(rbenv init -)"
 
 # goenv
 export GOENV_ROOT="${HOME}/.goenv"
-if [ -d "${GOENV_ROOT}" ]; then
-	export PATH=${GOENV_ROOT}/bin:$PATH
-	eval "$(goenv init -)"
-fi
+[ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
 
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
@@ -128,8 +122,11 @@ export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
-# k8s用の保管
-source <(kubectl completion zsh)
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'; fi
 
 # export aliases
 if [ -f ~/.aliases.sh ]; then
@@ -158,7 +155,7 @@ bindkey '^Z' fancy-ctrl-z
 # fzf
 # ------------------------------------------------------------------------------
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+export FZF_COMPLETION_TRIGGER=","
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
@@ -247,8 +244,8 @@ chpwd() {
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'; fi
+
+if (which zprof > /dev/null 2>&1) ;then
+	zprof
+fi
