@@ -80,7 +80,8 @@ nmap <leader>r :source ~/.vimrc<CR>
 
 " 保存
 nmap <Space>w :w<CR>
-nmap <Space>qqq :q!<CR>
+" とにかく終了
+nmap <Space>Q :q!<CR>
 
 " emacsっぽい動き
 nmap <C-e> $
@@ -91,6 +92,9 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>0
 imap <C-f> <C-o>W
 imap <C-b> <C-o>B
+
+" すばやく新規ファイルを作る
+nmap <Space>e :edit
 
 " terminal召喚
 nmap <Space>t :vertical terminal ++cols=100<CR>↲
