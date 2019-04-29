@@ -97,7 +97,10 @@ imap <C-b> <C-o>B
 nmap <Space>e :edit 
 
 " terminal召喚
-nmap <Space>t :vertical terminal ++cols=100<CR>↲
+nmap <Space>t :vertical terminal ++cols=70<CR>
+
+" test用terminalを走らせる
+nmap <Space>k :call term_sendkeys(3, "\<C-p> \<CR>")
 
 " ------------------------------------------------------------------------------
 " buffer
