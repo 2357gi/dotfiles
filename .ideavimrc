@@ -1,0 +1,103 @@
+
+" 検索するときに大文字小文字を区別しない
+set ignorecase
+
+" 検索時に大文字を含んでいたら大/小を区別
+set smartcase
+
+" インクリメンタル検索 (検索ワードの最初の文字を入力した時点で検索が開始)
+set incsearch
+
+" 検索対象をハイライト
+set hlsearch
+
+" 検索コマンドをide純正に
+nnoremap / :<C-u>action Find<CR>
+
+" 対応する括弧やブレースを表示
+set showmatch matchtime=1
+
+" メッセージ表示欄を2行確保
+set cmdheight=2
+
+" ステータス行を常に表示
+set laststatus=2
+
+" ウィンドウの右下にまだ実行していない入力中のコマンドを表示
+set showcmd
+
+" 省略されずに表示
+set display=lastline
+
+" 行末のスペースを可視化
+set listchars=tab:^\ ,trail:~
+
+" ヤンクでクリップボードにコピー
+set clipboard+=unnamed
+
+" 対応する括弧を強調表示
+set showmatch
+
+" Escの2回押しでハイライト消去
+nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
+
+" 行をまたいで移動
+set whichwrap=b,s,h,l,<,>,[,],~
+
+" インデント方法の変更
+set cinoptions+=:0
+
+" jjで抜ける
+inoremap jj <Esc>
+
+" cordjampをIDEAのものに
+nnoremap <C-o> :<C-u>action Back<CR>
+nnoremap <C-i> :<C-u>action Forward<CR>
+nnoremap <C-S-o> <C-o>
+nnoremap <C-S-i> <C-i>
+
+" 全開の変更箇所へジャンプ
+nnoremap g; :<C-u>action JumpToLastChange<CR>
+nnoremap g, :<C-u>action JumpToNextChange<CR>
+
+
+" Spaceをリーダーキーとして様々な動作
+" 参考
+" https://qiita.com/sei40kr/items/09e7e92eb7686f9b5950#ide%E3%81%AE%E3%83%AA%E3%83%83%E3%83%81%E3%81%AA%E6%A9%9F%E8%83%BD%E3%81%AB%E3%82%AD%E3%83%BC%E3%83%90%E3%82%A4%E3%83%B3%E3%83%89%E3%82%92%E5%89%B2%E3%82%8A%E5%BD%93%E3%81%A6%E3%82%8B
+nnoremap <Space>a :<C-u>action GotoAction<CR>
+nnoremap <Space>G :<C-u>action Generate<CR>
+nnoremap <Space>gn :<C-u>action NewClass<CR>
+nnoremap <Space>go :<C-u>action OverrideMethods<CR>
+nnoremap <Space>gc :<C-u>action GenerateConstructor<CR>
+nnoremap <Space>gg :<C-u>action GenerateGetter<CR>
+nnoremap <Space>gs :<C-u>action GenerateSetter<CR>
+nnoremap <Space>ga :<C-u>action GenerateGetterAndSetter<CR>
+nnoremap <Space>ge :<C-u>action GenerateEquals<CR>
+nnoremap <Space>gt :<C-u>action GenerateTestMethod<CR>
+nnoremap <Space>= :<C-u>action ReformatCode<CR>
+nnoremap <Space>o :<C-u>action FileStructurePopup<CR>
+nnoremap <Space>q :<C-u>action CloseContent<CR>
+nnoremap <Space>Q :<C-u>action ReopenClosedTab<CR>
+nnoremap <Space>e :<C-u>action SearchEverywhere<CR>
+nnoremap <Space>f :<C-u>action GotoFile<CR>
+nnoremap <Space>F :<C-u>action FindInPath<CR>
+nnoremap <Space>s :<C-u>action GotoClass<CR>
+nnoremap <Space>S :<C-u>action GotoSymbol<CR>
+nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
+nnoremap <Space>P :<C-u>action ManageRecentProjects<CR>
+nnoremap <Space>b :<C-u>action ToggleLineBreakpoint<CR>
+
+" surround
+set surround
+
+"x キー削除でデフォルトレジスタに入れない
+nnoremap x "_x
+vnoremap x "_x
+
+" ヤンクでクリップボードにコピー
+noremap "+y "*y
+noremap "+Y "*Y
+noremap "+p "*p
+noremap "+P "*P
+noremap <C-S-c> "*y
+noremap <C-S-v> "*P
