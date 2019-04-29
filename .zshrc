@@ -110,10 +110,12 @@ export RBENV_ROOT="${HOME}/.rbenv"
 # goenv
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
+export GOPATH="$HOME/go"
 
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
 PATH=$JAVA_HOME/bin:$PATH
+
 
 export PATH=~/vim/src/:$PATH
 export PATH=$PATH:/usr/local/bin/
@@ -224,8 +226,13 @@ PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
 %B%F{green}❯%f%b "
 
 # ------------------------------------------------------------------------------
-# history
+# other functions
 # ------------------------------------------------------------------------------
+# ghux
+source ~/.zsh/ghux/ghux.plugin.zsh
+
+# ghq_unset
+source ~/.zsh/function/ghq_unset.plugin.zsh
 
 # ------------------------------------------------------------------------------
 # Precomd
