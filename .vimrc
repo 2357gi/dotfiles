@@ -94,7 +94,7 @@ imap <C-f> <C-o>W
 imap <C-b> <C-o>B
 
 " すばやく新規ファイルを作る
-nmap <Space>e :edit
+nmap <Space>e :edit 
 
 " terminal召喚
 nmap <Space>t :vertical terminal ++cols=100<CR>↲
@@ -113,6 +113,9 @@ set hidden
 set autoread
 
 " ------------------------------------------------------------------------------
+"x キー削除でデフォルトレジスタに入れない
+nnoremap x "_x
+vnoremap x "_x
 
 " Windowsでもパスの区切り文字を/にする
 set shellslash
