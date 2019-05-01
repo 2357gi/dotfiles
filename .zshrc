@@ -110,20 +110,21 @@ export RBENV_ROOT="${HOME}/.rbenv"
 # goenv
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/go:$HOME"
+export GOBIN="$HOME/go:$HOME"
 
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
 PATH=$JAVA_HOME/bin:$PATH
 
 
-export PATH=~/vim/src/:$PATH
-export PATH=$PATH:/usr/local/bin/
-export PATH="/home/gi/anaconda3/bin:$PATH"
+export PATH=$PATH/vim/src/:$PATH
+export PATH=/usr/local/bin:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
+# GOPATHでルートも指定しているので個別に
+export PATH="$HOME/go/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
