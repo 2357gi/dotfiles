@@ -81,7 +81,7 @@ nmap <leader>r :source ~/.vimrc<CR>
 " 保存
 nmap <Space>w :w<CR>
 " とにかく終了
-nmap <Space>Q :q!<CR>
+nmap <Space>Q :qa!<CR>
 
 " emacsっぽい動き
 nmap <C-e> $
@@ -95,6 +95,9 @@ imap <C-b> <C-o>B
 
 " すばやく新規ファイルを作る
 nmap <Space>e :edit 
+
+" Chromeで選択したものを貼り付け
+nmap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
 
 " terminal召喚
 nmap <Space>t :vertical terminal ++cols=70<CR>
