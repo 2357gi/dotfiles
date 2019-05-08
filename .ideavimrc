@@ -11,9 +11,6 @@ set incsearch
 " 検索対象をハイライト
 set hlsearch
 
-" 検索コマンドをide純正に
-nnoremap / :<C-u>action Find<CR>
-
 " 対応する括弧やブレースを表示
 set showmatch matchtime=1
 
@@ -55,6 +52,16 @@ nnoremap <C-o> :<C-u>action Back<CR>
 nnoremap <C-i> :<C-u>action Forward<CR>
 nnoremap <C-S-o> <C-o>
 nnoremap <C-S-i> <C-i>
+
+" emacsっぽい動き
+nmap <C-e> $
+nmap <C-a> 0
+nmap <C-f> W
+nmap <C-b> B
+imap <C-e> <C-o>$
+imap <C-a> <C-o>0
+imap <C-f> <C-o>W
+imap <C-b> <C-o>B
 
 " 全開の変更箇所へジャンプ
 nnoremap g; :<C-u>action JumpToLastChange<CR>
