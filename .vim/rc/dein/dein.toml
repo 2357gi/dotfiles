@@ -9,6 +9,9 @@ build = 'make'
 repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
+repo = 'Shougo/deoplete.nvim'
+
+[[plugins]]
 repo = 'w0rp/ale'
 hook_source = 'source ~/.vim/rc/plugins/ale.rc.vim'
 
@@ -60,11 +63,15 @@ hook_source = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+hook_source = 'source ~/.vim/rc/plugins/quickrun.vim.rc.vim'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
 
 [[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
 repo = 'neoclide/coc.nvim'
-build = 'coc#util#install()'
+build = './install.sh nightly'
 hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'
