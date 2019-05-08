@@ -19,6 +19,7 @@ case $ANSWER in
 	* ) echo "skip" ;;
 esac
 
+DOTFILES_PATH=$HOME/dotfiles
 
 echo '********* generate a new SSH key?[Y/n]'
 read ANSWER
@@ -38,7 +39,7 @@ case $ANSWER in
 esac
 
 
-cd DOTFILES_PATH
+cd $DOTFILES_PATH
 
 echo "start setup..."
 for f in .??*; do
@@ -52,7 +53,7 @@ for f in .??*; do
 done
 
 if [[ -e ~/.gitconfig.local ]];then
-   cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
+   cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig
 fi
 
 eval git config --global commit.template .commit_template
