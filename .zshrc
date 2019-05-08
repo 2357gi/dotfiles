@@ -10,6 +10,11 @@ autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
 export ghq_root=$(ghq root)
 export GITHUB_DIR=$ghq_root/github.com
 
+# docker buildkit有効化
+DOCKER_BUILDKIT=1
+
+# emacs keymap
+bindkey -v
 # zshが勝手に改行したときの記号を消す
 # export PROMPT_EOL_MARK=''$ghq_root
 
@@ -99,6 +104,12 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 # PATH周り
 # ------------------------------------------------------------------------------
 
+export PATH=/usr/local/bin:$PATH
+export PATH=$PATH/vim/src/:$PATH
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
+
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 [ -d "${PYENV_ROOT}" ] && export PATH=${PYENV_ROOT}/bin:$PATH && eval "$(pyenv init -)"
@@ -110,8 +121,11 @@ export RBENV_ROOT="${HOME}/.rbenv"
 # goenv
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
-export GOPATH="$HOME/go:$HOME"
-export GOBIN="$HOME/go:$HOME"
+export GOPATH="$HOME/go"
+export GOBIN="$HOME/go"
+
+# activate go mod
+export GO111MODULE=on
 
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
@@ -119,7 +133,6 @@ PATH=$JAVA_HOME/bin:$PATH
 
 
 export PATH=$PATH/vim/src/:$PATH
-export PATH=/usr/local/bin:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
@@ -141,6 +154,11 @@ plugins=(
   git
 )
 
+# ------------------------------------------------------------------------------
+# hub
+# ------------------------------------------------------------------------------
+eval "$(hub alias -s)"
+ 
 # ------------------------------------------------------------------------------
 # Ctrl-Zでvimを抜けて、ctrl-Zでvimにもどれ
 # ------------------------------------------------------------------------------
@@ -223,8 +241,16 @@ precmd_prompt () {
 }
 add-zsh-hook precmd precmd_prompt
 
+set_color() {
+	if [[ $? -eq 0 ]]; then
+		echo green
+	else;
+		echo red
+	fi
+}
+
 PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
-%B%F{green}❯%f%b "
+%(?.%B%F{green}.%B%F{red})❯%f%b "
 
 # ------------------------------------------------------------------------------
 # other functions
@@ -253,4 +279,5 @@ chpwd() {
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
 
+[[ $TMUX ]] && [[ -z $VIM_TERMINAL ]] && vim
 
