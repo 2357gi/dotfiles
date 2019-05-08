@@ -1,41 +1,32 @@
 "dein Scripts-----------------------------
 if &compatible
-  set nocompatible               " Be iMproved
+  set nocompatible
 endif
 
-let s:dein_path = expand('~/.vim/dein')
-let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
-" dein.vim がなければ github からclone
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_path)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_path
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_path, ':p')
+let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+let s:dein_dir = s:cache_home . '/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+if !isdirectory(s:dein_repo_dir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 endif
+let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
-if dein#load_state(s:dein_path)
-  call dein#begin(s:dein_path)
-
-  let g:config_dir  = expand('~/.vim/rc/dein')
-  let s:toml        = g:config_dir . '/dein.toml'
-  let s:lazy_toml   = g:config_dir . '/dein_lazy.toml'
-
-  " TOML 読み込み
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
+let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
+let s:lazy_toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein_lazy.toml'
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+  call dein#load_toml(s:toml_file, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml_file, {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
 
-
-" Required:
-filetype plugin indent on
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
+if has('vim_starting') && dein#check_install()
   call dein#install()
 endif
-
 "End dein Scripts-------------------------
