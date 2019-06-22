@@ -10,6 +10,8 @@ alias cp='cp -i'
 
 alias ll='ls -alG'
 
+alias gx="ghux"
+
 alias c_='cd $_'
 
 alias v='vim'

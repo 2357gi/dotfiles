@@ -8,6 +8,10 @@
 	excludesfile = /Users/2357gi/.gitignore_global
 	pager = 'less'
 
+[push]
+	default = current
+
+
 [ghq]
 	root = ~/src
 
@@ -35,5 +39,3 @@
 	graph  = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
 	review = diff origin/master
 
-[core]
-    excludesfile = PATH/.gitignore_global
