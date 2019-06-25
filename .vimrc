@@ -56,7 +56,8 @@ set smartindent
 " 括弧入力時の対応する括弧を表示
 set showmatch matchtime=1
 
-" タブ幅を4に設定
+" タブ幅を4に設定, スペースに
+set expandtab
 set tabstop=4
 set shiftwidth=4
 
@@ -119,9 +120,6 @@ set hidden
 set autoread
 
 " ------------------------------------------------------------------------------
-"x キー削除でデフォルトレジスタに入れない
-nnoremap x "_x
-vnoremap x "_x
 
 " Windowsでもパスの区切り文字を/にする
 set shellslash
