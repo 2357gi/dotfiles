@@ -4,7 +4,7 @@
 export LANG=ja_JP.UTF-8		# 日本語設定
 autoload -U is-at-least		# zsh バージョン切り分けモジュール
 export EDITOR=vim			# エディタを vim に設定
-export PAGER=lv				# ページャを lv に設定
+export PAGER=less				# ページャを lv に設定
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
 export ghq_root=$(ghq root)
@@ -13,7 +13,7 @@ export GITHUB_DIR=$ghq_root/github.com
 # docker buildkit有効化
 DOCKER_BUILDKIT=1
 
-# emacs keymap
+# vim keymap
 bindkey -v
 # zshが勝手に改行したときの記号を消す
 # export PROMPT_EOL_MARK=''$ghq_root
@@ -252,6 +252,8 @@ set_color() {
 PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
 %(?.%B%F{green}.%B%F{red})❯%f%b "
 
+RPROMPT="%*"
+
 # ------------------------------------------------------------------------------
 # other functions
 # ------------------------------------------------------------------------------
@@ -278,6 +280,4 @@ chpwd() {
 # 全ての設定が終わってから実行
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
-
-[[ $TMUX ]] && [[ -z $VIM_TERMINAL ]] && vim
 
