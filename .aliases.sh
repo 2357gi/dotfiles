@@ -14,7 +14,6 @@ alias gx="ghux"
 
 alias c_='cd $_'
 
-alias v='vim'
 alias vi='vim'
 alias vif='vim $(fzf)'
 
