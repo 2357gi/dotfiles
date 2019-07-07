@@ -31,8 +31,8 @@ alias d='docker'
 compdef d=docker
 alias fig='docker-compose'
 compdef fig=docker-compose
-alias k='kubectl'
-compdef k=kubectl
+# alias k='kubectl'
+# compdef k=kubectl
 
 alias :q='exit'
 
