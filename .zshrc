@@ -127,6 +127,9 @@ export GOBIN="$HOME/go"
 # activate go mod
 export GO111MODULE=on
 
+# dotenv
+eval "$(direnv hook zsh)"
+
 # java8 (scalaを動かそうとしたら文句言われたので仮置き
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
 PATH=$JAVA_HOME/bin:$PATH
