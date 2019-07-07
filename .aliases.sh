@@ -36,6 +36,8 @@ compdef fig=docker-compose
 
 alias :q='exit'
 
+alias gh='ghux'
+
 alias c='pbcopy'
 
 alias jn='jupyter notebook'
