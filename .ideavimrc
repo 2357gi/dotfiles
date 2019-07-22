@@ -97,9 +97,6 @@ nnoremap <Space>b :<C-u>action ToggleLineBreakpoint<CR>
 " surround
 set surround
 
-"x キー削除でデフォルトレジスタに入れない
-nnoremap x "_x
-vnoremap x "_x
 
 " ヤンクでクリップボードにコピー
 noremap "+y "*y

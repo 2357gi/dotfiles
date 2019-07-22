@@ -77,10 +77,13 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
-nmap <leader>r :source ~/.vimrc<CR>
+nmap <Space>rr :source ~/.vimrc<CR>
 
-" 保存
+" 保r
 nmap <Space>w :w<CR>
+
+" 保存して終了
+nmap <Space>q :wq<CR>
 " とにかく終了
 nmap <Space>Q :qa!<CR>
 
@@ -105,6 +108,8 @@ nmap <Space>t :vertical terminal ++cols=70<CR>
 
 " test用terminalを走らせる
 nmap <Space>k :call term_sendkeys(3, "\<C-p> \<CR>")
+
+nmap <Space>sv :split<CR>
 
 " ------------------------------------------------------------------------------
 " buffer
