@@ -29,10 +29,13 @@ alias .z='source ~/.zshrc'
 
 alias d='docker'
 compdef d=docker
+alias drn="docker run -it --rm"
+alias db="DOCKER_BUILDKIT=1 docker build"
+
 alias fig='docker-compose'
 compdef fig=docker-compose
-# alias k='kubectl'
-# compdef k=kubectl
+alias k='kubectl'
+compdef k=kubectl
 
 alias :q='exit'
 
