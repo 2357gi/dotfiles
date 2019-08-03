@@ -74,7 +74,6 @@ nnoremap g, :<C-u>action JumpToNextChange<CR>
 nnoremap <Space>a :<C-u>action GotoAction<CR>
 nnoremap <Space>G :<C-u>action Generate<CR>
 nnoremap <Space>gn :<C-u>action NewClass<CR>
-nnoremap <Space>go :<C-u>action OverrideMethods<CR>
 nnoremap <Space>gc :<C-u>action GenerateConstructor<CR>
 nnoremap <Space>gg :<C-u>action GenerateGetter<CR>
 nnoremap <Space>gs :<C-u>action GenerateSetter<CR>
@@ -82,10 +81,8 @@ nnoremap <Space>ga :<C-u>action GenerateGetterAndSetter<CR>
 nnoremap <Space>ge :<C-u>action GenerateEquals<CR>
 nnoremap <Space>gt :<C-u>action GenerateTestMethod<CR>
 nnoremap <Space>= :<C-u>action ReformatCode<CR>
-nnoremap <Space>o :<C-u>action FileStructurePopup<CR>
 nnoremap <Space>q :<C-u>action CloseContent<CR>
 nnoremap <Space>Q :<C-u>action ReopenClosedTab<CR>
-nnoremap <Space>e :<C-u>action SearchEverywhere<CR>
 nnoremap <Space>f :<C-u>action GotoFile<CR>
 nnoremap <Space>F :<C-u>action FindInPath<CR>
 nnoremap <Space>s :<C-u>action GotoClass<CR>
@@ -93,6 +90,10 @@ nnoremap <Space>S :<C-u>action GotoSymbol<CR>
 nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
 nnoremap <Space>P :<C-u>action ManageRecentProjects<CR>
 nnoremap <Space>b :<C-u>action ToggleLineBreakpoint<CR>
+
+" 自前shortcut
+nnoremap <Space>go :<C-u>action Run<CR>
+nnoremap <Space>o :<C-u>action SearchEverywhere<CR>
 
 " surround
 set surround
