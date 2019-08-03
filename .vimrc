@@ -79,11 +79,8 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
 nmap <Space>rr :source ~/.vimrc<CR>
 
-" 保r
+" 保存
 nmap <Space>w :w<CR>
-
-" 保存して終了
-nmap <Space>q :wq<CR>
 " とにかく終了
 nmap <Space>Q :qa!<CR>
 

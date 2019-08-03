@@ -122,7 +122,7 @@ export RBENV_ROOT="${HOME}/.rbenv"
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
 export GOPATH="$HOME/go"
-export GOBIN="$HOME/go"
+export GOBIN="$HOME/go/bin"
 
 # activate go mod
 export GO111MODULE=on
@@ -252,8 +252,8 @@ set_color() {
 	fi
 }
 
-PROMPT="%B%F{green}❯❯%1(v|%1v|)%f%b %B%F{blue}%~%f%b
-%(?.%B%F{green}.%B%F{red})❯%f%b "
+PROMPT="%B%F{green}┌%1(v|%1v|)%f%b %B%F{blue}%~%f%b
+%(?.%B%F{green}.%B%F{red})└$ %f%b"
 
 RPROMPT="%*"
 
