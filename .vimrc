@@ -148,11 +148,11 @@ nnoremap Y y$
 " w!! でスーパーユーザーとして保存（sudoが使える環境限定）
 cmap w!! w !sudo tee > /dev/null %
 
-"Window間の移動を快適にする
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
+" 現在行を中心に添えたままスクロール(もっといい方法アリそう)
+nnoremap <C-j> jzz
+nnoremap <C-k> kzz
+nnoremap <C-l> lzz
+nnoremap <C-h> hzz
 
 " 折り返し時に表示行単位での移動できるようにする
 set whichwrap=b,s,h,l,<,>,[,],~
