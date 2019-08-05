@@ -1,5 +1,4 @@
 export PATH=$PATH:/usr/local/bin/
-export PATH="/home/gi/anaconda3/bin:$PATH"
 
 if [ -f ~/.aliases ]; then
     . ~/.aliases
