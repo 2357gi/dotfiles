@@ -1,0 +1,7 @@
+  "languageserver": {
+    "golang": {
+      "command": "/Users/2357gi/go/bin/gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
