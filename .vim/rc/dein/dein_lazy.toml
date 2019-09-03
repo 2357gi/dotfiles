@@ -64,7 +64,7 @@ on_ft = ['Dockerfile']
 repo = 'derekwyatt/vim-scala'
 on_ft = ['scala', 'play']
 
-# scala
+# quickrun
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_ft = ['python', 'scala', 'go', 'ruby', 'javascript']
