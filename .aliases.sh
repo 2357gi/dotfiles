@@ -49,6 +49,8 @@ alias p='pwd'
 
 alias df='df -h'
 
+alias dtf="tmux switch-client -t dotfiles"
+
 alias noti='terminal-notifier -message "コマンド完了"'
 
 # global alias( zsh only)
