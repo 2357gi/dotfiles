@@ -12,6 +12,9 @@ repo = 'ujihisa/unite-colorscheme'
 repo = 'Shougo/deoplete.nvim'
 
 [[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+
+[[plugins]]
 repo = 'w0rp/ale'
 hook_source = 'source ~/.vim/rc/plugins/ale.rc.vim'
 
@@ -47,6 +50,10 @@ repo = 'ryanoasis/vim-devicons'
 hook_source = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
+repo= 'Chiel92/vim-autoformat'
+hook_source = 'au BufWrite * :Autoformat'
+
+[[plugins]]
 repo = 'junegunn/fzf.vim'
 build = './install --all'
 hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
@@ -67,6 +74,10 @@ hook_source = 'source ~/.vim/rc/plugins/quickrun.vim.rc.vim'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'Raimondi/delimitMate'
+
 
 [[plugins]]
 repo = 'simeji/winresizer'
