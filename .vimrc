@@ -184,6 +184,39 @@ hi SpellBad cterm=underline
 
 " タイトルを表示する
 set title
+
+
+" ----------------------------------------------------
+" functions
+" ----------------------------------------------------
+"" txt
+augroup vimrc-wrapping
+    autocmd!
+    autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+augroup END
+if !exists('*s:setupWrapping')
+    function s:setupWrapping()
+        set wrap
+        set wm=2
+        set textwidth=79
+    endfunction
+endif
+
+"" make/cmake
+augroup vimrc-make-cmake
+    autocmd!
+    autocmd FileType make setlocal noexpandtab
+    autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+augroup END
+
+"" python
+augroup vimrc-python
+    autocmd!
+    autocmd FileType python setlocal
+                \ formatoptions+=croq softtabstop=4
+                \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+augroup END
+
 " ----------------------------------------------------
 " 検索系
 " ----------------------------------------------------
