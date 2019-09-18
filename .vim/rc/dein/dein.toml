@@ -51,7 +51,7 @@ hook_source = 'source ~/.vim/rc/plugins/vim-devicons.rc.vim'
 
 [[plugins]]
 repo= 'Chiel92/vim-autoformat'
-hook_source = 'au BufWrite * :Autoformat'
+hook_source = 'source ~/.vim/rc/plugins/autoformat.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
