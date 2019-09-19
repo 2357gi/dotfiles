@@ -1,0 +1,6 @@
+#!/bin/bash
+# Based on
+# - https://github.com/b4b4r07/dotfiles/blob/master/bin/git-reset
+# git-undo  :undos your last commit
+
+git reset "${1:---sort}" HEAD^
