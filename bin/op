@@ -1,0 +1,18 @@
+#!/bin/bash
+# Based on b4b4r07/dotfiles/bin/op
+
+if ! type open &>/dev/null; then
+    exit 1
+fi
+
+if [[ -p /dev/stdin ]]; then
+    open #$(cat <&0)" "$@"
+else
+    if [[ -z $1 ]]; then
+        open .
+    else
+        open "$@"
+    fi
+fi
+
+

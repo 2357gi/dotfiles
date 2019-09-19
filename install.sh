@@ -52,6 +52,9 @@ for f in .??*; do
 	ln -snfv ~/dotfiles/"$f" ~/
 done
 
+# linked dotfiles/bin
+ln -snfv ~/dotfiles/bin $HOME/bin
+
 if [[ -e ~/.gitconfig.local ]];then
    cp -f ~/dotfiles/.gitconfig.local.template ~/.gitconfig
 fi

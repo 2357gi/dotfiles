@@ -101,14 +101,14 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
 
 # ------------------------------------------------------------------------------
-# PATH周り
+# PATH
 # ------------------------------------------------------------------------------
 
 export PATH=/usr/local/bin:$PATH
-export PATH=$PATH/vim/src/:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
