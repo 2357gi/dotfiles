@@ -118,9 +118,10 @@ set noswapfile
 
 " 保存されていないFileがあっても構わず別のFileを開く
 set hidden
+
 " 外部で変更されたら読み直す
 set autoread
-
+au CursorHold * checktime
 " ------------------------------------------------------------------------------
 
 " Windowsでもパスの区切り文字を/にする
