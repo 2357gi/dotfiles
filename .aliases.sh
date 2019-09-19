@@ -25,7 +25,7 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gco='git checkout'
 
-alias .z='source ~/.zshrc'
+alias .z='source ~/.zshrc && clear'
 
 alias d='docker'
 compdef d=docker
