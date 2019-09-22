@@ -76,6 +76,12 @@ hook_source = 'source ~/.vim/rc/plugins/quickrun.vim.rc.vim'
 repo = 'tpope/vim-surround'
 
 [[plugins]]
+repo =  'sheerun/vim-polyglot'
+
+[[plugins]]
+repo = 'tpope/vim-sleuth'
+
+[[plugins]]
 repo = 'Raimondi/delimitMate'
 
 
@@ -85,4 +91,4 @@ repo = 'simeji/winresizer'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
-hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'
+# hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'

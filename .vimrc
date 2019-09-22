@@ -57,7 +57,7 @@ set smartindent
 set showmatch matchtime=1
 
 " タブ幅を4に設定, スペースに
-set expandtab
+# set expandtab
 set tabstop=4
 set shiftwidth=4
 
