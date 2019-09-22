@@ -26,9 +26,6 @@ set ttyfast
 set spell
 set spelllang=en,cjk 
 
-" w!! でスーパーユーザーとして保存（sudoが使える環境限定）
-cmap w!! w !sudo tee > /dev/null %
-
 syntax on
 
 " 編集箇所のカーソルを記憶
@@ -103,8 +100,6 @@ nmap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy sel
 " terminal召喚
 nmap <Space>t :vertical terminal ++cols=70<CR>
 
-" test用terminalを走らせる
-nmap <Space>k :call term_sendkeys(3, "\<C-p> \<CR>")
 
 nmap <Space>sv :split<CR>
 
@@ -136,6 +131,36 @@ set clipboard&
 set clipboard=unnamed,unnamedplus
 
 " ------------------------------------------------------------------------------
+" tmux keymaps
+" ------------------------------------------------------------------------------
+nmap <Space>rt :call TmuxPaneRepeat()<CR>
+
+nmap <Space>rc :call TmuxPaneClear()<CR>
+
+" ------------------------------------------------------------------------------
+" tmux functions
+" ------------------------------------------------------------------------------
+function TmuxPaneRepeat()
+  write
+  silent execute ':!tmux send-keys -t $(tmux display-message "\#S"):1.2 c-c c-p c-j'
+  redraw!
+endfunction
+
+function TmuxPaneClear()
+  silent execute ':!tmux send-keys -t' '$(tmux display-message "\#S"):1.2' 'c-c' 'c-j' 'c-l'
+  redraw!
+endfunction
+let g:gitgutter_sign_added = '∙'
+let g:gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
+nmap ]g :GitGutterNextHunk<CR>
+nmap [g :GitGutterPrevHunk<CR>
+augroup VimDiff
+  autocmd!
+  autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
+augroup END
+" ------------------------------------------------------------------------------
 " window
 " ------------------------------------------------------------------------------
 set splitbelow				" ウィンドウ分割を(上でなく)下側に変更
@@ -145,7 +170,7 @@ set splitright				" ウィンドウ分割を(左でなく)右側に変更
 " jj esc
 inoremap jj <Esc>
 inoremap ッｊ <Esc>
-inoremap っｊ<Esc>
+inoremap っｊ <Esc>
 
 "Yを行末までのヤンクにする
 nnoremap Y y$

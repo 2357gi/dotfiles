@@ -35,7 +35,10 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
-hock_source =  'source ~/.vim/rc/plugins/vim-gitgutter.rc.vim'
+hock_source = 'source ~/.vim/rc/plugins/vim-gitgutter.rc.vim'
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
