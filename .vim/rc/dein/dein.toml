@@ -59,7 +59,6 @@ hook_source = 'source ~/.vim/rc/plugins/autoformat.rc.vim'
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 build = './install --all'
-hook_source = 'source ~/.vim/rc/plugins/fzf.vim.rc.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
