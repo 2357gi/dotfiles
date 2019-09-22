@@ -57,7 +57,7 @@ set smartindent
 set showmatch matchtime=1
 
 " タブ幅を4に設定, スペースに
-# set expandtab
+" set expandtab
 set tabstop=4
 set shiftwidth=4
 
@@ -122,6 +122,10 @@ set hidden
 " 外部で変更されたら読み直す
 set autoread
 au CursorHold * checktime
+
+" swich buffer
+nmap <C-w>n :bnext<CR>
+nmap <C-w>p :bprev<CR>
 " ------------------------------------------------------------------------------
 
 " Windowsでもパスの区切り文字を/にする
