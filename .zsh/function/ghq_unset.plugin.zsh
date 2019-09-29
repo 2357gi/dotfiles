@@ -16,7 +16,6 @@ ask_yn() {
         esac
     done
 }
-
 test_repo_is_clean() {
     local msg
     msg=$(git -c status.color=always status --short)
