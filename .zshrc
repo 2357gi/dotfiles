@@ -10,6 +10,8 @@ autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
 export ghq_root=$(ghq root)
 export GITHUB_DIR=$ghq_root/github.com
 
+# githubtoken読み込み
+source $HOME/dotfiles/github_token
 # docker buildkit有効化
 DOCKER_BUILDKIT=1
 

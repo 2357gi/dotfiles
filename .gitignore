@@ -9,4 +9,6 @@
 .tmux/plugins/tpm
 !.tmux/plugins/tpm/.keep
 
+./github_token
+
 \[quickrun\ output\]
