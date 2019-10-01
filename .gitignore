@@ -6,8 +6,6 @@
 
 .vim/rc/plugins/logfile
 
-.tmux/plugins/tpm
-!.tmux/plugins/tpm/.keep
 
 github_token
 
