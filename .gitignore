@@ -4,4 +4,9 @@
 .tmux/resurrect/*
 !.vim/resurrect/.keep
 
+.vim/rc/plugins/logfile
+
+.tmux/plugins/tpm
+!.tmux/plugins/tpm/.keep
+
 \[quickrun\ output\]

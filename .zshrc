@@ -325,14 +325,14 @@ set_color() {
 }
 
 if [ -z $TMUX ]; then
-# PROMPT="%B%F{green}┌%1(v|%1v|)%f%b %B%F{blue}%~%f%b
-# %(?.%B%F{green}.%B%F{red})└$ %f%b"
-  PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir}%K{black}%F{blue}> %f%k'
+  PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir} ${git_info}
+%K{black}%F{cyan} > %f%k'
+
 else
-  PROMPT='%F{blue}» %f'
+  PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir}%K{black}%F{cyan} > %f%k'
 fi
 
-PROMPT2='%F{blue}» %f'
+PROMPT2='%F{cyan}» %f'
 RPROMPT="%*"
 SPROMPT='zsh: correct? %F{red}%R%f -> %F{green}%r%f [y/n]:'
 
