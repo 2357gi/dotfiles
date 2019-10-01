@@ -107,6 +107,7 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/tmux/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
@@ -225,6 +226,79 @@ if [ -f ~/enhancd/init.sh ]; then
 	export ENHANCD_FILTER=fzy:fzf:peco:percol:gof:picj:icepick:sentaku:selecta
 fi
 # ------------------------------------------------------------------------------
+# other functions
+# ------------------------------------------------------------------------------
+# ghux
+source ~/.zsh/ghux/ghux.plugin.zsh
+
+# ghq_unset
+source ~/.zsh/function/ghq_unset.plugin.zsh
+
+
+# ------------------------------------------------------------------------------
+# alias
+# ------------------------------------------------------------------------------
+alias -g F="| fzf"
+alias -g G="| rg -n"
+alias -g L="|less"
+alias -g P="| pbcopy"
+# ------------------------------------------------------------------------------
+# Precomd
+# ------------------------------------------------------------------------------
+precmd () {
+  [ $(whoami) = "root" ] && root="%K{black}%F{yellow} ⚡ %f|%k" || root=""
+  if [ ! -z $TMUX ]; then
+    tmux refresh-client -S
+  fi
+  if [ ! -z $TMUX ]; then
+    tmux refresh-client -S
+  else
+    dir="%F{cyan}%K{black} %~ %k%f"
+    if git_status=$(git status 2>/dev/null ); then
+      git_branch="$(echo $git_status| awk 'NR==1 {print $3}')"
+       case $git_status in
+        *Changes\ not\ staged* ) state=$'%{\e[30;48;5;013m%}%F{black} ± %f%k' ;;
+        *Changes\ to\ be\ committed* ) state="%K{blue}%F{black} + %k%f" ;;
+        * ) state="%K{green}%F{black} ✔ %f%k" ;;
+      esac
+      if [[ $git_branch = "master" ]]; then
+        git_info="%K{black}%F{blue}⭠ ${git_branch}%f%k ${state}"
+      else
+        git_info="%K{black}⭠ ${git_branch}%f ${state}"
+      fi
+    else
+      git_info=""
+    fi
+  fi
+}
+
+chpwd() {
+	if [[ $(pwd) != $HOME ]] ; then
+		ls
+	fi
+  if [ ! -z $TMUX ]; then
+    tmux refresh-client -S
+  else
+  j dir="%F{cyan}%K{black} %~ %k%f"
+    if git_status=$(git status 2>/dev/null ); then
+      git_branch="$(echo $git_status| awk 'NR==1 {print $3}')"
+       case $git_status in
+        *Changes\ not\ staged* ) state=$'%{\e[30;48;5;013m%}%F{black} ± %f%k' ;;
+        *Changes\ to\ be\ committed* ) state="%K{blue}%F{black} + %k%f" ;;
+        * ) state="%K{green}%F{black} ✔ %f%k" ;;
+      esac
+      if [[ $git_branch = "master" ]]; then
+        git_info="%K{black}%F{blue}⭠ ${git_branch}%f%k ${state}"
+      else
+        git_info="%K{black}⭠ ${git_branch}%f ${state}"
+      fi
+    else
+      git_info=""
+    fi
+  fi
+}
+
+# ------------------------------------------------------------------------------
 # prompt
 # ------------------------------------------------------------------------------
 autoload -Uz vcs_info
@@ -250,31 +324,17 @@ set_color() {
 	fi
 }
 
-PROMPT="%B%F{green}┌%1(v|%1v|)%f%b %B%F{blue}%~%f%b
-%(?.%B%F{green}.%B%F{red})└$ %f%b"
+if [ -z $TMUX ]; then
+# PROMPT="%B%F{green}┌%1(v|%1v|)%f%b %B%F{blue}%~%f%b
+# %(?.%B%F{green}.%B%F{red})└$ %f%b"
+  PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir}%K{black}%F{blue}> %f%k'
+else
+  PROMPT='%F{blue}» %f'
+fi
 
+PROMPT2='%F{blue}» %f'
 RPROMPT="%*"
-
-# ------------------------------------------------------------------------------
-# other functions
-# ------------------------------------------------------------------------------
-# ghux
-source ~/.zsh/ghux/ghux.plugin.zsh
-
-# ghq_unset
-source ~/.zsh/function/ghq_unset.plugin.zsh
-
-# ------------------------------------------------------------------------------
-# Precomd
-# ------------------------------------------------------------------------------
-precmd () {
-}
-
-chpwd() {
-	if [[ $(pwd) != $HOME ]] ; then
-		ls
-	fi
-}
+SPROMPT='zsh: correct? %F{red}%R%f -> %F{green}%r%f [y/n]:'
 
 
 # ------------------------------------------------------------------------------
