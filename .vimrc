@@ -27,6 +27,7 @@ set spell
 set spelllang=en,cjk 
 
 syntax on
+colorscheme molokai
 
 " 編集箇所のカーソルを記憶
 if has("autocmd")
@@ -161,6 +162,51 @@ augroup VimDiff
   autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
 augroup END
 " ------------------------------------------------------------------------------
+" CursorLine
+" ------------------------------------------------------------------------------
+" 初期状態はcursorlineを表示しない
+" 以下の一行は必ずcolorschemeの設定後に追加すること
+
+" 'cursorline' を必要な時にだけ有効にする
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+" を少し改造、number の highlight は常に有効にする
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+
+  setlocal cursorline 
+  setlocal cursorcolumn
+
+  let s:cursorline_lock = 0
+  function! s:auto_cursorline(event)
+    if a:event ==# 'WinEnter'
+      setlocal cursorline
+	  setlocal cursorcolumn
+      let s:cursorline_lock = 2
+    elseif a:event ==# 'WinLeave'
+      setlocal nocursorline
+	  setlocal nocursorcolumn
+    elseif a:event ==# 'CursorMoved'
+      if s:cursorline_lock
+        if 1 < s:cursorline_lock
+          let s:cursorline_lock = 1
+        else
+          setlocal nocursorline
+		  setlocal nocursorcolumn
+          let s:cursorline_lock = 0
+        endif
+      endif
+    elseif a:event ==# 'CursorHold'
+      setlocal cursorline
+	  setlocal cursorcolumn
+      let s:cursorline_lock = 1
+    endif
+  endfunction
+augroup END
+" ------------------------------------------------------------------------------
 " window
 " ------------------------------------------------------------------------------
 set splitbelow				" ウィンドウ分割を(上でなく)下側に変更
@@ -188,7 +234,6 @@ nnoremap <C-h> hzz
 set whichwrap=b,s,h,l,<,>,[,],~
 
 
-colorscheme molokai
 " 
 " set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
