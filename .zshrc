@@ -248,14 +248,14 @@ alias -g P="| pbcopy"
 # Precomd
 # ------------------------------------------------------------------------------
 precmd () {
-  [ $(whoami) = "root" ] && root="%K{black}%F{yellow} ⚡ %f|%k" || root=""
+  [ $(whoami) = "root" ] && root="%F{yellow} %f|" || root=""
   if [ ! -z $TMUX ]; then
     tmux refresh-client -S
   fi
   if [ ! -z $TMUX ]; then
     tmux refresh-client -S
   else
-    dir="%F{cyan}%K{black} %~ %k%f"
+    dir="%F{cyan} %~ %f"
     if git_status=$(git status 2>/dev/null ); then
       git_branch="$(echo $git_status| awk 'NR==1 {print $3}')"
        case $git_status in
@@ -264,9 +264,9 @@ precmd () {
         * ) state="%K{green}%F{black} ✔ %f%k" ;;
       esac
       if [[ $git_branch = "master" ]]; then
-        git_info="%K{black}%F{blue}⭠ ${git_branch}%f%k ${state}"
+        git_info="%F{blue} ${git_branch}%f ${state}"
       else
-        git_info="%K{black}⭠ ${git_branch}%f ${state}"
+        git_info=" ${git_branch}%f ${state}"
       fi
     else
       git_info=""
@@ -281,7 +281,7 @@ chpwd() {
   if [ ! -z $TMUX ]; then
     tmux refresh-client -S
   else
-  j dir="%F{cyan}%K{black} %~ %k%f"
+  j dir="%F{cyan} %~ %f"
     if git_status=$(git status 2>/dev/null ); then
       git_branch="$(echo $git_status| awk 'NR==1 {print $3}')"
        case $git_status in
@@ -290,9 +290,9 @@ chpwd() {
         * ) state="%K{green}%F{black} ✔ %f%k" ;;
       esac
       if [[ $git_branch = "master" ]]; then
-        git_info="%K{black}%F{blue}⭠ ${git_branch}%f%k ${state}"
+        git_info="%F{blue} ${git_branch}%f ${state}"
       else
-        git_info="%K{black}⭠ ${git_branch}%f ${state}"
+        git_info=" ${git_branch}%f ${state}"
       fi
     else
       git_info=""
@@ -327,8 +327,8 @@ set_color() {
 }
 
 if [ -z $TMUX ]; then
-  PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir} ${git_info}
-%K{black}%F{cyan} > %f%k'
+  PROMPT=$'%(?,,%F{red} ✘%f %f|)${root}${dir} ${git_info}
+%F{cyan} > %f'
 
 else
   PROMPT=$'%(?,,%F{red}%K{black} ✘%f %f|%k)${root}${dir}%K{black}%F{cyan} > %f%k'
