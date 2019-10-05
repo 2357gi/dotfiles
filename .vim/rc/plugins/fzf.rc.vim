@@ -1,7 +1,7 @@
-nmap <leader>o  :call FzfOmniFiles()<CR>
-nmap <leader>f :Buffers<CR>
-nmap <leader><leader> :Commands<CR>
-nmap <C-g> :Rg<CR>
+nnoremap <leader>o  :call FzfOmniFiles()<CR>
+nnoremap <leader>f :Buffers<CR>
+nnoremap <leader><leader> :Commands<CR>
+nnoremap <C-g> :Rg<CR>
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',

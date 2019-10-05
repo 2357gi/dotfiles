@@ -7,5 +7,5 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " NERDTreeだけが残る場合にvimを自動的に閉じる
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-nmap <Space>l :NERDTreeToggle<CR>
+nnoremap <Space>l :NERDTreeToggle<CR>
 

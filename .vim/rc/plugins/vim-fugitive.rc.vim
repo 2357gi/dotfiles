@@ -1,1 +1,1 @@
-nmap <Space>ss :Gstatus<CR>
+nnoremap <Space>ss :Gstatus<CR>

@@ -75,34 +75,35 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
-nmap <Space>rr :source ~/.vimrc<CR>
+nnoremap <Space>rr :source ~/.vimrc<CR>
 
 " 保存
-nmap <Space>w :w<CR>
+nnoremap <Space>w :w<CR>
 " とにかく終了
-nmap <Space>Q :qa!<CR>
+nnoremap <Space>Q :qa!<CR>
 
 " emacsっぽい動き
-nmap <C-e> $
-nmap <C-a> 0
-nmap <C-f> W
-nmap <C-b> B
-imap <C-e> <C-o>$
-imap <C-a> <C-o>0
-imap <C-f> <C-o>W
-imap <C-b> <C-o>B
+nnoremap <C-e> $
+nnoremap <C-a> 0
+nnoremap <C-f> W
+nnoremap <C-b> B
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+inoremap <C-f> <C-o>W
+inoremap <C-b> <C-o>B
+
 
 " すばやく新規ファイルを作る
-nmap <Space>e :edit 
+nnoremap <Space>e :edit 
 
 " Chromeで選択したものを貼り付け
-nmap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
+nnoremap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
 
 " terminal召喚
-nmap <Space>t :vertical terminal ++cols=70<CR>
+nnoremap <Space>t :vertical terminal ++cols=70<CR>
 
 
-nmap <Space>sv :split<CR>
+nnoremap <Space>sv :split<CR>
 
 " ------------------------------------------------------------------------------
 " buffer
@@ -120,8 +121,8 @@ set autoread
 au CursorHold * checktime
 
 " swich buffer
-nmap <C-w>n :bnext<CR>
-nmap <C-w>p :bprev<CR>
+nnoremap <C-w>n :bnext<CR>
+nnoremap <C-w>p :bprev<CR>
 " ------------------------------------------------------------------------------
 
 " Windowsでもパスの区切り文字を/にする
@@ -134,9 +135,9 @@ set clipboard=unnamed,unnamedplus
 " ------------------------------------------------------------------------------
 " tmux keymaps
 " ------------------------------------------------------------------------------
-nmap <Space>rt :call TmuxPaneRepeat()<CR>
+nnoremap <Space>rt :call TmuxPaneRepeat()<CR>
 
-nmap <Space>rc :call TmuxPaneClear()<CR>
+nnoremap <Space>rc :call TmuxPaneClear()<CR>
 
 " ------------------------------------------------------------------------------
 " tmux functions
@@ -155,8 +156,8 @@ let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
-nmap ]g :GitGutterNextHunk<CR>
-nmap [g :GitGutterPrevHunk<CR>
+nnoremap ]g :GitGutterNextHunk<CR>
+nnoremap [g :GitGutterPrevHunk<CR>
 augroup VimDiff
   autocmd!
   autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
@@ -166,7 +167,7 @@ augroup END
 " ------------------------------------------------------------------------------
 " 初期状態はcursorlineを表示しない
 " 以下の一行は必ずcolorschemeの設定後に追加すること
-
+highlight cursorline ctermbg=236 guibg=#293739
 " 'cursorline' を必要な時にだけ有効にする
 " http://d.hatena.ne.jp/thinca/20090530/1243615055
 " を少し改造、number の highlight は常に有効にする
@@ -177,7 +178,7 @@ augroup vimrc-auto-cursorline
   autocmd WinEnter * call s:auto_cursorline('WinEnter')
   autocmd WinLeave * call s:auto_cursorline('WinLeave')
 
-  setlocal cursorline 
+  setlocal cursorline
   setlocal cursorcolumn
 
   let s:cursorline_lock = 0
@@ -239,7 +240,7 @@ set whichwrap=b,s,h,l,<,>,[,],~
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-highlight Normal ctermbg=none
+" highlight Normal ctermbg=none
 
 set list           " 不可視文字を表示
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表示記号指定
@@ -254,8 +255,10 @@ set wrap				" 文字を折り返す
 " ALEの左側のLintからむを常時標示
 let g:ale_sign_column_always = 1
 
-hi clear SpellBad
-hi SpellBad cterm=underline
+
+" スペルミスの際にアンダーラインを引くように
+highlight clear SpellBad
+highlight SpellBad cterm=underline
 
 " タイトルを表示する
 set title
@@ -311,7 +314,7 @@ set wrapscan
 set hlsearch
 
 " ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 
 " font
