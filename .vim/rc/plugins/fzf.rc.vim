@@ -13,13 +13,20 @@ command! -bang -nargs=* Rg
   \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'options': '--exact --reverse --delimiter : --nth 3..'}, 'right:50%:wrap'))
 
-fun! FzfOmniFiles()
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=? -complete=dir GitFiles
+  \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+function! FzfOmniFiles()
   let is_git = system('git status')
   if v:shell_error
     :Files
   else
     :GitFiles
   endif
-endfun
+endfunction
+
 
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)

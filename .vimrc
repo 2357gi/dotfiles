@@ -105,6 +105,8 @@ nnoremap <Space>t :vertical terminal ++cols=70<CR>
 
 nnoremap <Space>sv :split<CR>
 
+
+
 " ------------------------------------------------------------------------------
 " buffer
 " ------------------------------------------------------------------------------
@@ -152,6 +154,7 @@ function TmuxPaneClear()
   silent execute ':!tmux send-keys -t' '$(tmux display-message "\#S"):1.2' 'c-c' 'c-j' 'c-l'
   redraw!
 endfunction
+" ------------------------------------------------------------------------------
 let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
