@@ -37,7 +37,12 @@ compdef fig=docker-compose
 alias k='kubectl'
 compdef k=kubectl
 
+# -------------------------------
+alias ipy='/Users/2357gi/.pyenv/versions/anaconda3-5.0.0/bin/ipython3'
+
 alias :q='exit'
+
+alias hoge='echo fuga'
 
 alias gh='ghux'
 

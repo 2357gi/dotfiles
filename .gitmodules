@@ -1,3 +1,10 @@
 [submodule ".zsh/ghux"]
 	path = .zsh/ghux
 	url = https://github.com/2357gi/ghux.git
+[submodule "./tmux/plugins/tmux-continuum'"]
+	path = .tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
+[submodule "./tmux/plugins/tpm'"]
+	path = .tmux/plugins/tpm/tpm
+	url = https://github.com/tmux-plugins/tpm
+

@@ -245,7 +245,8 @@ source ~/.zsh/function/ghq_unset.plugin.zsh
 # ------------------------------------------------------------------------------
 alias -g F="| fzf"
 alias -g G="| rg -n"
-alias -g L="|less"
+alias -g L="|less -R"
+alias -g X="| xargs"
 alias -g P="| pbcopy"
 # ------------------------------------------------------------------------------
 # Precomd
