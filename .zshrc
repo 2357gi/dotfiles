@@ -243,11 +243,13 @@ source ~/.zsh/function/ghq_unset.plugin.zsh
 # ------------------------------------------------------------------------------
 # alias
 # ------------------------------------------------------------------------------
-alias -g F="| fzf"
-alias -g G="| rg -n"
-alias -g L="|less -R"
-alias -g X="| xargs"
-alias -g P="| pbcopy"
+alias -g @f="| fzf"
+alias -g @g="| rg -n"
+alias -g @l="|less -R"
+alias -g @x="| xargs"
+alias -g @p="| pbcopy"
+# docker用 macでx11を使うとき用のglobal alias
+alias -g @X11='-e DISPLAY=localhost:0 -v ~/.Xauthority:/root/.Xauthority'
 # ------------------------------------------------------------------------------
 # Precomd
 # ------------------------------------------------------------------------------
