@@ -123,11 +123,8 @@ set autoread
 au CursorHold * checktime
 
 " swich buffer
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprev<CR>
-
-
-
+nnoremap <C-w>n :bnext<CR>
+nnoremap <C-w>p :bprev<CR>
 " ------------------------------------------------------------------------------
 
 " Windowsでもパスの区切り文字を/にする
@@ -171,48 +168,48 @@ augroup END
 " ------------------------------------------------------------------------------
 " CursorLine
 " ------------------------------------------------------------------------------
-" " 初期状態はcursorlineを表示しない
-" " 以下の一行は必ずcolorschemeの設定後に追加すること
-" highlight cursorline ctermbg=236 guibg=#293739
-" " 'cursorline' を必要な時にだけ有効にする
-" " http://d.hatena.ne.jp/thinca/20090530/1243615055
-" " を少し改造、number の highlight は常に有効にする
-" augroup vimrc-auto-cursorline
-"   autocmd!
-"   autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
-"   autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
-"   autocmd WinEnter * call s:auto_cursorline('WinEnter')
-"   autocmd WinLeave * call s:auto_cursorline('WinLeave')
-" 
-"   setlocal cursorline
-"   setlocal cursorcolumn
-" 
-"   let s:cursorline_lock = 0
-"   function! s:auto_cursorline(event)
-"     if a:event ==# 'WinEnter'
-"       setlocal cursorline
-" 	  setlocal cursorcolumn
-"       let s:cursorline_lock = 2
-"     elseif a:event ==# 'WinLeave'
-"       setlocal nocursorline
-" 	  setlocal nocursorcolumn
-"     elseif a:event ==# 'CursorMoved'
-"       if s:cursorline_lock
-"         if 1 < s:cursorline_lock
-"           let s:cursorline_lock = 1
-"         else
-"           setlocal nocursorline
-" 		  setlocal nocursorcolumn
-"           let s:cursorline_lock = 0
-"         endif
-"       endif
-"     elseif a:event ==# 'CursorHold'
-"       setlocal cursorline
-" 	  setlocal cursorcolumn
-"       let s:cursorline_lock = 1
-"     endif
-"   endfunction
-" augroup END
+" 初期状態はcursorlineを表示しない
+" 以下の一行は必ずcolorschemeの設定後に追加すること
+highlight cursorline ctermbg=236 guibg=#293739
+" 'cursorline' を必要な時にだけ有効にする
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+" を少し改造、number の highlight は常に有効にする
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+
+  setlocal cursorline
+  setlocal cursorcolumn
+
+  let s:cursorline_lock = 0
+  function! s:auto_cursorline(event)
+    if a:event ==# 'WinEnter'
+      setlocal cursorline
+	  setlocal cursorcolumn
+      let s:cursorline_lock = 2
+    elseif a:event ==# 'WinLeave'
+      setlocal nocursorline
+	  setlocal nocursorcolumn
+    elseif a:event ==# 'CursorMoved'
+      if s:cursorline_lock
+        if 1 < s:cursorline_lock
+          let s:cursorline_lock = 1
+        else
+          setlocal nocursorline
+		  setlocal nocursorcolumn
+          let s:cursorline_lock = 0
+        endif
+      endif
+    elseif a:event ==# 'CursorHold'
+      setlocal cursorline
+	  setlocal cursorcolumn
+      let s:cursorline_lock = 1
+    endif
+  endfunction
+augroup END
 " ------------------------------------------------------------------------------
 " window
 " ------------------------------------------------------------------------------
@@ -234,6 +231,8 @@ cmap w!! w !sudo tee > /dev/null %
 " 現在行を中心に添えたままスクロール(もっといい方法アリそう)
 nnoremap <C-j> jzz
 nnoremap <C-k> kzz
+nnoremap <C-l> lzz
+nnoremap <C-h> hzz
 
 " 折り返し時に表示行単位での移動できるようにする
 set whichwrap=b,s,h,l,<,>,[,],~
@@ -253,8 +252,6 @@ set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表
 set laststatus=2
 set showcmd				" コマンドをステータスラインに表示
 set noshowmode
-
-set showtabline=2
 
 set wrap				" 文字を折り返す
 
@@ -320,7 +317,7 @@ set wrapscan
 set hlsearch
 
 " ESC連打でハイライト解除
-noremap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 
 " font
