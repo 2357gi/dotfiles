@@ -86,6 +86,9 @@ repo = 'tpope/vim-sleuth'
 [[plugins]]
 repo = 'Raimondi/delimitMate'
 
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_source = 'source ~/.vim/rc/plugins/tagbar.rc.vim'
 
 [[plugins]]
 repo = 'simeji/winresizer'

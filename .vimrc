@@ -66,6 +66,10 @@ set fenc=utf-8
 
 set nobackup
 
+" タグファイルを定義
+set tag=.tags;$HOME
+
+
 
 " F3で相対行表示切り替え
 set number
@@ -98,10 +102,6 @@ nnoremap <Space>e :edit
 
 " Chromeで選択したものを貼り付け
 nnoremap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
-
-" terminal召喚
-nnoremap <Space>t :vertical terminal ++cols=70<CR>
-
 
 nnoremap <Space>sv :split<CR>
 
