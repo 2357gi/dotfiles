@@ -87,6 +87,10 @@ repo = 'tpope/vim-sleuth'
 repo = 'Raimondi/delimitMate'
 
 [[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_source = 'source ~/.vim/rc/plugins/vim-easymotion.rc.vim'
+
+[[plugins]]
 repo = 'majutsushi/tagbar'
 hook_source = 'source ~/.vim/rc/plugins/tagbar.rc.vim'
 
