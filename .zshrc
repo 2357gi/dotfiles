@@ -287,7 +287,7 @@ chpwd() {
   if [ ! -z $TMUX ]; then
     tmux refresh-client -S
   else
-  j dir="%F{cyan} %~ %f"
+    dir="%F{cyan} %~ %f"
     if git_status=$(git status 2>/dev/null ); then
       git_branch="$(echo $git_status| awk 'NR==1 {print $3}')"
        case $git_status in
