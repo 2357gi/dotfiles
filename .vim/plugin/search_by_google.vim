@@ -19,15 +19,13 @@ endfunction
 
 function! s:search_by_google(line1, line2, ...) range
     if mode() == 'n'
-        let line = line(".")
-        let col  = col(".")
         let s:searchWord = expand("<cword>")
     else
         let s:searchWord = GetVisualSelection()
     endif
 
-    let executeCmd = 'open https://www.google.co.jp/search\?q\="'.s:searchWord.'"'
-    echo system(executeCmd)
+    let s:executeCmd = 'open https://www.google.co.jp/search\?q\="'.s:searchWord.'"'
+    echo system(s:executeCmd)
     " execute 'call cursor(' . line . ',' . col . ')'
 
 endfunction
