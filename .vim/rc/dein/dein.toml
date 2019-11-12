@@ -35,7 +35,7 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
-hock_source = 'source ~/.vim/rc/plugins/vim-gitgutter.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/vim-gitgutter.rc.vim'
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -97,6 +97,12 @@ hook_source = 'source ~/.vim/rc/plugins/tagbar.rc.vim'
 [[plugins]]
 repo = 'simeji/winresizer'
 
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+[[plugins]]
+repo = 'vimtaku/hl_matchit.vim'
+hook_source = 'let g:hl_matchit_enable_on_vim_startup = 1'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'

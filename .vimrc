@@ -11,8 +11,11 @@
 " Plugin
 runtime! rc/dein/dein.vim
 
+" 組み込みの諸々
+runtime macros/matchit.vim
+
 " leaderをspaceに
-let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 
 " mouseを有効か
@@ -79,12 +82,12 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " key mapping
 " ----------------------------------------------------
 " プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
-nnoremap <Space>rr :source ~/.vimrc<CR>
+nnoremap <leader>rr :source ~/.vimrc<CR>
 
 " 保存
-nnoremap <Space>w :w<CR>
+nnoremap <leader>w :w<CR>
 " とにかく終了
-nnoremap <Space>Q :qa!<CR>
+nnoremap <leader>Q :qa!<CR>
 
 " emacsっぽい動き
 nnoremap <C-e> $
@@ -98,12 +101,12 @@ inoremap <C-b> <C-o>B
 
 
 " すばやく新規ファイルを作る
-nnoremap <Space>e :edit 
+nnoremap <leader>e :edit 
 
 " Chromeで選択したものを貼り付け
-nnoremap <Space>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
+nnoremap <leader>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
 
-nnoremap <Space>sv :split<CR>
+nnoremap <leader>sv :split<CR>
 
 
 
@@ -140,22 +143,20 @@ set clipboard=unnamed,unnamedplus
 " ------------------------------------------------------------------------------
 " tmux keymaps
 " ------------------------------------------------------------------------------
-nnoremap <Space>rt :call TmuxPaneRepeat()<CR>
+nnoremap <leader>rt :call TmuxPaneRepeat()<CR>
 
-nnoremap <Space>rc :call TmuxPaneClear()<CR>
+nnoremap <leader>rc :call TmuxPaneClear()<CR>
 
 " ------------------------------------------------------------------------------
 " tmux functions
 " ------------------------------------------------------------------------------
+let g:target_pane = '2'
 function TmuxPaneRepeat()
-  write
-  silent execute ':!tmux send-keys -t $(tmux display-message "\#S"):1.2 c-c c-p c-j'
-  redraw!
+  echo system('tmux send-keys -t '.g:target_pane.' c-c c-p c-j')
 endfunction
 
 function TmuxPaneClear()
-  silent execute ':!tmux send-keys -t' '$(tmux display-message "\#S"):1.2' 'c-c' 'c-j' 'c-l'
-  redraw!
+  echo system('tmux send-keys -t '.g:target_pane.' c-c c-j c-l')
 endfunction
 " ------------------------------------------------------------------------------
 let g:gitgutter_sign_added = '∙'

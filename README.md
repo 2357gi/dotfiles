@@ -15,3 +15,5 @@ bash .vim/installer.sh $HOME/dotfiles/.vim/dein/
 この子も./install.shに追記しちゃう
 
 
+# todo
+- [x] vimのtagジャンプ周りをyosinani
