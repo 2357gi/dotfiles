@@ -64,7 +64,7 @@ rm_each_repo() {
     done
 }
 
-g_unset() {
+ghq_unset() {
     rm_each_repo 3 3< <( ghq list -p | "$FILTER" )
 }
 
