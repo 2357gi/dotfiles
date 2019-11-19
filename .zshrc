@@ -15,8 +15,23 @@ source $HOME/dotfiles/github_token
 # docker buildkit有効化
 DOCKER_BUILDKIT=1
 
+
+
+# ------------------------------------------------------------------------------
+# keymaps
+# ------------------------------------------------------------------------------
+# keymapを一旦リセット
+bindkey -d
 # vim keymap
 bindkey -v
+
+# もうちょっと快適に
+bindkey -M viins '^A'  beginning-of-line
+bindkey -M viins '^E'  end-of-line
+bindkey -M viins '^F'  forward-char
+bindkey -M viins '^B'  backward-char
+bindkey -M viins '^U'  backward-kill-line
+bindkey -M viins '^W'  backward-kill-word
 
 # ------------------------------------------------------------------------------
 # 補完
@@ -235,6 +250,7 @@ fi
 # ------------------------------------------------------------------------------
 # ghux
 source ~/.zsh/ghux/ghux.plugin.zsh
+bindkey '^G' ghux
 
 # ghq_unset
 source ~/.zsh/function/ghq_unset.plugin.zsh
@@ -248,6 +264,7 @@ alias -g @g="| rg -n"
 alias -g @l="|less -R"
 alias -g @x="| xargs"
 alias -g @p="| pbcopy"
+alias -g @tf="&& echo True || echo False"
 # docker用 macでx11を使うとき用のglobal alias
 alias -g @X11='-e DISPLAY=localhost:0 -v ~/.Xauthority:/root/.Xauthority'
 # ------------------------------------------------------------------------------
