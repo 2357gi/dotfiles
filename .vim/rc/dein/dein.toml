@@ -67,6 +67,9 @@ depends = 'fzf'
 hook_source = 'source ~/.vim/rc/plugins/fzf.rc.vim'
 
 [[plugins]]
+repo = 'gorodinskiy/vim-coloresque'
+
+[[plugins]]
 repo = 'mileszs/ack.vim'
 hook_source = 'source ~/.vim/rc/plugins/ack.vim.rc.vim'
 
@@ -100,9 +103,6 @@ repo = 'simeji/winresizer'
 [[plugins]]
 repo = 'tpope/vim-dispatch'
 
-[[plugins]]
-repo = 'vimtaku/hl_matchit.vim'
-hook_source = 'let g:hl_matchit_enable_on_vim_startup = 1'
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'

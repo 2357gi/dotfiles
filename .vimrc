@@ -11,9 +11,6 @@
 " Plugin
 runtime! rc/dein/dein.vim
 
-" 組み込みの諸々
-runtime macros/matchit.vim
-
 " leaderをspaceに
 let g:mapleader = "\<Space>"
 
@@ -151,11 +148,11 @@ nnoremap <leader>rc :call TmuxPaneClear()<CR>
 " tmux functions
 " ------------------------------------------------------------------------------
 let g:target_pane = '2'
-function TmuxPaneRepeat()
+function! TmuxPaneRepeat()
   echo system('tmux send-keys -t '.g:target_pane.' c-c c-p c-j')
 endfunction
 
-function TmuxPaneClear()
+function! TmuxPaneClear()
   echo system('tmux send-keys -t '.g:target_pane.' c-c c-j c-l')
 endfunction
 " ------------------------------------------------------------------------------

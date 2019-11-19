@@ -92,7 +92,7 @@ nnoremap <Space>P :<C-u>action ManageRecentProjects<CR>
 nnoremap <Space>b :<C-u>action ToggleLineBreakpoint<CR>
 
 " 自前shortcut
-nnoremap <Space>go :<C-u>action Run<CR>
+nnoremap <Space>go :<C-u>action Debug<CR>
 nnoremap <Space>o :<C-u>action SearchEverywhere<CR>
 
 " surround
