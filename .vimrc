@@ -48,16 +48,23 @@ set backspace=indent,eol,start
 " スクロールの余白を確保する
 set scrolloff=4
 
-" インデントはスマートインデント
-set smartindent
-
 " 括弧入力時の対応する括弧を表示
 set showmatch matchtime=1
 
 " タブ幅を4に設定, スペースに
-" set expandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+set smartindent
+
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4
+    autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *html setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
 
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=block
