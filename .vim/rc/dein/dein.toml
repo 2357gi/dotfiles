@@ -18,6 +18,7 @@ repo = 'vim-jp/vimdoc-ja'
 repo = 'w0rp/ale'
 hook_source = 'source ~/.vim/rc/plugins/ale.rc.vim'
 
+# インデントを|で表記するやつ
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_source = 'source ~/.vim/rc/plugins/indentline.rc.vim'
@@ -101,9 +102,12 @@ hook_source = 'source ~/.vim/rc/plugins/tagbar.rc.vim'
 repo = 'simeji/winresizer'
 
 [[plugins]]
+repo = 'skanehira/translate.vim'
+
+[[plugins]]
 repo = 'tpope/vim-dispatch'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
-# hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'
+hook_source = 'source ~/.vim/rc/plugins/coc.nvim.rc.vim'

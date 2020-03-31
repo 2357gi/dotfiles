@@ -16,3 +16,25 @@ call CocAction('doHover')
 endif
 endfunction
 
+
+nnoremap <C-c> <Nop>
+" call coc-lists outline
+nnoremap <C-c>o :<C-u>CocList outline --auto-preview<CR>
+
+" -------------------------
+" copy from coc-lists doc
+" https://github.com/neoclide/coc-lists
+"
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <C-c>c :exe 'CocList --auto-preview -I --input='.expand('<cword>').' grep'<CR>
+
+" --------------------------

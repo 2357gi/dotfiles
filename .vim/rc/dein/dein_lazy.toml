@@ -48,6 +48,12 @@ on_ft = ['markdown', 'mkd']
 repo  = 'tyru/open-browser.vim'
 on_ft = ['markdown', 'mkd']
 
+#tex
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['tex']
+hook_add = 'source ~/.vim/rc/plugins/vimtex.rc.vim'
+
 # terraform
 [[plugins]]
 repo  = 'hashivim/vim-terraform'
