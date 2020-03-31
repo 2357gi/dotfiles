@@ -138,7 +138,12 @@ export RBENV_ROOT="${HOME}/.rbenv"
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
 export GOPATH="$HOME/go"
-export GOBIN="$HOME/go/bin"
+export GOBIN="$GOPATH/bin"
+
+
+# GOPATHでルートも指定しているので個別に
+export PATH="$GOBIN:$PATH"
+
 
 # activate go mod
 export GO111MODULE=on
@@ -155,8 +160,7 @@ export PATH=$PATH/vim/src/:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
-# GOPATHでルートも指定しているので個別に
-export PATH="$HOME/go/bin:$PATH"
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
@@ -205,7 +209,7 @@ export FZF_COMPLETION_TRIGGER=","
 # ------------
 source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--preview "bat --color=always {}" --height 40% --reverse'
+export FZF_DEFAULT_OPTS=' --height 40% --reverse'
 # export FZF_CTRL_T_OPTS='--preview "bat  --color always --style=header,grid --line-range :100 {}"'
 
 

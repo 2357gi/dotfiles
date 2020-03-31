@@ -38,6 +38,7 @@ alias k='kubectl'
 compdef k=kubectl
 
 # -------------------------------
+alias rm='gomi'
 alias ipy='/Users/2357gi/.pyenv/versions/anaconda3-5.0.0/bin/ipython3'
 
 alias :q='exit'
