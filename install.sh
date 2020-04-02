@@ -2,19 +2,23 @@
 
 set -eu
 
+SPACER:="================================================="
+
+
+
 cat << END
-**************************************************
+${SPACER}
 DOTFILES SETUP START!
-**************************************************
+${SPACER}
 END
 
 cd $HOME
 
-echo '********* clone 2357gi/dotfiles?'
+echo 'clone 2357gi/dotfiles?'
 read ANSWER
 case $ANSWER in
 	"" | "Y" | "y" )
-		git clone https://github.com/2357gi/dotfiles.git $HOME/dotfiles
+		git clone --depth-1 https://github.com/2357gi/dotfiles.git $HOME/dotfiles
 		DOTFILES_PATH=$HOME/dotfiles ;;
 	* ) echo "skip" ;;
 esac
@@ -34,7 +38,7 @@ echo '********* install homebrew?[Y/n]'
 read ANSWER
 case $ANSWER in
 	"" | "Y" | "y" )
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" ;;
+		which brew >/dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" ;;
 	* ) echo "skip" ;;
 esac
 
@@ -52,6 +56,10 @@ for f in .??*; do
 	ln -snfv ~/dotfiles/"$f" ~/
 done
 
+echo $
+brew bundle --global
+
+
 # linked dotfiles/bin
 ln -snfv ~/dotfiles/bin $HOME/bin
 
@@ -67,8 +75,8 @@ eval git config --global core.excludesfile ~/.gitignore_global
 
 cat << END
 
-**************************************************
+${SPACER}
 DOTFILES SETUP FINISHED! bye.
-**************************************************
+${SPACER}
 
 END
