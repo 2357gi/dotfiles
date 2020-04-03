@@ -43,9 +43,10 @@ case $ANSWER in
 esac
 
 
+echo "${SPACER}"
+echo "make links"
+echo "${SPACER}"
 cd $DOTFILES_PATH
-
-echo "start setup..."
 for f in .??*; do
 	[[ "$f" = ".tmux" ]] && continue
 	[[ "$f" = ".git" ]] && continue
@@ -56,11 +57,15 @@ for f in .??*; do
 	ln -snfv ~/dotfiles/"$f" ~/
 done
 
-echo $
+echo "${SPACER}"
+echo "brew install"
+echo "${SPACER}"
 brew bundle --global
 
 
-# linked dotfiles/bin
+echo "${SPACER}"
+echo "linked dotfiles/bin"
+echo "${SPACER}"
 ln -snfv ~/dotfiles/bin $HOME/bin
 
 if [[ -e ~/.gitconfig.local ]];then
