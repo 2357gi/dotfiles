@@ -73,10 +73,16 @@ if [[ -e ~/.gitconfig.local ]];then
 fi
 
 
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 eval git config --global commit.template .commit_template
 eval git config --global core.excludesfile ~/.gitignore_global
+
+
+echo "${SPACER}"
+echo "install docker"
+echo "${SPACER}"
+mkdir -p ~/.zsh/completions
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.zsh-completion ~/.zsh/completions/_docker
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion ~/.zsh/completions/_docker-compose
 
 cat << END
 

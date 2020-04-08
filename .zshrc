@@ -7,11 +7,16 @@ export EDITOR=vim			# エディタを vim に設定
 export PAGER=less
 export LV="-c -Outf8"	# エスケープシーケンス解釈・UTF-8変換
 autoload -Uz add-zsh-hook	# 独自に定義したhook関数を有効化する。
-export ghq_root=$(ghq root)
-export GITHUB_DIR=$ghq_root/github.com
+
+if type ghq &> /dev/null; then
+  export ghq_root=$(ghq root)
+  export GITHUB_DIR=$ghq_root/github.com
+fi
 
 # githubtoken読み込み
-source $HOME/dotfiles/github_token
+if file $HOME/dotfiles/github_token &> /dev/null; then
+  source $HOME/dotfiles/github_token
+fi
 # docker buildkit有効化
 DOCKER_BUILDKIT=1
 
@@ -126,6 +131,10 @@ export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/tmux/bin:$PATH"
 
+# anyenv
+export anyenv_ROOT="${HOME}/.anyenv"
+[ -d "${anyenv_ROOT}" ] && export PATH=${anyenv_ROOT}/bin:$PATH && eval "$(anyenv init -)"
+
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
 [ -d "${PYENV_ROOT}" ] && export PATH=${PYENV_ROOT}/bin:$PATH && eval "$(pyenv init -)"
@@ -137,10 +146,10 @@ export RBENV_ROOT="${HOME}/.rbenv"
 # goenv
 export GOENV_ROOT="${HOME}/.goenv"
 [ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
+
+
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
-
-
 # GOPATHでルートも指定しているので個別に
 export PATH="$GOBIN:$PATH"
 
