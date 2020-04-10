@@ -31,7 +31,8 @@ alias d='docker'
 compdef d=docker
 alias drn="docker run -it --rm"
 alias db="DOCKER_BUILDKIT=1 docker build"
-
+alias dps="docker ps --format \"table {{.Names}} {{.ID}} {{.Status}}\""
+alias dpsa="docker ps -a --format \"table {{.Names}} {{.ID}} {{.Status}}\""
 alias fig='docker-compose'
 compdef fig=docker-compose
 alias k='kubectl'
