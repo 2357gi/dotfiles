@@ -14,7 +14,7 @@ if type ghq &> /dev/null; then
 fi
 
 # githubtoken読み込み
-if file $HOME/dotfiles/github_token &> /dev/null; then
+if [[ -x $HOME/dotfiles/github_token ]]; then
   source $HOME/dotfiles/github_token
 fi
 # docker buildkit有効化
@@ -87,7 +87,7 @@ setopt hist_no_store			# historyコマンドは履歴に登録しない
 setopt hist_reduce_blanks		# 空白を詰めて保存
 setopt hist_expire_dups_first		# 履歴削除時に重複行を優先して削除
 setopt share_history			# 履歴をプロセスで共有する
-setopt hist_verify			# 履歴選択後、実行前に編集可能にする
+setopt hist_verify			#r履歴選択後、実行前に編集可能にする
 # ------------------------------------------------------------------------------
 # 履歴の検索
 # ------------------------------------------------------------------------------
@@ -130,6 +130,7 @@ export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/tmux/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 # anyenv
 export anyenv_ROOT="${HOME}/.anyenv"
@@ -159,10 +160,6 @@ export GO111MODULE=on
 
 # dotenv
 eval "$(direnv hook zsh)"
-
-# java8 (scalaを動かそうとしたら文句言われたので仮置き
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v “1.8”`
-PATH=$JAVA_HOME/bin:$PATH
 
 
 export PATH=$PATH/vim/src/:$PATH
@@ -216,7 +213,7 @@ export FZF_COMPLETION_TRIGGER=","
 
 # Key bindings
 # ------------
-source "$HOME/.fzf/shell/key-bindings.zsh"
+[[ -x "$HOME/.fzf/shell/key-bindings.zsh" ]]&& source "$HOME/.fzf/shell/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS=' --height 40% --reverse'
 # export FZF_CTRL_T_OPTS='--preview "bat  --color always --style=header,grid --line-range :100 {}"'
@@ -380,4 +377,7 @@ SPROMPT='zsh: correct? %F{red}%R%f -> %F{green}%r%f [y/n]:'
 # 全ての設定が終わってから実行
 # ------------------------------------------------------------------------------
 typeset -U path cdpath fpath manpath	# パスの重複をなくす
+
+if [ -f '/Users/2357gi/.sec' ]; then source ~/.sec; fi
+
 
