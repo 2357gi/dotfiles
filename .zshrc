@@ -33,3 +33,8 @@ if command -v zsh &> /dev/null; then
     echo "✓ RTX: $(command -v rtx &> /dev/null && echo "available" || echo "not found")"
     echo "✓ Volta: $(command -v volta &> /dev/null && echo "available" || echo "not found")"
 fi
+
+# Homebrew (if available)
+if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
