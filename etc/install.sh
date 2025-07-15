@@ -302,6 +302,66 @@ setup_ubuntu_specific() {
     fi
 }
 
+install_tmux_plugins() {
+    print_separator
+    log_info "Installing tmux plugins..."
+    print_separator
+    
+    local tpm_dir="$HOME/.tmux/plugins/tpm"
+    
+    # Check if tmux is installed
+    if ! command_exists tmux; then
+        log_warning "tmux is not installed, skipping plugin installation"
+        return 0
+    fi
+    
+    # Check if TPM already exists
+    if [[ -d "$tpm_dir" ]]; then
+        log_info "TPM already exists, updating..."
+        if cd "$tpm_dir" && git pull origin master; then
+            log_success "TPM updated successfully"
+        else
+            log_error "Failed to update TPM"
+            return 1
+        fi
+    else
+        # Install TPM
+        if ask_user "Install Tmux Plugin Manager (TPM)?"; then
+            log_info "Installing TPM..."
+            if git clone https://github.com/tmux-plugins/tpm "$tpm_dir"; then
+                log_success "TPM installed successfully"
+            else
+                log_error "Failed to install TPM"
+                return 1
+            fi
+        else
+            log_info "Skipping TPM installation"
+            return 0
+        fi
+    fi
+    
+    # Install plugins automatically if TPM is available
+    if [[ -f "$tpm_dir/bin/install_plugins" ]]; then
+        log_info "Installing tmux plugins..."
+        if "$tpm_dir/bin/install_plugins"; then
+            log_success "Tmux plugins installed successfully"
+        else
+            log_warning "Some tmux plugins may not have been installed correctly"
+        fi
+    fi
+    
+    # Display information about plugin usage
+    cat << EOF
+
+📋 Tmux Plugin Manager (TPM) Usage:
+   - prefix + I : Install plugins
+   - prefix + U : Update plugins
+   - prefix + alt + u : Uninstall plugins
+   - Default prefix: Ctrl+Space (as configured in .tmux.conf)
+
+EOF
+}
+
 show_completion() {
     cat << END
 
@@ -337,6 +397,7 @@ main() {
     install_packages || exit 1
     setup_bin_directory || exit 1
     configure_git || exit 1
+    install_tmux_plugins || exit 1
     setup_platform_specific || exit 1
     
     # Show completion message

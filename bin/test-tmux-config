@@ -62,9 +62,25 @@ else
     exit 1
 fi
 
-# 5. tmux設定の読み込みテスト
+# 5. TPM (Tmux Plugin Manager) の存在確認
 echo ""
-echo "5️⃣ tmux設定の読み込みテスト"
+echo "5️⃣ TPM (Tmux Plugin Manager) の存在確認"
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [[ -d "$TPM_DIR" ]]; then
+    echo "✅ TPM が見つかりました: $TPM_DIR"
+    if [[ -f "$TPM_DIR/tpm" ]]; then
+        echo "✅ TPM実行ファイルが存在します"
+    else
+        echo "⚠️ TPM実行ファイルが見つかりません"
+    fi
+else
+    echo "⚠️ TPM が見つかりません"
+    echo "   インストールするには: dotfiles/etc/install.sh を実行してください"
+fi
+
+# 6. tmux設定の読み込みテスト
+echo ""
+echo "6️⃣ tmux設定の読み込みテスト"
 if tmux -f "$TMUX_CONF" new-session -d -s test_session 2>/dev/null; then
     echo "✅ tmux設定の読み込み成功"
     tmux kill-session -t test_session 2>/dev/null || true
