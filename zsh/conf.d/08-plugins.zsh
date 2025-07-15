@@ -32,14 +32,8 @@ if [ -f ~/enhancd/init.sh ]; then
 fi
 
 # Custom plugins
-if [ -f ~/.zsh/ghux/ghux.plugin.zsh ]; then
-    source ~/.zsh/ghux/ghux.plugin.zsh
-    bindkey '^G' ghux
-fi
-
-if [ -f ~/.zsh/function/ghq_unset.plugin.zsh ]; then
-    source ~/.zsh/function/ghq_unset.plugin.zsh
-fi
+# Note: ghux plugin was removed as it's no longer available
+# Note: ghq_unset function has been moved to 06-functions.zsh
 
 # Security file
 if [ -f '/Users/2357gi/.sec' ]; then 
