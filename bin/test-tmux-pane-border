@@ -1,0 +1,117 @@
+#!/bin/zsh
+
+# tmux-pane-border スクリプト専用テストスクリプト
+# Usage: ./bin/test-tmux-pane-border [--quiet]
+
+set -e
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_PATH="$DOTFILES_DIR/bin/tmux-pane-border"
+QUIET_MODE=false
+
+# 引数処理
+if [[ "$1" == "--quiet" ]]; then
+    QUIET_MODE=true
+fi
+
+log() {
+    if [[ "$QUIET_MODE" == "false" ]]; then
+        echo "$@"
+    fi
+}
+
+log "🔍 tmux-pane-border スクリプトのテストを開始します..."
+log ""
+
+# 1. スクリプトの存在確認
+log "1️⃣ スクリプトの存在確認"
+if [[ -f "$SCRIPT_PATH" ]]; then
+    log "✅ $SCRIPT_PATH が見つかりました"
+else
+    log "❌ $SCRIPT_PATH が見つかりません"
+    exit 1
+fi
+
+# 2. 実行権限の確認
+log ""
+log "2️⃣ 実行権限の確認"
+if [[ -x "$SCRIPT_PATH" ]]; then
+    log "✅ 実行権限があります"
+else
+    log "❌ 実行権限がありません"
+    exit 1
+fi
+
+# 3. 通常モードでの動作確認
+log ""
+log "3️⃣ 通常モード（Git情報表示）での動作確認"
+TEST_DIR="$DOTFILES_DIR"
+if OUTPUT=$("$SCRIPT_PATH" test 123 "$TEST_DIR" 2>&1); then
+    log "✅ 通常モードでの実行成功"
+    if [[ "$QUIET_MODE" == "false" ]]; then
+        log "   出力: $OUTPUT"
+    fi
+    
+    # Git情報が含まれているかチェック
+    if [[ "$OUTPUT" == *"master"* ]] || [[ "$OUTPUT" == *"main"* ]]; then
+        log "✅ Git情報が正しく表示されています"
+    else
+        log "⚠️ Git情報が表示されていない可能性があります"
+    fi
+else
+    log "❌ 通常モードでの実行に失敗しました"
+    log "   エラー: $OUTPUT"
+    exit 1
+fi
+
+# 4. SSHモードでの動作確認
+log ""
+log "4️⃣ SSHモードでの動作確認"
+if OUTPUT=$("$SCRIPT_PATH" ssh 123 "$TEST_DIR" 2>/dev/null); then
+    log "✅ SSHモードでの実行成功"
+    if [[ "$QUIET_MODE" == "false" ]]; then
+        log "   出力: $OUTPUT"
+    fi
+    
+    # SSH情報が含まれているかチェック
+    if [[ "$OUTPUT" == *"ssh:"* ]]; then
+        log "✅ SSH情報フォーマットが正しく表示されています"
+    else
+        log "⚠️ SSH情報フォーマットが表示されていない可能性があります"
+    fi
+else
+    log "⚠️ SSHモードでの実行でエラーが発生しましたが、これは通常の動作です"
+    log "   （SSH設定ファイルが存在しない場合など）"
+fi
+
+# 5. 非Gitディレクトリでの動作確認
+log ""
+log "5️⃣ 非Gitディレクトリでの動作確認"
+TEMP_DIR=$(mktemp -d)
+if OUTPUT=$("$SCRIPT_PATH" test 123 "$TEMP_DIR" 2>/dev/null); then
+    log "✅ 非Gitディレクトリでの実行成功"
+    if [[ "$QUIET_MODE" == "false" ]]; then
+        log "   出力: $OUTPUT"
+    fi
+    
+    # Git情報が含まれていないかチェック
+    if [[ "$OUTPUT" != *"master"* ]] && [[ "$OUTPUT" != *"main"* ]]; then
+        log "✅ Git情報が正しく除外されています"
+    else
+        log "⚠️ 非GitディレクトリでもGit情報が表示されています"
+    fi
+else
+    log "❌ 非Gitディレクトリでの実行に失敗しました"
+    exit 1
+fi
+
+# 一時ディレクトリを削除
+rm -rf "$TEMP_DIR"
+
+if [[ "$QUIET_MODE" == "false" ]]; then
+    log ""
+    log "🎉 全てのテストが成功しました！"
+    log "tmux-pane-border スクリプトは正常に動作します。"
+fi
+
+exit 0

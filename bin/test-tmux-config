@@ -1,0 +1,78 @@
+#!/bin/zsh
+
+# tmux設定全体のテストスクリプト
+# Usage: ./bin/test-tmux-config
+
+set -e
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TMUX_CONF="${DOTFILES_DIR}/.tmux.conf"
+
+echo "🔍 tmux設定テストを開始します..."
+echo ""
+
+# 1. tmux.confの存在確認
+echo "1️⃣ tmux.conf の存在確認"
+if [[ -f "$TMUX_CONF" ]]; then
+    echo "✅ $TMUX_CONF が見つかりました"
+else
+    echo "❌ $TMUX_CONF が見つかりません"
+    exit 1
+fi
+
+# 2. 構文チェック
+echo ""
+echo "2️⃣ tmux.conf の構文チェック"
+if tmux -f "$TMUX_CONF" -T test 2>/dev/null; then
+    echo "✅ 構文チェック成功"
+else
+    echo "❌ 構文エラーが検出されました"
+    tmux -f "$TMUX_CONF" -T test
+    exit 1
+fi
+
+# 3. 必要なスクリプトの存在確認
+echo ""
+echo "3️⃣ 必要なスクリプトの存在確認"
+REQUIRED_SCRIPTS=(
+    "$DOTFILES_DIR/bin/tmux-pane-border"
+)
+
+for script in "${REQUIRED_SCRIPTS[@]}"; do
+    if [[ -f "$script" ]]; then
+        echo "✅ $(basename "$script") が見つかりました"
+        if [[ -x "$script" ]]; then
+            echo "✅ $(basename "$script") に実行権限があります"
+        else
+            echo "⚠️ $(basename "$script") に実行権限がありません"
+        fi
+    else
+        echo "❌ $(basename "$script") が見つかりません"
+        exit 1
+    fi
+done
+
+# 4. tmux-pane-borderスクリプトの基本動作確認
+echo ""
+echo "4️⃣ tmux-pane-border スクリプトの動作確認"
+if "$DOTFILES_DIR/bin/test-tmux-pane-border" --quiet; then
+    echo "✅ tmux-pane-border スクリプトの動作確認成功"
+else
+    echo "❌ tmux-pane-border スクリプトの動作確認に失敗しました"
+    exit 1
+fi
+
+# 5. tmux設定の読み込みテスト
+echo ""
+echo "5️⃣ tmux設定の読み込みテスト"
+if tmux -f "$TMUX_CONF" new-session -d -s test_session 2>/dev/null; then
+    echo "✅ tmux設定の読み込み成功"
+    tmux kill-session -t test_session 2>/dev/null || true
+else
+    echo "❌ tmux設定の読み込みに失敗しました"
+    exit 1
+fi
+
+echo ""
+echo "🎉 全てのテストが成功しました！"
+echo "tmux設定は正常に動作します。"
