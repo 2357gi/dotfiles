@@ -80,6 +80,14 @@ if [[ -d "$TPM_DIR" ]]; then
     for plugin in "${PLUGINS[@]}"; do
         if [[ -d "$HOME/.tmux/plugins/$plugin" ]]; then
             echo "   ✅ $plugin"
+            # tmux-fingersのバイナリ確認
+            if [[ "$plugin" == "tmux-fingers" ]]; then
+                if [[ -f "$HOME/.tmux/plugins/tmux-fingers/target/release/tmux-fingers" ]]; then
+                    echo "      ✅ tmux-fingers バイナリがビルド済み"
+                else
+                    echo "      ⚠️ tmux-fingers バイナリが未ビルド（初回起動時にビルドされます）"
+                fi
+            fi
         else
             echo "   ⚠️ $plugin (未インストール)"
         fi

@@ -345,6 +345,17 @@ install_tmux_plugins() {
         log_info "Installing tmux plugins..."
         if "$tpm_dir/bin/install_plugins"; then
             log_success "Tmux plugins installed successfully"
+            
+            # Build tmux-fingers binary to avoid runtime compilation
+            local fingers_dir="$HOME/.tmux/plugins/tmux-fingers"
+            if [[ -d "$fingers_dir" ]]; then
+                log_info "Building tmux-fingers binary..."
+                if cd "$fingers_dir" && ./scripts/build.sh; then
+                    log_success "tmux-fingers binary built successfully"
+                else
+                    log_warning "Failed to build tmux-fingers binary, it will be built on first use"
+                fi
+            fi
         else
             log_warning "Some tmux plugins may not have been installed correctly"
         fi
@@ -358,6 +369,8 @@ install_tmux_plugins() {
    - prefix + U : Update plugins
    - prefix + alt + u : Uninstall plugins
    - Default prefix: Ctrl+Space (as configured in .tmux.conf)
+
+💡 Note: tmux-fingers バイナリは事前ビルドされているため、初回起動時のコンパイルは不要です
 
 EOF
 }
