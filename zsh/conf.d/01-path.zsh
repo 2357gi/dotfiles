@@ -18,9 +18,9 @@ if is_osx; then
     export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 fi
 
-# RTX (replaces anyenv, pyenv, rbenv, goenv)
-if command -v rtx &> /dev/null; then
-    eval "$(rtx activate zsh)"
+# Mise (formerly rtx) - replaces anyenv, pyenv, rbenv, goenv
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh)"
 fi
 
 # Volta (Node.js version manager)
