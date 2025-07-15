@@ -79,7 +79,7 @@ show_copy_help() {
 show_plugin_help() {
     echo "${BOLD}${GREEN}🔌 プラグイン${NC}"
     echo "${CYAN}  F${NC}                    tmux-fzf 起動（セッション/ウィンドウ/ペイン管理）"
-    echo "${CYAN}  f${NC}                    tmux-fingers 起動（テキスト選択）"
+    echo "${CYAN}  u${NC}                    tmux-fingers 起動（テキスト選択）"
     echo "${CYAN}  j${NC}                    tmux-fingers ジャンプモード"
     echo "${CYAN}  I${NC}                    プラグインインストール"
     echo "${CYAN}  U${NC}                    プラグイン更新"
@@ -102,7 +102,7 @@ show_other_help() {
 show_footer() {
     echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo "${YELLOW}💡 Tip: ${NC}tmux-fzf (prefix+F) で検索機能を使うと便利です"
-    echo "${YELLOW}💡 Tip: ${NC}tmux-fingers (prefix+f) でテキスト選択が素早くできます"
+    echo "${YELLOW}💡 Tip: ${NC}tmux-fingers (prefix+u) でテキスト選択が素早くできます"
     echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
 
