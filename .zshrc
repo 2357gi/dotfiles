@@ -155,15 +155,17 @@ eval "$(direnv hook zsh)"
 
 
 export PATH=$PATH/vim/src/:$PATH
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'; fi
+# Google Cloud SDK (platform-specific)
+if is_osx; then
+    if [ -f '/Users/2357gi/google-cloud-sdk/path.zsh.inc' ]; then 
+        . '/Users/2357gi/google-cloud-sdk/path.zsh.inc'
+    fi
+    if [ -f '/Users/2357gi/google-cloud-sdk/completion.zsh.inc' ]; then 
+        . '/Users/2357gi/google-cloud-sdk/completion.zsh.inc'
+    fi
+fi
 
 # export aliases
 if [ -f ~/.aliases.sh ]; then
