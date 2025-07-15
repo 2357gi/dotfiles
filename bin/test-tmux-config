@@ -73,6 +73,17 @@ if [[ -d "$TPM_DIR" ]]; then
     else
         echo "⚠️ TPM実行ファイルが見つかりません"
     fi
+    
+    # プラグインの存在確認
+    echo "   プラグインの確認:"
+    PLUGINS=("tmux-fzf" "tmux-fingers" "tmux-sensible" "tmux-resurrect" "tmux-yank")
+    for plugin in "${PLUGINS[@]}"; do
+        if [[ -d "$HOME/.tmux/plugins/$plugin" ]]; then
+            echo "   ✅ $plugin"
+        else
+            echo "   ⚠️ $plugin (未インストール)"
+        fi
+    done
 else
     echo "⚠️ TPM が見つかりません"
     echo "   インストールするには: dotfiles/etc/install.sh を実行してください"
@@ -89,6 +100,27 @@ else
     exit 1
 fi
 
+# 7. カスタムヘルプスクリプトの確認
+echo ""
+echo "7️⃣ カスタムヘルプスクリプトの確認"
+HELP_SCRIPT="$DOTFILES_DIR/bin/tmux-help"
+if [[ -f "$HELP_SCRIPT" ]]; then
+    echo "✅ tmux-help スクリプトが見つかりました"
+    if [[ -x "$HELP_SCRIPT" ]]; then
+        echo "✅ tmux-help スクリプトに実行権限があります"
+    else
+        echo "⚠️ tmux-help スクリプトに実行権限がありません"
+    fi
+else
+    echo "❌ tmux-help スクリプトが見つかりません"
+fi
+
 echo ""
 echo "🎉 全てのテストが成功しました！"
 echo "tmux設定は正常に動作します。"
+echo ""
+echo "📚 使用方法:"
+echo "  • prefix + ? または prefix + Ctrl+h でカスタムヘルプを表示"
+echo "  • prefix + F で tmux-fzf を起動"
+echo "  • prefix + f で tmux-fingers を起動"
+echo "  • prefix は Ctrl+Space です"

@@ -1,0 +1,156 @@
+#!/bin/zsh
+
+# tmux カスタムヘルプスクリプト
+# Usage: tmux-help [category]
+
+set -e
+
+# 色定義
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# ヘッダー表示
+show_header() {
+    echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo "${BOLD}${CYAN}                           TMUX KEYBINDINGS HELP                           ${NC}"
+    echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo "${YELLOW}Prefix Key: ${BOLD}Ctrl+Space${NC}"
+    echo ""
+}
+
+# セッション管理
+show_session_help() {
+    echo "${BOLD}${GREEN}📋 セッション管理${NC}"
+    echo "${CYAN}  p${NC}                    前のセッションに切り替え"
+    echo "${CYAN}  n${NC}                    次のセッションに切り替え"
+    echo "${CYAN}  P${NC}                    現在のパスでセッションにアタッチ"
+    echo "${CYAN}  d${NC}                    セッションからデタッチ"
+    echo "${CYAN}  s${NC}                    セッション一覧表示"
+    echo "${CYAN}  \$${NC}                    セッション名を変更"
+    echo ""
+}
+
+# ウィンドウ管理
+show_window_help() {
+    echo "${BOLD}${GREEN}🪟 ウィンドウ管理${NC}"
+    echo "${CYAN}  c, Ctrl+c${NC}           新しいウィンドウを作成"
+    echo "${CYAN}  Ctrl+h${NC}              前のウィンドウに移動"
+    echo "${CYAN}  Ctrl+l${NC}              次のウィンドウに移動"
+    echo "${CYAN}  0-9${NC}                 指定番号のウィンドウに移動"
+    echo "${CYAN}  w${NC}                    ウィンドウ一覧表示"
+    echo "${CYAN}  ,${NC}                    ウィンドウ名を変更"
+    echo "${CYAN}  &${NC}                    ウィンドウを削除"
+    echo ""
+}
+
+# ペイン管理
+show_pane_help() {
+    echo "${BOLD}${GREEN}📱 ペイン管理${NC}"
+    echo "${CYAN}  Ctrl+k${NC}              水平分割（右に新しいペイン）"
+    echo "${CYAN}  Ctrl+j${NC}              垂直分割（下に新しいペイン）"
+    echo "${CYAN}  h, j, k, l${NC}          vim風ペイン移動"
+    echo "${CYAN}  H, J, K, L${NC}          ペインサイズ変更"
+    echo "${CYAN}  q${NC}                    ペインを削除"
+    echo "${CYAN}  b${NC}                    ペインをウィンドウに分離"
+    echo "${CYAN}  Ctrl+x${NC}              ペインまたはウィンドウを削除"
+    echo "${CYAN}  Ctrl+t${NC}              最後のペイン/ウィンドウまたは新規ウィンドウ"
+    echo ""
+}
+
+# コピーモード
+show_copy_help() {
+    echo "${BOLD}${GREEN}📋 コピーモード${NC}"
+    echo "${CYAN}  \[${NC}                    コピーモード開始"
+    echo "${CYAN}  v${NC}                    選択開始（コピーモード内）"
+    echo "${CYAN}  y${NC}                    コピーして終了（コピーモード内）"
+    echo "${CYAN}  Enter${NC}               コピーして終了（コピーモード内）"
+    echo "${CYAN}  \]${NC}                    貼り付け"
+    echo ""
+}
+
+# プラグイン
+show_plugin_help() {
+    echo "${BOLD}${GREEN}🔌 プラグイン${NC}"
+    echo "${CYAN}  F${NC}                    tmux-fzf 起動（セッション/ウィンドウ/ペイン管理）"
+    echo "${CYAN}  f${NC}                    tmux-fingers 起動（テキスト選択）"
+    echo "${CYAN}  j${NC}                    tmux-fingers ジャンプモード"
+    echo "${CYAN}  I${NC}                    プラグインインストール"
+    echo "${CYAN}  U${NC}                    プラグイン更新"
+    echo "${CYAN}  Alt+u${NC}               プラグインアンインストール"
+    echo ""
+}
+
+# その他
+show_other_help() {
+    echo "${BOLD}${GREEN}⚙️ その他${NC}"
+    echo "${CYAN}  r${NC}                    設定ファイルを再読み込み"
+    echo "${CYAN}  a${NC}                    ペイン同期のオン/オフ"
+    echo "${CYAN}  Ctrl+q${NC}              セッションを終了"
+    echo "${CYAN}  \?${NC}                    標準キーバインド一覧表示"
+    echo "${CYAN}  \:${NC}                    コマンドモード"
+    echo ""
+}
+
+# フッター
+show_footer() {
+    echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo "${YELLOW}💡 Tip: ${NC}tmux-fzf (prefix+F) で検索機能を使うと便利です"
+    echo "${YELLOW}💡 Tip: ${NC}tmux-fingers (prefix+f) でテキスト選択が素早くできます"
+    echo "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+}
+
+# メイン関数
+main() {
+    local category="$1"
+    
+    case "$category" in
+        "session"|"s")
+            show_header
+            show_session_help
+            ;;
+        "window"|"w")
+            show_header
+            show_window_help
+            ;;
+        "pane"|"p")
+            show_header
+            show_pane_help
+            ;;
+        "copy"|"c")
+            show_header
+            show_copy_help
+            ;;
+        "plugin"|"pl")
+            show_header
+            show_plugin_help
+            ;;
+        "other"|"o")
+            show_header
+            show_other_help
+            ;;
+        "")
+            show_header
+            show_session_help
+            show_window_help
+            show_pane_help
+            show_copy_help
+            show_plugin_help
+            show_other_help
+            show_footer
+            ;;
+        *)
+            echo "${RED}使用法: tmux-help [session|window|pane|copy|plugin|other]${NC}"
+            echo "${YELLOW}カテゴリを指定しない場合は全て表示されます${NC}"
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

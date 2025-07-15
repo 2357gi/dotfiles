@@ -6,7 +6,8 @@
       "Bash(mkdir:*)",
       "Bash(ls:*)",
       "Bash(./bin/test-tmux-config:*)",
-      "Bash(./bin/test-tmux-pane-border:*)"
+      "Bash(./bin/test-tmux-pane-border:*)",
+      "Bash(./bin/tmux-help)"
     ],
     "deny": []
   }
