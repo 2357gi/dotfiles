@@ -126,27 +126,19 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
 export PATH=/usr/local/bin:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="$HOME/.nodebrew/current/bin:$PATH"
+# Volta (Node.js version manager)
+if [[ -s "$HOME/.volta/load.sh" ]]; then
+    source "$HOME/.volta/load.sh"
+fi
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/tmux/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
-# anyenv
-export anyenv_ROOT="${HOME}/.anyenv"
-[ -d "${anyenv_ROOT}" ] && export PATH=${anyenv_ROOT}/bin:$PATH && eval "$(anyenv init -)"
-
-# pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-[ -d "${PYENV_ROOT}" ] && export PATH=${PYENV_ROOT}/bin:$PATH && eval "$(pyenv init -)"
-
-# rbenv
-export RBENV_ROOT="${HOME}/.rbenv"
-[ -d "${RBENV_ROOT}" ] && export PATH=${RBENV_ROOT}/bin:$PATH && eval "$(rbenv init -)"
-
-# goenv
-export GOENV_ROOT="${HOME}/.goenv"
-[ -d "${GOENV_ROOT}" ] && export PATH=${GOENV_ROOT}/bin:$PATH && eval "$(goenv init -)"
+# RTX (replaces anyenv, pyenv, rbenv, goenv)
+if command -v rtx &> /dev/null; then
+    eval "$(rtx activate zsh)"
+fi
 
 
 export GOPATH="$HOME/go"
@@ -164,7 +156,6 @@ eval "$(direnv hook zsh)"
 
 export PATH=$PATH/vim/src/:$PATH
 export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 
 
