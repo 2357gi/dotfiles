@@ -8,7 +8,9 @@
       "Bash(./bin/test-tmux-config:*)",
       "Bash(./bin/test-tmux-pane-border:*)",
       "Bash(./bin/tmux-help)",
-      "Bash(./bin/tmux-help:*)"
+      "Bash(./bin/tmux-help:*)",
+      "Bash(cp:*)",
+      "Bash(nvim:*)"
     ],
     "deny": []
   }
