@@ -103,3 +103,61 @@ ghq_unset() {
 
     rm_each_repo 3 3< <( ghq list -p | "$filter" --preview="")
 }
+
+
+# Jiraチケット用ブランチ作成関数
+jira_branch() {
+  # クリップボードからURLを取得
+  local url=$(pbpaste)
+
+  # URLが空の場合はエラー
+  if [[ -z "$url" ]]; then
+    echo "Error: クリップボードが空です"
+    return 1
+  fi
+
+  # URLからチケットIDを抽出（/browse/の後の部分）
+  local ticket_id=$(echo "$url" | grep -oE '[A-Z]+-[0-9]+')
+
+  # チケットIDが取得できない場合はエラー
+  if [[ -z "$ticket_id" ]]; then
+    echo "Error: 有効なJiraチケットURLではありません: $url"
+    return 1
+  fi
+
+  # ブランチ名を生成
+  local branch_name="feature/$ticket_id"
+
+  echo "チケットID: $ticket_id"
+  echo "ブランチ作成: $branch_name"
+
+  # ブランチを作成して移動
+  git checkout -b "$branch_name"
+}
+
+# AWS Cost Explorer を専用のChromeプロファイルで開く関数
+aws_cost_explorer() {
+  local profile="${1:-nealle-sso}"
+  local chrome_profile="AWS-Cost-Explorer"
+  local chrome_user_data="$HOME/Library/Application Support/Google/Chrome/AWS-Cost-Explorer"
+  local url="https://us-east-1.console.aws.amazon.com/costmanagement/home#/cost-explorer?chartStyle=STACK&costAggregate=unBlendedCost&endDate=2025-12-24&excludeForecasting=false&filter=%5B%7B%22dimension%22:%7B%22id%22:%22Service%22,%22displayValue%22:%22%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Tax%22,%22displayValue%22:%22Tax%22%7D,%7B%22value%22:%22AWS%20Support%20(Business)%22,%22displayValue%22:%22Support%20(Business)%22%7D,%7B%22value%22:%22Amazon%20Connect%22,%22displayValue%22:%22Connect%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%20%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D%5D%7D,%7B%22dimension%22:%7B%22id%22:%22PurchaseType%22,%22displayValue%22:%22%E8%B3%BC%E5%85%A5%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Standard%20Reserved%20Instances%22,%22displayValue%22:%22Reserved%22%7D,%7B%22value%22:%22Savings%20Plans%22,%22displayValue%22:%22Savings%20Plans%22%7D%5D%7D%5D&futureRelativeRange=CUSTOM&granularity=Daily&groupBy=%5B%22Service%22%5D&historicalRelativeRange=MONTH_TO_DATE&isDefault=false&reportArn=arn:aws:ce::006080634847:ce-saved-report%2F0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportId=0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportMode=STANDARD&reportName=Daily&showOnlyUncategorized=false&showOnlyUntagged=false&startDate=2025-12-01&usageAggregate=undefined&useNormalizedUnits=false"
+
+  echo "AWS SSOプロファイル: $profile"
+  echo "Chromeプロファイル: $chrome_profile"
+  echo "ログイン中..."
+
+  # AWS SSOにログイン
+  aws sso login --profile "$profile"
+
+  if [[ $? -eq 0 ]]; then
+    echo "Cost Explorerを専用Chromeプロファイルで開いています..."
+    # 専用のChromeプロファイルでURLを開く
+    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+      --user-data-dir="$chrome_user_data" \
+      --profile-directory="Default" \
+      "$url" &
+  else
+    echo "Error: AWS SSOログインに失敗しました"
+    return 1
+  fi
+}
