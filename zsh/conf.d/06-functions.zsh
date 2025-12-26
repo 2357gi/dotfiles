@@ -138,26 +138,45 @@ jira_branch() {
 # AWS Cost Explorer を専用のChromeプロファイルで開く関数
 aws_cost_explorer() {
   local profile="${1:-nealle-sso}"
-  local chrome_profile="AWS-Cost-Explorer"
-  local chrome_user_data="$HOME/Library/Application Support/Google/Chrome/AWS-Cost-Explorer"
-  local url="https://us-east-1.console.aws.amazon.com/costmanagement/home#/cost-explorer?chartStyle=STACK&costAggregate=unBlendedCost&endDate=2025-12-24&excludeForecasting=false&filter=%5B%7B%22dimension%22:%7B%22id%22:%22Service%22,%22displayValue%22:%22%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Tax%22,%22displayValue%22:%22Tax%22%7D,%7B%22value%22:%22AWS%20Support%20(Business)%22,%22displayValue%22:%22Support%20(Business)%22%7D,%7B%22value%22:%22Amazon%20Connect%22,%22displayValue%22:%22Connect%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%20%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D%5D%7D,%7B%22dimension%22:%7B%22id%22:%22PurchaseType%22,%22displayValue%22:%22%E8%B3%BC%E5%85%A5%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Standard%20Reserved%20Instances%22,%22displayValue%22:%22Reserved%22%7D,%7B%22value%22:%22Savings%20Plans%22,%22displayValue%22:%22Savings%20Plans%22%7D%5D%7D%5D&futureRelativeRange=CUSTOM&granularity=Daily&groupBy=%5B%22Service%22%5D&historicalRelativeRange=MONTH_TO_DATE&isDefault=false&reportArn=arn:aws:ce::006080634847:ce-saved-report%2F0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportId=0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportMode=STANDARD&reportName=Daily&showOnlyUncategorized=false&showOnlyUntagged=false&startDate=2025-12-01&usageAggregate=undefined&useNormalizedUnits=false"
+  local cost_explorer_url="https://us-east-1.console.aws.amazon.com/costmanagement/home#/cost-explorer?chartStyle=STACK&costAggregate=unBlendedCost&endDate=2025-12-24&excludeForecasting=false&filter=%5B%7B%22dimension%22:%7B%22id%22:%22Service%22,%22displayValue%22:%22%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Tax%22,%22displayValue%22:%22Tax%22%7D,%7B%22value%22:%22AWS%20Support%20(Business)%22,%22displayValue%22:%22Support%20(Business)%22%7D,%7B%22value%22:%22Amazon%20Connect%22,%22displayValue%22:%22Connect%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D,%7B%22value%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%20%22,%22displayValue%22:%22Contact%20Center%20Telecommunications%20(service%20sold%20by%20AMCS,%20LLC)%22%7D%5D%7D,%7B%22dimension%22:%7B%22id%22:%22PurchaseType%22,%22displayValue%22:%22%E8%B3%BC%E5%85%A5%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%22%7D,%22operator%22:%22EXCLUDES%22,%22values%22:%5B%7B%22value%22:%22Standard%20Reserved%20Instances%22,%22displayValue%22:%22Reserved%22%7D,%7B%22value%22:%22Savings%20Plans%22,%22displayValue%22:%22Savings%20Plans%22%7D%5D%7D%5D&futureRelativeRange=CUSTOM&granularity=Daily&groupBy=%5B%22Service%22%5D&historicalRelativeRange=MONTH_TO_DATE&isDefault=false&reportArn=arn:aws:ce::006080634847:ce-saved-report%2F0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportId=0c00dbcf-c987-43ec-9fc2-702b7babbc94&reportMode=STANDARD&reportName=Daily&showOnlyUncategorized=false&showOnlyUntagged=false&startDate=2025-12-01&usageAggregate=undefined&useNormalizedUnits=false"
 
   echo "AWS SSOプロファイル: $profile"
-  echo "Chromeプロファイル: $chrome_profile"
-  echo "ログイン中..."
+  echo "ログインURLを取得中..."
 
-  # AWS SSOにログイン
-  aws sso login --profile "$profile"
+  # AWS SSOログインURLを取得
+  local login_url=$(aws sso login --profile "$profile" --no-browser 2>&1 | grep -oE 'https://[^ ]+')
 
-  if [[ $? -eq 0 ]]; then
-    echo "Cost Explorerを専用Chromeプロファイルで開いています..."
-    # 専用のChromeプロファイルでURLを開く
-    /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-      --user-data-dir="$chrome_user_data" \
-      --profile-directory="Default" \
-      "$url" &
-  else
-    echo "Error: AWS SSOログインに失敗しました"
+  if [[ -z "$login_url" ]]; then
+    echo "Error: ログインURLの取得に失敗しました"
     return 1
   fi
+
+  echo "専用のChromeプロファイルで開いています..."
+
+  # まずログインURLを開き、その後Cost ExplorerのURLを開く
+  open -na "Google Chrome" --args --user-data-dir=$HOME/Library/Application\ Support/Google/Chrome/aws-cost-explorer/$profile "$login_url" "$cost_explorer_url"
+}
+
+# AWS Vault Login with fzf profile selector
+aws_login() {
+  # ~/.aws/configから*-sso, *-no-sessionを除外してプロファイル名を抽出
+  local profile=$(grep '^\[profile ' ~/.aws/config | \
+    sed 's/^\[profile \(.*\)\]/\1/' | \
+    grep -v -e '-sso$' -e '-no-session$' | \
+    fzf --prompt="AWS Profile > " \
+        --height=40% \
+        --border \
+        --preview="echo 'Profile: {}' && grep -A5 '^\[profile {}\]' ~/.aws/config | tail -n +2")
+
+  # プロファイルが選択されなかった場合は終了
+  if [[ -z "$profile" ]]; then
+    echo "No profile selected."
+    return 1
+  fi
+
+  echo "Selected profile: $profile"
+  echo "Opening browser for aws-vault login..."
+
+  # aws-vault loginを実行
+  aws-vault login "$profile"
 }
