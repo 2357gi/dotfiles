@@ -40,3 +40,22 @@ fi
 if command -v kubectl &> /dev/null; then
     source <(kubectl completion zsh)
 fi
+
+# AWS profile completion with fzf
+_aws_profile_fzf() {
+  local selected
+  selected=$(grep '^\[profile ' ~/.aws/config 2>/dev/null | \
+    sed 's/^\[profile \(.*\)\]/\1/' | \
+    grep -v -e '-sso$' -e '-no-session$' | \
+    fzf --prompt="AWS Profile > " --height=40% --border)
+
+  if [[ -n "$selected" ]]; then
+    LBUFFER="${LBUFFER}${selected}"
+  fi
+  zle reset-prompt
+}
+
+zle -N _aws_profile_fzf
+
+# Ctrl+P で AWS プロファイル選択を起動（--profile の後で使用）
+bindkey '^P' _aws_profile_fzf
