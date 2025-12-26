@@ -30,8 +30,8 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ..='cd ..'
-alias vi='nvim'
-alias vif='nvim $(fzf)'
+alias vi='vim'
+alias vif='vim $(fzf)'
 alias :q='exit'
 alias p='pwd'
 alias df='df -h'
@@ -57,7 +57,6 @@ fi
 
 # Git aliases
 alias g='git'
-compdef g git
 alias gs='git status --short --branch'
 alias ga='git add'
 alias gc='git commit'
@@ -66,24 +65,17 @@ alias gco='git checkout'
 
 # Docker aliases
 alias d='docker'
-compdef d docker
 alias drn="docker run -it --rm"
 alias db="DOCKER_BUILDKIT=1 docker build"
 alias dps="docker ps --format \"table {{.Names}} {{.ID}} {{.Status}}\""
 alias dpsa="docker ps -a --format \"table {{.Names}} {{.ID}} {{.Status}}\""
 alias fig='docker-compose'
-compdef fig docker-compose
 
 # Kubernetes aliases
 alias k='kubectl'
-compdef k kubectl
 
 # Other aliases
-alias gx="ghux"
-alias gh='ghux'
-alias jn='jupyter notebook'
 alias dtf="tmux switch-client -t dotfiles"
-alias hoge='echo fuga'
 
 # Platform-specific notification
 if is_osx; then
@@ -92,7 +84,7 @@ elif is_ubuntu; then
     alias noti='notify-send "コマンド完了"'
 fi
 
-# Dictionary function
-dic() {
-    w3m "http://ejje.weblio.jp/content/$1" | grep -E "主な|用例"
-}
+avl(){ open -na "Google Chrome" --args --incognito --user-data-dir=$HOME/Library/Application\ Support/Google/Chrome/aws-vault/$@ $(aws-vault login $@ --stdout) }
+
+alias jb='jira_branch'
+alias ace='aws_cost_explorer'

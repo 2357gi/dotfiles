@@ -39,5 +39,16 @@ if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
+# Homebrew completion paths (must be set before compinit)
+if is_osx; then
+    # Add Homebrew's completion directory to fpath
+    if [[ -d "/opt/homebrew/share/zsh/site-functions" ]]; then
+        fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+    fi
+    if [[ -d "/usr/local/share/zsh/site-functions" ]]; then
+        fpath=(/usr/local/share/zsh/site-functions $fpath)
+    fi
+fi
+
 # Remove duplicates from PATH
 typeset -U path cdpath fpath manpath

@@ -57,5 +57,13 @@ _aws_profile_fzf() {
 
 zle -N _aws_profile_fzf
 
-# Ctrl+P で AWS プロファイル選択を起動（--profile の後で使用）
-bindkey '^P' _aws_profile_fzf
+# Completion definitions for aliases (must be after compinit)
+# Only set compdef if the completion function exists
+compdef g=git 2>/dev/null || true
+if command -v docker &> /dev/null; then
+    compdef d=docker 2>/dev/null || true
+    compdef fig=docker-compose 2>/dev/null || true
+fi
+if command -v kubectl &> /dev/null; then
+    compdef k=kubectl 2>/dev/null || true
+fi
