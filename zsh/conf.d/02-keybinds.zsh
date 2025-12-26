@@ -23,7 +23,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 # Incremental search (zsh >= 4.3.10)
 if is-at-least 4.3.10; then
-    bindkey '^R' history-incremental-pattern-search-backward
+    # bindkey '^R' history-incremental-pattern-search-backward  # Commented out to avoid conflict with fzf-history-widget
     bindkey '^S' history-incremental-pattern-search-forward
 fi
 
