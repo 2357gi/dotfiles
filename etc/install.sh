@@ -88,6 +88,14 @@ clone_dotfiles() {
                 return 1
             }
             log_success "Dotfiles repository updated"
+
+            # Update submodules
+            log_info "Updating git submodules..."
+            if git submodule update --init --recursive; then
+                log_success "Git submodules updated"
+            else
+                log_warning "Failed to update git submodules"
+            fi
         fi
         return 0
     fi
@@ -96,6 +104,15 @@ clone_dotfiles() {
         log_info "Cloning dotfiles repository..."
         if git clone --depth=1 "$GITHUB_REPO" "$DOTFILES_PATH"; then
             log_success "Dotfiles repository cloned"
+
+            # Initialize and update submodules
+            log_info "Initializing git submodules..."
+            cd "$DOTFILES_PATH"
+            if git submodule update --init --recursive; then
+                log_success "Git submodules initialized"
+            else
+                log_warning "Failed to initialize git submodules"
+            fi
         else
             log_error "Failed to clone dotfiles repository"
             return 1

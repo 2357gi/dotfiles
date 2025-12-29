@@ -8,3 +8,6 @@
 	path = .tmux/plugins/tpm/tpm
 	url = https://github.com/tmux-plugins/tpm
 
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

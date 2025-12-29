@@ -54,6 +54,12 @@ fi
 # Note: ghux plugin was removed as it's no longer available
 # Note: ghq_unset function has been moved to 06-functions.zsh
 
+# zsh-autosuggestions
+ZSH_AUTOSUGGESTIONS_PATH="$DOTFILES_DIR/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -f "$ZSH_AUTOSUGGESTIONS_PATH" ]]; then
+    source "$ZSH_AUTOSUGGESTIONS_PATH"
+fi
+
 # Security file
 if [ -f '/Users/2357gi/.sec' ]; then 
     source ~/.sec
