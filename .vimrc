@@ -14,21 +14,20 @@ let g:mapleader = "\<Space>"
 
 " mouseを有効か
 set mouse=a
-if has('mouse_sgr')
-  set ttymouse=sgr
-else
-  set ttymouse=xterm2
+if !has('nvim')
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
+  set ttyfast
 endif
-
-" Terminal接続を高速化
-set ttyfast
 
 " スペルチェック
 set spell
 set spelllang=en,cjk 
 
 syntax on
-colorscheme molokai
 
 " 編集箇所のカーソルを記憶
 if has("autocmd")
@@ -83,8 +82,6 @@ set nobackup
 " タグファイルを定義
 set tag=.tags;$HOME
 
-
-
 " F3で相対行表示切り替え
 set number
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
@@ -133,8 +130,8 @@ set autoread
 au CursorHold * checktime
 
 " swich buffer
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprev<CR>
+nnoremap <Space>l :bnext<CR>
+nnoremap <Space>h :bprev<CR>
 
 
 
@@ -318,6 +315,8 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " font
 set guifont=Cica:h16
-set printfont=Cica:h12
+if !has('nvim')
+  set printfont=Cica:h12
+endif
 set ambiwidth=double
 

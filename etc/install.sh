@@ -215,6 +215,40 @@ create_symlinks() {
     log_success "Created $linked_count symbolic links"
 }
 
+setup_config_directory() {
+    print_separator
+    log_info "Setting up .config directory..."
+    print_separator
+
+    if [[ ! -d "$DOTFILES_PATH/.config" ]]; then
+        log_warning ".config directory not found in dotfiles: $DOTFILES_PATH/.config"
+        return 0
+    fi
+
+    # Create .config directory if it doesn't exist
+    mkdir -p "$HOME/.config"
+
+    # Link each subdirectory in .config
+    local linked_count=0
+    for config_dir in "$DOTFILES_PATH/.config"/*; do
+        if [[ -d "$config_dir" ]]; then
+            local dir_name=$(basename "$config_dir")
+            if ln -snfv "$config_dir" "$HOME/.config/$dir_name"; then
+                ((linked_count++))
+                log_info "Linked .config/$dir_name"
+            else
+                log_warning "Failed to link .config/$dir_name"
+            fi
+        fi
+    done
+
+    if [[ $linked_count -gt 0 ]]; then
+        log_success "Created $linked_count .config directory links"
+    else
+        log_info "No .config directories to link"
+    fi
+}
+
 install_packages() {
     if ! command_exists brew; then
         log_warning "Homebrew not found, skipping package installation"
@@ -424,6 +458,7 @@ main() {
     generate_ssh_key || exit 1
     install_homebrew || exit 1
     create_symlinks || exit 1
+    setup_config_directory || exit 1
     install_packages || exit 1
     setup_bin_directory || exit 1
     configure_git || exit 1

@@ -6,7 +6,7 @@
 export LANG=ja_JP.UTF-8
 
 # Editor and pager settings
-export EDITOR=vim
+export EDITOR=nvim
 export PAGER=less
 export LV="-c -Outf8"
 
