@@ -2,6 +2,11 @@
 # Completion Settings
 # ------------------------------------------------------------------------------
 
+# Load fzf-tab before compinit
+if [[ -f ~/.fzf-tab/fzf-tab.plugin.zsh ]]; then
+    source ~/.fzf-tab/fzf-tab.plugin.zsh
+fi
+
 # Load completion system
 autoload -U compinit; compinit -u
 autoload -U bashcompinit; bashcompinit -u
@@ -31,6 +36,14 @@ setopt mark_dirs
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# fzf-tab configuration
+zstyle ':fzf-tab:*' fzf-command fzf
+zstyle ':fzf-tab:*' fzf-flags --height=40% --border --reverse
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath 2>/dev/null || ls -1 $realpath'
+zstyle ':fzf-tab:complete:git-*:*' fzf-preview 'git show --color=always $word 2>/dev/null || echo $word'
+zstyle ':fzf-tab:*' fzf-min-height 20
+
 # Docker completion with fzf
 if [[ -n "$GITHUB_DIR" && -f "$GITHUB_DIR/kwhrtsk/docker-fzf-completion/docker-fzf.zsh" ]]; then
     source "$GITHUB_DIR/kwhrtsk/docker-fzf-completion/docker-fzf.zsh"
@@ -39,6 +52,11 @@ fi
 # Kubernetes completion
 if command -v kubectl &> /dev/null; then
     source <(kubectl completion zsh)
+fi
+
+# aws cli completion
+if command -v aws &> /dev/null; then
+    complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 # AWS profile completion with fzf

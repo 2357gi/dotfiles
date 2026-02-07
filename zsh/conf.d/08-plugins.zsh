@@ -21,6 +21,10 @@ FZF_LOCATIONS=(
 FZF_FOUND=0
 for fzf_base in "${FZF_LOCATIONS[@]}"; do
     if [[ -d "$fzf_base" ]]; then
+        # Add fzf to PATH
+        if [[ -d "$fzf_base/bin" ]] && [[ ":$PATH:" != *":$fzf_base/bin:"* ]]; then
+            export PATH="$fzf_base/bin:$PATH"
+        fi
         # Source completion
         if [[ $- == *i* ]] && [[ -f "$fzf_base/shell/completion.zsh" ]]; then
             source "$fzf_base/shell/completion.zsh" 2> /dev/null
@@ -66,6 +70,6 @@ if [ -f '/Users/2357gi/.sec' ]; then
 fi
 
 # ghux
-if [ -f '/Users/2357gi/src/github.com/2357gi/ghux' ]; then
-    source /Users/2357gi/src/github.com/2357gi/ghux/ghux.plugin.zsh
+if [ -f "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh" ]; then
+    source "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh"
 fi

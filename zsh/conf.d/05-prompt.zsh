@@ -33,9 +33,6 @@ precmd() {
 }
 
 chpwd() {
-    if [[ $(pwd) != $HOME ]] ; then
-        ls
-    fi
     update_git_info
 }
 

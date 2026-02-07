@@ -28,6 +28,11 @@ if [[ -s "$HOME/.volta/load.sh" ]]; then
     source "$HOME/.volta/load.sh"
 fi
 
+# rancher desktop
+if [[ -d "$HOME/.rd" ]]; then
+    export PATH="$HOME/.rd/bin:$PATH"
+fi
+
 # Go-specific settings
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
