@@ -1,0 +1,4 @@
+[opener]
+edit = [
+  { run = 'tmux display-popup -E -w 80% -h 80% -- ${EDITOR:-vi} "$@"', block = true, for = "unix" },
+]
