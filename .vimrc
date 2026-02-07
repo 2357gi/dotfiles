@@ -8,16 +8,17 @@
 "                                 
 " its vim basic config.
 
-" Plugin
-runtime! rc/dein/dein.vim
-
 " leaderをspaceに
 let g:mapleader = "\<Space>"
 
 
 " mouseを有効か
 set mouse=a
-set ttymouse=xterm2
+if has('mouse_sgr')
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+endif
 
 " Terminal接続を高速化
 set ttyfast
@@ -91,7 +92,6 @@ nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 " ----------------------------------------------------
 " key mapping
 " ----------------------------------------------------
-" プラギン固有のkeymapは全て.vim/rc/*.rc.vim に切り離し済み
 nnoremap <leader>rr :source ~/.vimrc<CR>
 
 " 保存
@@ -112,9 +112,6 @@ inoremap <C-b> <C-o>B
 
 " すばやく新規ファイルを作る
 nnoremap <leader>e :edit 
-
-" Chromeで選択したものを貼り付け
-nnoremap <leader>p :r! osascript -e 'tell application "Google Chrome" to get copy selection of active tab of window 1' ; pbpaste<CR>
 
 nnoremap <leader>sv :split<CR>
 
@@ -169,16 +166,6 @@ function! TmuxPaneClear()
   echo system('tmux send-keys -t '.g:target_pane.' c-c c-j c-l')
 endfunction
 " ------------------------------------------------------------------------------
-let g:gitgutter_sign_added = '∙'
-let g:gitgutter_sign_modified = '∙'
-let g:gitgutter_sign_removed = '∙'
-let g:gitgutter_sign_modified_removed = '∙'
-nnoremap ]g :GitGutterNextHunk<CR>
-nnoremap [g :GitGutterPrevHunk<CR>
-augroup VimDiff
-  autocmd!
-  autocmd VimEnter,FilterWritePre * if &diff | GitGutterDisable | endif
-augroup END
 " ------------------------------------------------------------------------------
 " CursorLine
 " ------------------------------------------------------------------------------
@@ -263,15 +250,11 @@ set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮ " 不可視文字の表
 " ステータスライン周り
 set laststatus=2
 set showcmd				" コマンドをステータスラインに表示
-set noshowmode
+set showmode
 
 set showtabline=2
 
 set wrap				" 文字を折り返す
-
-" ALEの左側のLintからむを常時標示
-let g:ale_sign_column_always = 1
-
 
 " スペルミスの際にアンダーラインを引くように
 highlight clear SpellBad
@@ -332,7 +315,6 @@ set hlsearch
 
 " ESC連打でハイライト解除
 nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
-
 
 " font
 set guifont=Cica:h16
