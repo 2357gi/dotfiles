@@ -6,6 +6,20 @@ vim.opt.termguicolors = true
 vim.opt.ambiwidth = "single"
 vim.opt.signcolumn = "yes"
 
+-- C-w h/j/k/l でvimウィンドウ端ならtmuxペインに移動
+local function tmux_navigate(direction, tmux_dir)
+  local win = vim.api.nvim_get_current_win()
+  vim.cmd("wincmd " .. direction)
+  if vim.api.nvim_get_current_win() == win then
+    -- ウィンドウが変わらなかった = 端にいる → tmuxに移動
+    vim.fn.system("tmux select-pane -" .. tmux_dir)
+  end
+end
+vim.keymap.set("n", "<C-w>h", function() tmux_navigate("h", "L") end)
+vim.keymap.set("n", "<C-w>j", function() tmux_navigate("j", "D") end)
+vim.keymap.set("n", "<C-w>k", function() tmux_navigate("k", "U") end)
+vim.keymap.set("n", "<C-w>l", function() tmux_navigate("l", "R") end)
+
 -- lazy.nvim のブートストラップ
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
@@ -200,6 +214,30 @@ require("lazy").setup({
       vim.keymap.set("n", "<Space>fb", builtin.buffers)
       vim.keymap.set("n", "<Space>fd", builtin.diagnostics)
       vim.keymap.set("n", "<Space>fr", builtin.lsp_references)
+      vim.keymap.set("n", "<Space>fk", builtin.keymaps)
+    end,
+  },
+  -- キーマップ表示
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    config = function()
+      local wk = require("which-key")
+      wk.setup()
+      wk.add({
+        { "<Space>f", group = "Find" },
+        { "<Space>ff", desc = "Files" },
+        { "<Space>fg", desc = "Grep" },
+        { "<Space>fb", desc = "Buffers" },
+        { "<Space>fd", desc = "Diagnostics" },
+        { "<Space>fr", desc = "References" },
+        { "<Space>fk", desc = "Keymaps" },
+        { "<Space>h", desc = "Prev buffer" },
+        { "<Space>l", desc = "Next buffer" },
+        { "<Space>rn", desc = "Rename" },
+        { "<Space>ca", desc = "Code action" },
+        { "<Space>d", desc = "Diagnostic float" },
+      })
     end,
   },
   {

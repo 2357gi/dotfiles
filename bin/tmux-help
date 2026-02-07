@@ -28,73 +28,74 @@ show_header() {
 # セッション管理
 show_session_help() {
     echo "${BOLD}${GREEN}📋 セッション管理${NC}"
-    echo "${CYAN}  p${NC}                    前のセッションに切り替え"
-    echo "${CYAN}  n${NC}                    次のセッションに切り替え"
-    echo "${CYAN}  P${NC}                    現在のパスでセッションにアタッチ"
-    echo "${CYAN}  d${NC}                    セッションからデタッチ"
-    echo "${CYAN}  s${NC}                    セッション一覧表示"
-    echo "${CYAN}  \$${NC}                    セッション名を変更"
+    echo "${CYAN}  prefix + p${NC}           前のセッションに切り替え"
+    echo "${CYAN}  prefix + n${NC}           次のセッションに切り替え"
+    echo "${CYAN}  prefix + P${NC}           現在のパスでセッションにアタッチ"
+    echo "${CYAN}  prefix + d${NC}           セッションからデタッチ"
+    echo "${CYAN}  prefix + s${NC}           セッション一覧表示"
+    echo "${CYAN}  prefix + \$${NC}           セッション名を変更"
     echo ""
 }
 
 # ウィンドウ管理
 show_window_help() {
     echo "${BOLD}${GREEN}🪟 ウィンドウ管理${NC}"
-    echo "${CYAN}  c, Ctrl+c${NC}           新しいウィンドウを作成"
-    echo "${CYAN}  Ctrl+h${NC}              前のウィンドウに移動"
-    echo "${CYAN}  Ctrl+l${NC}              次のウィンドウに移動"
-    echo "${CYAN}  0-9${NC}                 指定番号のウィンドウに移動"
-    echo "${CYAN}  w${NC}                    ウィンドウ一覧表示"
-    echo "${CYAN}  ,${NC}                    ウィンドウ名を変更"
-    echo "${CYAN}  &${NC}                    ウィンドウを削除"
+    echo "${CYAN}  prefix + c, Ctrl+c${NC}  新しいウィンドウを作成"
+    echo "${CYAN}  prefix + Ctrl+h${NC}     前のウィンドウに移動"
+    echo "${CYAN}  prefix + Ctrl+l${NC}     次のウィンドウに移動"
+    echo "${CYAN}  prefix + 0-9${NC}        指定番号のウィンドウに移動"
+    echo "${CYAN}  prefix + w${NC}           ウィンドウ一覧表示"
+    echo "${CYAN}  prefix + ,${NC}           ウィンドウ名を変更"
+    echo "${CYAN}  prefix + &${NC}           ウィンドウを削除"
     echo ""
 }
 
 # ペイン管理
 show_pane_help() {
     echo "${BOLD}${GREEN}📱 ペイン管理${NC}"
-    echo "${CYAN}  Ctrl+k${NC}              水平分割（右に新しいペイン）"
-    echo "${CYAN}  Ctrl+j${NC}              垂直分割（下に新しいペイン）"
-    echo "${CYAN}  h, j, k, l${NC}          vim風ペイン移動"
-    echo "${CYAN}  H, J, K, L${NC}          ペインサイズ変更"
-    echo "${CYAN}  q${NC}                    ペインを削除"
-    echo "${CYAN}  b${NC}                    ペインをウィンドウに分離"
-    echo "${CYAN}  Ctrl+x${NC}              ペインまたはウィンドウを削除"
-    echo "${CYAN}  Ctrl+t${NC}              最後のペイン/ウィンドウまたは新規ウィンドウ"
+    echo "${CYAN}  prefix + Ctrl+k${NC}     水平分割（右に新しいペイン）"
+    echo "${CYAN}  prefix + Ctrl+j${NC}     垂直分割（下に新しいペイン）"
+    echo "${CYAN}  prefix + h/j/k/l${NC}    vim風ペイン移動"
+    echo "${YELLOW}  Ctrl+w h/j/k/l${NC}      ペイン移動（prefix不要/nvim連携）"
+    echo "${CYAN}  prefix + H/J/K/L${NC}    ペインサイズ変更"
+    echo "${CYAN}  prefix + q${NC}           ペインを削除"
+    echo "${CYAN}  prefix + b${NC}           ペインをウィンドウに分離"
+    echo "${CYAN}  prefix + Ctrl+x${NC}     ペインまたはウィンドウを削除"
+    echo "${CYAN}  prefix + Ctrl+t${NC}     最後のペイン/ウィンドウまたは新規ウィンドウ"
     echo ""
 }
 
 # コピーモード
 show_copy_help() {
     echo "${BOLD}${GREEN}📋 コピーモード${NC}"
-    echo "${CYAN}  \[${NC}                    コピーモード開始"
+    echo "${CYAN}  prefix + [${NC}           コピーモード開始"
     echo "${CYAN}  v${NC}                    選択開始（コピーモード内）"
     echo "${CYAN}  y${NC}                    コピーして終了（コピーモード内）"
     echo "${CYAN}  Enter${NC}               コピーして終了（コピーモード内）"
-    echo "${CYAN}  \]${NC}                    貼り付け"
+    echo "${CYAN}  prefix + ]${NC}           貼り付け"
     echo ""
 }
 
 # プラグイン
 show_plugin_help() {
     echo "${BOLD}${GREEN}🔌 プラグイン${NC}"
-    echo "${CYAN}  F${NC}                    tmux-fzf 起動（セッション/ウィンドウ/ペイン管理）"
-    echo "${CYAN}  u${NC}                    tmux-fingers 起動（テキスト選択）"
-    echo "${CYAN}  j${NC}                    tmux-fingers ジャンプモード"
-    echo "${CYAN}  I${NC}                    プラグインインストール"
-    echo "${CYAN}  U${NC}                    プラグイン更新"
-    echo "${CYAN}  Alt+u${NC}               プラグインアンインストール"
+    echo "${CYAN}  prefix + F${NC}           tmux-fzf 起動（セッション/ウィンドウ/ペイン管理）"
+    echo "${CYAN}  prefix + u${NC}           tmux-fingers 起動（テキスト選択）"
+    echo "${CYAN}  prefix + j${NC}           tmux-fingers ジャンプモード"
+    echo "${CYAN}  prefix + I${NC}           プラグインインストール"
+    echo "${CYAN}  prefix + U${NC}           プラグイン更新"
+    echo "${CYAN}  prefix + Alt+u${NC}      プラグインアンインストール"
     echo ""
 }
 
 # その他
 show_other_help() {
     echo "${BOLD}${GREEN}⚙️ その他${NC}"
-    echo "${CYAN}  r${NC}                    設定ファイルを再読み込み"
-    echo "${CYAN}  a${NC}                    ペイン同期のオン/オフ"
-    echo "${CYAN}  Ctrl+q${NC}              セッションを終了"
-    echo "${CYAN}  \?${NC}                    標準キーバインド一覧表示"
-    echo "${CYAN}  \:${NC}                    コマンドモード"
+    echo "${CYAN}  prefix + r${NC}           設定ファイルを再読み込み"
+    echo "${CYAN}  prefix + a${NC}           ペイン同期のオン/オフ"
+    echo "${CYAN}  prefix + Ctrl+q${NC}     セッションを終了"
+    echo "${CYAN}  prefix + ?${NC}           このヘルプを表示"
+    echo "${CYAN}  prefix + :${NC}           コマンドモード"
     echo ""
 }
 
