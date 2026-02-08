@@ -27,13 +27,6 @@ plugins=(
     git
 )
 
-# Final cleanup and verification
-if command -v zsh &> /dev/null; then
-    echo "✓ ZSH configuration loaded successfully"
-    echo "✓ Mise: $(command -v mise &> /dev/null && echo "available" || echo "not found")"
-    echo "✓ Volta: $(command -v volta &> /dev/null && echo "available" || echo "not found")"
-fi
-
 # Homebrew (if available)
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
