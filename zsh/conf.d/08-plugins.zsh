@@ -73,3 +73,18 @@ fi
 if [ -f "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh" ]; then
     source "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh"
 fi
+
+# git-wt (worktree manager)
+if command -v git-wt &> /dev/null; then
+    wt() {
+        local selected
+        selected=$(command git wt | tail -n +2 | fzf --prompt="worktree> " --height=40% --reverse | awk '{print $(NF-1)}')
+        if [ -n "$selected" ]; then
+            local result
+            result=$(GIT_WT_SHELL_INTEGRATION=1 command git wt "$selected")
+            local last_line
+            last_line=$(echo "$result" | tail -n 1)
+            [ -d "$last_line" ] && cd "$last_line" || echo "$result"
+        fi
+    }
+fi
