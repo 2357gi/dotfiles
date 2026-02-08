@@ -1,0 +1,159 @@
+# Nightfox theme for Yazi
+# Based on EdenEast/nightfox.nvim palette
+#
+# bg0: #131a24  bg1: #192330  bg2: #212e3f  bg3: #29394f  bg4: #39506d
+# fg0: #d6d6d7  fg1: #cdcecf  fg2: #aeafb0  fg3: #71839b
+# sel0: #2b3b51  sel1: #3c5372
+# black: #393b44  red: #c94f6d  green: #81b29a  yellow: #dbc074
+# blue: #719cd6  magenta: #9d79d6  cyan: #63cdcf  white: #dfdfe0
+# orange: #f4a261  pink: #d67ad2  comment: #738091
+
+[app]
+overall = { bg = "#192330" }
+
+# Manager
+[mgr]
+syntect_theme = "~/.config/yazi/nightfox.tmTheme"
+cwd = { fg = "#63cdcf" }
+
+find_keyword = { fg = "#dbc074", bold = true }
+find_position = { fg = "#f4a261", italic = true }
+
+symlink_target = { fg = "#738091", italic = true }
+
+marker_copied = { fg = "#81b29a", bg = "#81b29a" }
+marker_cut = { fg = "#c94f6d", bg = "#c94f6d" }
+marker_marked = { fg = "#dbc074", bg = "#dbc074" }
+marker_selected = { fg = "#719cd6", bg = "#719cd6" }
+
+count_copied = { fg = "#192330", bg = "#81b29a" }
+count_cut = { fg = "#192330", bg = "#c94f6d" }
+count_selected = { fg = "#192330", bg = "#719cd6" }
+
+border_symbol = "│"
+border_style = { fg = "#39506d" }
+
+[indicator]
+parent = { fg = "#738091" }
+current = { fg = "#63cdcf" }
+preview = { fg = "#738091" }
+
+# Tabs
+[tabs]
+active = { fg = "#192330", bg = "#719cd6" }
+inactive = { fg = "#aeafb0", bg = "#212e3f" }
+
+[mode]
+normal_main = { fg = "#192330", bg = "#719cd6", bold = true }
+normal_alt = { fg = "#719cd6", bg = "#212e3f" }
+
+select_main = { fg = "#192330", bg = "#81b29a", bold = true }
+select_alt = { fg = "#81b29a", bg = "#212e3f" }
+
+unset_main = { fg = "#192330", bg = "#9d79d6", bold = true }
+unset_alt = { fg = "#9d79d6", bg = "#212e3f" }
+
+# Status bar
+[status]
+overall = { bg = "#131a24" }
+
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_type = { fg = "#719cd6" }
+perm_read = { fg = "#dbc074" }
+perm_write = { fg = "#c94f6d" }
+perm_exec = { fg = "#81b29a" }
+perm_sep = { fg = "#39506d" }
+
+progress_label = { fg = "#cdcecf", bold = true }
+progress_normal = { fg = "#719cd6", bg = "#212e3f" }
+progress_error = { fg = "#c94f6d", bg = "#212e3f" }
+
+# Which key
+[which]
+mask = { bg = "#131a24" }
+cand = { fg = "#63cdcf" }
+rest = { fg = "#738091" }
+desc = { fg = "#aeafb0" }
+separator_style = { fg = "#39506d" }
+
+# Confirm dialog
+[confirm]
+border = { fg = "#719cd6" }
+title = { fg = "#719cd6" }
+body = { fg = "#cdcecf" }
+btn_yes = { fg = "#192330", bg = "#81b29a" }
+btn_no = { fg = "#192330", bg = "#c94f6d" }
+
+# Spot
+[spot]
+border = { fg = "#719cd6" }
+title = { fg = "#719cd6" }
+
+# Notification
+[notify]
+title_info = { fg = "#81b29a" }
+title_warn = { fg = "#dbc074" }
+title_error = { fg = "#c94f6d" }
+
+# Pick
+[pick]
+border = { fg = "#719cd6" }
+active = { fg = "#63cdcf", bold = true }
+inactive = { fg = "#aeafb0" }
+
+# Input
+[input]
+border = { fg = "#719cd6" }
+title = { fg = "#719cd6" }
+value = { fg = "#cdcecf" }
+selected = { reversed = true }
+
+# Completion
+[cmp]
+border = { fg = "#719cd6" }
+active = { fg = "#63cdcf", bg = "#2b3b51" }
+inactive = { fg = "#aeafb0" }
+
+# Tasks
+[tasks]
+border = { fg = "#719cd6" }
+title = { fg = "#719cd6" }
+hovered = { fg = "#63cdcf", underline = true }
+
+# Help
+[help]
+on = { fg = "#63cdcf" }
+run = { fg = "#9d79d6" }
+desc = { fg = "#aeafb0" }
+hovered = { bg = "#2b3b51", bold = true }
+footer = { fg = "#738091", bg = "#131a24" }
+
+# File type rules
+[filetype]
+rules = [
+  # Media
+  { mime = "image/*", fg = "#63cdcf" },
+  { mime = "video/*", fg = "#dbc074" },
+  { mime = "audio/*", fg = "#f4a261" },
+
+  # Archives
+  { mime = "application/zip", fg = "#9d79d6" },
+  { mime = "application/gzip", fg = "#9d79d6" },
+  { mime = "application/x-tar", fg = "#9d79d6" },
+  { mime = "application/x-bzip*", fg = "#9d79d6" },
+  { mime = "application/x-7z-compressed", fg = "#9d79d6" },
+  { mime = "application/x-rar", fg = "#9d79d6" },
+  { mime = "application/x-xz", fg = "#9d79d6" },
+
+  # Documents
+  { mime = "application/pdf", fg = "#c94f6d" },
+  { mime = "application/*doc*", fg = "#719cd6" },
+  { mime = "application/*sheet*", fg = "#81b29a" },
+  { mime = "application/*slide*", fg = "#f4a261" },
+
+  # Fallback
+  { name = "*", fg = "#cdcecf" },
+  { name = "*/", fg = "#719cd6", bold = true },
+]
