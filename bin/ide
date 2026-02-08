@@ -1,7 +1,37 @@
 #!/bin/bash
-# tmux ide mode
+# tmux ide mode with layout selection via fzf
 
-tmux split-window -h -p 40
-tmux split-window -p 50
-tmux select-pane -R
-clear
+layout=$(printf '%s\n' \
+  "default: 2pane split" \
+  "dev: yazi + claude + lazygit" \
+| fzf --prompt="layout> " --height=10 --reverse)
+
+[ -z "$layout" ] && exit 0
+
+case "$layout" in
+  default*)
+    tmux split-window -h -p 50
+    tmux split-window -p 50
+    tmux select-pane -R
+    clear
+    ;;
+  dev*)
+    dir=""
+    if command -v git-wt &>/dev/null && git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
+      wt_list=$(git wt | tail -n +2)
+      if [ -n "$wt_list" ]; then
+        selected=$(echo "$wt_list" | fzf --prompt="worktree> " --height=20 --reverse | awk '{print $(NF-1)}')
+        [ -n "$selected" ] && dir=$(git wt "$selected" 2>/dev/null && pwd)
+      fi
+    fi
+    dir="${dir:-$(pwd)}"
+
+    tmux split-window -h -p 50 -c "$dir"
+    tmux split-window -v -p 40 -c "$dir"
+    tmux send-keys 'lazygit' Enter
+    tmux select-pane -U
+    tmux send-keys 'claude' Enter
+    tmux select-pane -L
+    tmux send-keys "cd '$dir' && yazi" Enter
+    ;;
+esac
