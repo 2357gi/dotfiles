@@ -19,8 +19,9 @@ if is_osx; then
 fi
 
 # Mise (formerly rtx) - replaces anyenv, pyenv, rbenv, goenv
+# --shims mode: faster startup, uses PATH shims instead of hook-based activation
 if command -v mise &> /dev/null; then
-    eval "$(mise activate zsh)"
+    eval "$(mise activate zsh --shims)"
 fi
 
 # Volta (Node.js version manager)

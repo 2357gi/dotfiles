@@ -7,9 +7,17 @@ if [[ -f ~/.fzf-tab/fzf-tab.plugin.zsh ]]; then
     source ~/.fzf-tab/fzf-tab.plugin.zsh
 fi
 
-# Load completion system
-autoload -U compinit; compinit -u
-autoload -U bashcompinit; bashcompinit -u
+# Load completion system (cached daily for fast startup)
+autoload -U compinit
+autoload -U bashcompinit
+_comp_dump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -f "$_comp_dump" && $(date +'%j') == $(stat -f '%Sm' -t '%j' "$_comp_dump" 2>/dev/null || echo 0) ]]; then
+    compinit -C -u
+else
+    compinit -u
+fi
+bashcompinit -u
+unset _comp_dump
 
 # Basic completion options
 setopt auto_cd
@@ -49,9 +57,13 @@ if [[ -n "$GITHUB_DIR" && -f "$GITHUB_DIR/kwhrtsk/docker-fzf-completion/docker-f
     source "$GITHUB_DIR/kwhrtsk/docker-fzf-completion/docker-fzf.zsh"
 fi
 
-# Kubernetes completion
+# Kubernetes completion (lazy-loaded on first kubectl/k use)
 if command -v kubectl &> /dev/null; then
-    source <(kubectl completion zsh)
+    kubectl() {
+        unfunction kubectl
+        source <(command kubectl completion zsh)
+        command kubectl "$@"
+    }
 fi
 
 # aws cli completion

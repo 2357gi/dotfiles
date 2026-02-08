@@ -26,10 +26,15 @@ function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONNECTION" ]; }
 
-# GHQ settings
+# GHQ settings (cached to avoid subprocess on every startup)
 if type ghq &> /dev/null; then
-    export ghq_root=$(ghq root)
+    _ghq_cache="${XDG_CACHE_HOME:-$HOME/.cache}/ghq_root"
+    if [[ ! -f "$_ghq_cache" ]] || [[ $(date +'%j') != $(stat -f '%Sm' -t '%j' "$_ghq_cache" 2>/dev/null || echo 0) ]]; then
+        ghq root > "$_ghq_cache"
+    fi
+    export ghq_root=$(<"$_ghq_cache")
     export GITHUB_DIR=$ghq_root/github.com
+    unset _ghq_cache
 fi
 
 # GitHub token

@@ -2,9 +2,13 @@
 # External Plugins
 # ------------------------------------------------------------------------------
 
-# Hub alias
+# Hub alias (lazy-loaded)
 if command -v hub &> /dev/null; then
-    eval "$(hub alias -s)"
+    hub() {
+        unfunction hub
+        eval "$(command hub alias -s)"
+        hub "$@"
+    }
 fi
 
 export FZF_COMPLETION_TRIGGER=","
