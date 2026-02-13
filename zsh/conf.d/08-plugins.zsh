@@ -73,11 +73,6 @@ if [ -f '/Users/2357gi/.sec' ]; then
     source ~/.sec
 fi
 
-# ghux
-if [ -f "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh" ]; then
-    source "$HOME/src/github.com/2357gi/ghux/ghux.plugin.zsh"
-fi
-
 # git-wt (worktree manager)
 if command -v git-wt &> /dev/null; then
     wt() {
