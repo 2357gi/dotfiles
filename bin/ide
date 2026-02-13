@@ -18,13 +18,34 @@ case "$layout" in
   dev*)
     dir=""
     if command -v git-wt &>/dev/null && git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
-      wt_list=$(git wt | tail -n +2)
-      if [ -n "$wt_list" ]; then
-        selected=$(echo "$wt_list" | fzf --prompt="worktree> " --height=20 --reverse | awk '{print $(NF-1)}')
-        [ -n "$selected" ] && dir=$(git wt "$selected" 2>/dev/null && pwd)
+      # Build worktree list: existing worktrees + new branch option
+      wt_list=$(git wt 2>/dev/null | tail -n +2)
+      choices=$(printf '%s\n%s' "+ new branch" "$wt_list" | sed '/^$/d')
+      selected=$(echo "$choices" | fzf --prompt="worktree> " --height=20 --reverse --header="Select worktree or create new branch")
+
+      if [ -z "$selected" ]; then
+        exit 0
+      elif [ "$selected" = "+ new branch" ]; then
+        # Read branch name from user
+        printf "branch name: "
+        read -r branch_name
+        [ -z "$branch_name" ] && exit 0
+
+        # Optionally select start-point from remote branches
+        start_point=$(git branch -r --format='%(refname:short)' | fzf --prompt="start-point> " --height=20 --reverse --header="Select start-point (ESC to use HEAD)")
+        if [ -n "$start_point" ]; then
+          git wt "$branch_name" "$start_point"
+        else
+          git wt "$branch_name"
+        fi
+        dir=$(git wt "$branch_name" 2>/dev/null | tail -1)
+      else
+        wt_path=$(echo "$selected" | awk '{print $(NF-1)}')
+        dir=$(git wt "$wt_path" 2>/dev/null | tail -1)
       fi
     fi
     dir="${dir:-$(pwd)}"
+    [ ! -d "$dir" ] && dir="$(pwd)"
 
     tmux split-window -h -p 50 -c "$dir"
     tmux split-window -v -p 40 -c "$dir"
@@ -33,5 +54,7 @@ case "$layout" in
     tmux send-keys 'claude' Enter
     tmux select-pane -L
     tmux send-keys "cd '$dir' && yazi" Enter
+    tmux select-pane -R
+    tmux select-pane -U
     ;;
 esac
