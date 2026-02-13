@@ -1,3 +1,5 @@
+.claude/settings.local.json
+
 .vim/.netrwhist
 .vim/dein/*
 !/.vim/dein/.keep
