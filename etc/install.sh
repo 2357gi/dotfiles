@@ -426,6 +426,24 @@ install_tmux_plugins() {
 EOF
 }
 
+verify_required_binaries() {
+    print_separator
+    log_info "Verifying required binaries..."
+    print_separator
+
+    if command_exists ghux; then
+        log_success "ghux binary found: $(command -v ghux)"
+    else
+        log_warning "ghux binary not found in PATH"
+        cat << EOF
+
+ghux is now expected as a standalone binary.
+Install it first, then ensure the install path is included in PATH.
+
+EOF
+    fi
+}
+
 show_completion() {
     cat << END
 
@@ -461,6 +479,7 @@ main() {
     setup_config_directory || exit 1
     install_packages || exit 1
     setup_bin_directory || exit 1
+    verify_required_binaries || exit 1
     configure_git || exit 1
     install_tmux_plugins || exit 1
     setup_platform_specific || exit 1
