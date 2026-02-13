@@ -1,0 +1,173 @@
+# ============================================================================
+# Ghostty Terminal Configuration
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Theme and Appearance
+# ----------------------------------------------------------------------------
+
+# Use default theme (ghostty's built-in theme)
+# You can customize colors if needed
+
+# ----------------------------------------------------------------------------
+# Font Configuration
+# ----------------------------------------------------------------------------
+
+# Use a Nerd Font compatible font (adjust to your installed fonts)
+font-family = "HackGen Console NF"
+font-size = 13
+
+# Font features for better rendering
+font-feature = -calt
+font-feature = -liga
+
+# Bold and italic fonts
+bold-is-bright = true
+
+# ----------------------------------------------------------------------------
+# Window Settings
+# ----------------------------------------------------------------------------
+
+# Window padding
+window-padding-x = 8
+window-padding-y = 8
+
+# Window decorations
+window-decoration = true
+
+# Window opacity (1.0 = fully opaque, 0.0 = fully transparent)
+background-opacity = 0.95
+
+# Window title
+window-title-font-family = "JetBrainsMono Nerd Font"
+
+# ----------------------------------------------------------------------------
+# Keybindings
+# ----------------------------------------------------------------------------
+
+# Working directory inheritance for new splits
+window-inherit-working-directory = true
+
+# Split keybindings (as requested)
+# Ctrl+K: Split right (vertical split)
+keybind = ctrl+k=new_split:right
+
+# Ctrl+J: Split down (horizontal split)
+keybind = ctrl+j=new_split:down
+
+# Window navigation with Cmd+Shift+H/J/K/L
+# Cmd+Shift+H: Move to left pane
+keybind = super+shift+h=goto_split:left
+
+# Cmd+Shift+J: Move to pane below
+keybind = super+shift+j=goto_split:bottom
+
+# Cmd+Shift+K: Move to pane above
+keybind = super+shift+k=goto_split:top
+
+# Cmd+Shift+L: Move to right pane
+keybind = super+shift+l=goto_split:right
+
+# Close split
+keybind = ctrl+shift+w=close_surface
+
+# Resize splits
+keybind = ctrl+shift+left=resize_split:left,10
+keybind = ctrl+shift+right=resize_split:right,10
+keybind = ctrl+shift+up=resize_split:up,10
+keybind = ctrl+shift+down=resize_split:down,10
+
+# Tab management
+keybind = super+ctrl+t=new_tab
+keybind = super+ctrl+q=close_tab
+keybind = super+ctrl+l=next_tab
+keybind = super+ctrl+h=previous_tab
+
+# Copy/Paste
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Font size adjustment
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# Clear screen
+keybind = ctrl+l=clear_screen
+
+# ----------------------------------------------------------------------------
+# Performance and Rendering
+# ----------------------------------------------------------------------------
+
+# Smooth scrolling
+scrollback-limit = 1000000
+
+# Shell integration
+shell-integration = detect
+
+# ----------------------------------------------------------------------------
+# Mouse Support
+# ----------------------------------------------------------------------------
+
+# Mouse support
+mouse-hide-while-typing = true
+
+# Click to open URLs
+link-url = true
+
+# Mouse bindings
+mouse-shift-capture = true
+
+# Copy on select
+copy-on-select = true
+
+# ----------------------------------------------------------------------------
+# Clipboard
+# ----------------------------------------------------------------------------
+
+# Clipboard integration
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+
+# ----------------------------------------------------------------------------
+# Advanced Settings
+# ----------------------------------------------------------------------------
+
+# Command to run on startup (defaults to shell)
+# command = /bin/zsh
+
+# Working directory
+# working-directory = ~
+
+# Confirm before closing with running processes
+confirm-close-surface = false
+
+# Focus follows mouse
+focus-follows-mouse = false
+
+# Unfocused split style
+unfocused-split-opacity = 0.7
+
+# Auto-update
+auto-update = check
+
+# ----------------------------------------------------------------------------
+# macOS Specific Settings
+# ----------------------------------------------------------------------------
+
+# macOS option key behavior
+macos-option-as-alt = true
+
+# macOS titlebar style
+macos-titlebar-style = transparent
+
+# Native tabs
+macos-window-shadow = true
+
+maximize = true
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = true
+mouse-hide-while-typing = true
+keybind = shift+enter=text:\x1b\r
