@@ -11,3 +11,5 @@ history/
 github_token
 
 \[quickrun\ output\]
+
+.claude/settings.local.json
