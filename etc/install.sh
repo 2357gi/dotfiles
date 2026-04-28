@@ -228,16 +228,45 @@ setup_config_directory() {
     # Create .config directory if it doesn't exist
     mkdir -p "$HOME/.config"
 
+    # Directories that need file-level symlinks instead of directory-level
+    # (e.g., Karabiner-Elements writes automatic_backups/ and assets/ into its config dir)
+    local file_link_dirs=("karabiner")
+
     # Link each subdirectory in .config
     local linked_count=0
     for config_dir in "$DOTFILES_PATH/.config"/*; do
         if [[ -d "$config_dir" ]]; then
             local dir_name=$(basename "$config_dir")
-            if ln -snfv "$config_dir" "$HOME/.config/$dir_name"; then
+
+            # Check if this directory needs file-level linking
+            local use_file_link=false
+            for fld in "${file_link_dirs[@]}"; do
+                if [[ "$dir_name" == "$fld" ]]; then
+                    use_file_link=true
+                    break
+                fi
+            done
+
+            if [[ "$use_file_link" == true ]]; then
+                # Create real directory and symlink individual files
+                mkdir -p "$HOME/.config/$dir_name"
+                for config_file in "$config_dir"/*; do
+                    [[ -f "$config_file" ]] || continue
+                    local file_name=$(basename "$config_file")
+                    if ln -snfv "$config_file" "$HOME/.config/$dir_name/$file_name"; then
+                        log_info "Linked .config/$dir_name/$file_name"
+                    else
+                        log_warning "Failed to link .config/$dir_name/$file_name"
+                    fi
+                done
                 ((linked_count++))
-                log_info "Linked .config/$dir_name"
             else
-                log_warning "Failed to link .config/$dir_name"
+                if ln -snfv "$config_dir" "$HOME/.config/$dir_name"; then
+                    ((linked_count++))
+                    log_info "Linked .config/$dir_name"
+                else
+                    log_warning "Failed to link .config/$dir_name"
+                fi
             fi
         fi
     done
