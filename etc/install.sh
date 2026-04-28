@@ -51,8 +51,13 @@ ask_user() {
     local prompt="$1"
     local default="${2:-Y}"
     local answer
-    
-    read -r -p "$prompt [${default}/n] " answer
+
+    # Read from /dev/tty so that `curl ... | bash` still works interactively
+    if [[ -t 0 ]]; then
+        read -r -p "$prompt [${default}/n] " answer
+    else
+        read -r -p "$prompt [${default}/n] " answer < /dev/tty
+    fi
     case "${answer:-$default}" in
         [Yy]*) return 0 ;;
         *) return 1 ;;
