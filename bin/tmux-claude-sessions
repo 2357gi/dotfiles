@@ -1,0 +1,87 @@
+#!/bin/zsh
+
+# tmux-claude-sessions: Claude Code セッション一覧・ステータス確認・ジャンプ
+# Usage: tmux-claude-sessions
+# tmux floating popup内で使用することを想定
+
+set -e
+
+# --- 全ペインからClaudeセッションを収集 ---
+collect_claude_panes() {
+    tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{pane_current_command} #{pane_current_path}' 2>/dev/null | while IFS=' ' read -r target cmd path; do
+        [[ "$cmd" == "claude" ]] || continue
+
+        local captured
+        captured=$(tmux capture-pane -t "$target" -p -S -20 2>/dev/null) || continue
+
+        local last_line
+        last_line=$(echo "$captured" | grep -v '^$' | tail -1)
+
+        # ステータス判定
+        local status_display
+        if echo "$last_line" | grep -qE '✽|⠋|⠙|⠹|⠸|⠼|⠴|⠦|⠧|⠇|⠏'; then
+            if echo "$last_line" | grep -qi 'running'; then
+                status_display="… Running"
+            else
+                status_display="… Thinking"
+            fi
+        elif echo "$last_line" | grep -qE '^(❯|>|\$) '; then
+            status_display="● Idle"
+        elif echo "$last_line" | grep -qE 'Running'; then
+            status_display="… Running"
+        else
+            status_display="● Active"
+        fi
+
+        local project session_window ctx_pct
+        project=$(basename "$path")
+        session_window=$(echo "$target" | sed 's/\.[0-9]*$//')
+        ctx_pct=$(echo "$captured" | grep -oE '[0-9]+(\.[0-9]+)?%' | tail -1)
+        ctx_pct=${ctx_pct:--}
+
+        # スペース区切り: 1番目がtarget（fzfの{1}で取得可能）
+        printf "%-30s %-22s %-14s %s\n" "$target" "$session_window/$project" "$status_display" "$ctx_pct"
+    done
+}
+
+main() {
+    local entries
+    entries=$(collect_claude_panes)
+
+    if [[ -z "$entries" ]]; then
+        echo ""
+        echo "  Claude セッションが見つかりません"
+        echo ""
+        echo "  tmux ペインで 'claude' を起動してください"
+        echo ""
+        echo "  Press any key to exit..."
+        read -k 1
+        exit 0
+    fi
+
+    local header
+    header=$(printf "%-30s %-22s %-14s %s" "TARGET" "SESSION/PROJECT" "STATUS" "CTX")
+
+    local selected
+    selected=$(echo "$entries" | fzf \
+        --ansi \
+        --header="$header" \
+        --with-nth=2.. \
+        --preview='tmux capture-pane -t {1} -p -S -40 2>&1' \
+        --preview-window=right:50%:wrap \
+        --color='pointer:75,marker:75,prompt:75,info:240,header:245,hl:75,hl+:75' \
+        --prompt='Claude Sessions > ' \
+        --no-sort \
+        --reverse) || exit 0
+
+    local target
+    target=$(echo "$selected" | awk '{print $1}')
+
+    if [[ -n "$target" ]]; then
+        tmux switch-client -t "$target"
+        tmux select-window -t "$target"
+        tmux select-pane -t "$target"
+    fi
+}
+
+main "$@"

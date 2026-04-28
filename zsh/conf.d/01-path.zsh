@@ -8,6 +8,7 @@ is_ubuntu() { [[ $OSTYPE == linux-gnu* ]]; }
 
 # Basic PATH setup
 export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/tmux/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
@@ -34,12 +35,6 @@ if [[ -d "$HOME/.rd" ]]; then
     export PATH="$HOME/.rd/bin:$PATH"
 fi
 
-# Go-specific settings
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-export PATH="$GOBIN:$PATH"
-export GO111MODULE=on
-
 # direnv
 if command -v direnv &> /dev/null; then
     eval "$(direnv hook zsh)"
@@ -54,6 +49,12 @@ if is_osx; then
     if [[ -d "/usr/local/share/zsh/site-functions" ]]; then
         fpath=(/usr/local/share/zsh/site-functions $fpath)
     fi
+fi
+
+# Go
+if command -v go &> /dev/null; then
+    export GOPATH="$HOME/go"
+    export PATH="$GOPATH/bin:$PATH"
 fi
 
 # Remove duplicates from PATH

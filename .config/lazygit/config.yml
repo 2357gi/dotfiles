@@ -1,0 +1,29 @@
+# Lazygit theme aligned to Nightfox palette used in this dotfiles repo.
+# Reference palette (Nightfox):
+# bg1 #192330, bg2 #212e3f, fg1 #cdcecf, blue #719cd6, cyan #63cdcf,
+# green #81b29a, yellow #dbc074, red #c94f6d, magenta #9d79d6, comment #738091
+
+gui:
+  theme:
+    # Keep only active section border vivid.
+    activeBorderColor: ["#719cd6", "bold"]
+    inactiveBorderColor: ["#738091"]
+    searchingActiveBorderColor: ["#dbc074", "bold"]
+
+    # Avoid blue emphasis for inactive sections.
+    inactiveViewSelectedLineBgColor: ["#212e3f"]
+
+    optionsTextColor: ["#738091"]
+    selectedLineBgColor: ["#2b3b51"]
+    selectedRangeBgColor: ["#29394f"]
+
+    cherryPickedCommitFgColor: ["#192330"]
+    cherryPickedCommitBgColor: ["#81b29a"]
+
+    unstagedChangesColor: ["#c94f6d"]
+    defaultFgColor: ["#cdcecf"]
+
+    # Diff colors
+    diffAddedColor: ["#81b29a"]
+    diffRemovedColor: ["#c94f6d"]
+    diffModifiedColor: ["#719cd6"]

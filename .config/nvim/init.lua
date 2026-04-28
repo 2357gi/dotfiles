@@ -209,7 +209,13 @@ require("lazy").setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<Space>ff", builtin.find_files)
+      vim.keymap.set("n", "<Space>ff", function()
+        local cwd = vim.fn.expand("%:p:h")
+        if cwd == "" then
+          cwd = vim.loop.cwd()
+        end
+        builtin.find_files({ cwd = cwd })
+      end)
       vim.keymap.set("n", "<Space>fg", builtin.live_grep)
       vim.keymap.set("n", "<Space>fb", builtin.buffers)
       vim.keymap.set("n", "<Space>fd", builtin.diagnostics)

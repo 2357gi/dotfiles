@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Git commit and push script
+# Usage: ./scripts/git-commit-push.sh <commit_message> <file_path1> [file_path2] [...]
+
+set -e
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <commit_message> <file_path1> [file_path2] [...]"
+    exit 1
+fi
+
+COMMIT_MESSAGE="$1"
+shift
+
+# Get current branch
+CURRENT_BRANCH=$(git branch --show-current)
+
+# Fetch remote changes
+echo "Fetching remote changes..."
+git fetch origin
+
+# Check if remote branch exists
+if git show-ref --verify --quiet "refs/remotes/origin/$CURRENT_BRANCH"; then
+    # Check for differences between local and remote
+    LOCAL_COMMIT=$(git rev-parse HEAD)
+    REMOTE_COMMIT=$(git rev-parse "origin/$CURRENT_BRANCH")
+
+    if [ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]; then
+        # Check if local is behind remote
+        if git merge-base --is-ancestor HEAD "origin/$CURRENT_BRANCH"; then
+            echo "Local branch is behind remote. Pulling changes..."
+            git pull --rebase origin "$CURRENT_BRANCH"
+        # Check if remote is behind local
+        elif git merge-base --is-ancestor "origin/$CURRENT_BRANCH" HEAD; then
+            echo "Local branch is ahead of remote. Proceeding with commit..."
+        # Branches have diverged
+        else
+            echo "Local and remote branches have diverged. Rebasing on remote..."
+            git pull --rebase origin "$CURRENT_BRANCH"
+        fi
+    else
+        echo "Local branch is up to date with remote."
+    fi
+else
+    echo "Remote branch does not exist yet. Will create it on push."
+fi
+
+# Add all specified files
+for file in "$@"; do
+    git add "$file"
+done
+
+# Commit with the message
+git commit -m "$COMMIT_MESSAGE"
+
+# Push to remote
+git push origin "$CURRENT_BRANCH"

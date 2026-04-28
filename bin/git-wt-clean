@@ -1,0 +1,52 @@
+#!/bin/bash
+# Delete git worktrees interactively with fzf multi-select
+# Usage: git wt-clean [-D] (force delete)
+
+set -euo pipefail
+
+force=""
+if [[ "${1:-}" == "-D" ]]; then
+  force="-D"
+fi
+
+if ! command -v git-wt &>/dev/null; then
+  echo "git-wt is required" >&2
+  exit 1
+fi
+
+if ! command -v fzf &>/dev/null; then
+  echo "fzf is required" >&2
+  exit 1
+fi
+
+# List worktrees excluding the current one (marked with *)
+wt_list=$(git wt 2>/dev/null | tail -n +2 | grep -v '^\*')
+
+if [[ -z "$wt_list" ]]; then
+  echo "No worktrees to delete."
+  exit 0
+fi
+
+# fzf multi-select with tab
+selected=$(echo "$wt_list" | fzf \
+  --multi \
+  --prompt="delete worktree> " \
+  --header="TAB: select multiple, ENTER: confirm" \
+  --height=20 \
+  --reverse)
+
+if [[ -z "$selected" ]]; then
+  exit 0
+fi
+
+delete_flag="${force:--d}"
+
+# Format: "  /path/to/worktree  branch  hash"
+echo "$selected" | while IFS= read -r line; do
+  # Extract branch name (second-to-last field)
+  branch=$(echo "$line" | awk '{print $(NF-1)}')
+  echo "Deleting worktree: $branch"
+  git wt "$delete_flag" "$branch" || echo "Failed to delete: $branch"
+done
+
+echo "Done."
