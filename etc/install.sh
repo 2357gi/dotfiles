@@ -283,6 +283,48 @@ setup_config_directory() {
     fi
 }
 
+setup_claude_code() {
+    print_separator
+    log_info "Setting up Claude Code configuration..."
+    print_separator
+
+    local claude_src="$DOTFILES_PATH/claude-code"
+    local claude_dst="$HOME/.claude"
+
+    if [[ ! -d "$claude_src" ]]; then
+        log_warning "Claude Code config not found in dotfiles: $claude_src"
+        return 0
+    fi
+
+    # Create ~/.claude if it doesn't exist
+    mkdir -p "$claude_dst"
+
+    # Symlink individual files (settings.json, CLAUDE.md, statusline.js)
+    for file in "$claude_src"/*; do
+        [[ -f "$file" ]] || continue
+        local file_name=$(basename "$file")
+        if ln -snfv "$file" "$claude_dst/$file_name"; then
+            log_info "Linked .claude/$file_name"
+        else
+            log_warning "Failed to link .claude/$file_name"
+        fi
+    done
+
+    # Symlink directories (hooks/, skills/)
+    for dir in "$claude_src"/*/; do
+        [[ -d "$dir" ]] || continue
+        local dir_name=$(basename "$dir")
+        if ln -snfv "$claude_src/$dir_name" "$claude_dst/$dir_name"; then
+            log_info "Linked .claude/$dir_name/"
+        else
+            log_warning "Failed to link .claude/$dir_name/"
+        fi
+    done
+
+    log_success "Claude Code configuration linked"
+    log_info "Note: Set OTEL API key in ~/.claude/settings.local.json"
+}
+
 install_packages() {
     if ! command_exists brew; then
         log_warning "Homebrew not found, skipping package installation"
@@ -515,6 +557,7 @@ main() {
     setup_bin_directory || exit 1
     verify_required_binaries || exit 1
     configure_git || exit 1
+    setup_claude_code || exit 1
     install_tmux_plugins || exit 1
     setup_platform_specific || exit 1
     
